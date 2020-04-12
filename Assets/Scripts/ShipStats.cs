@@ -8,14 +8,14 @@ public class ShipStats : MonoBehaviour
     public string model;
 
     //Value of the ship
-    public float value;  
-    
+    public float value;
+
     //The five stats for determining the selling price
     public int appearance;
     public int interior;
     public int safety;
     public int speed;
-    public enum SizeCategory { Small, Regular, Large}
+    public enum SizeCategory { Small, Regular, Large }
     public SizeCategory size;
 
     // Saved for future use of special ship characteristics
@@ -32,7 +32,7 @@ public class ShipStats : MonoBehaviour
     {
         string tooltip;
 
-        tooltip =   size + " " + model + " Class" +
+        tooltip = size + " " + model + " Class" +
                     "\n\n Appearance: " + appearance +
                     "\n Interior: " + interior +
                     "\n Safety: " + safety +

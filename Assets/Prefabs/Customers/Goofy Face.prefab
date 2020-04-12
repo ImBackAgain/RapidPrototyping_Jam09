@@ -94,10 +94,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfef8bb53d7ab72409fef02a735be780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appearanceWeight: 3
-  interiorWeight: 1
-  safetyWeight: 2
-  speedWeight: 4
-  sizeRankNumber: 5
+  appearanceRank: 3
+  interiorRank: 4
+  safetyRank: 2
+  speedRank: 5
+  sizeRank: 1
   sizePreference: 1
   modifier: 0

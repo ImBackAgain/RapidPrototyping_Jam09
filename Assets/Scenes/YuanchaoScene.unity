@@ -2393,15 +2393,9 @@ MonoBehaviour:
   - {fileID: 8904614707176069794, guid: cbf6d1a4c577afe479f0f399282f53c8, type: 3}
   - {fileID: 6208744681924399384, guid: faa67f68f81be47418a7ff6fb4e0b0fe, type: 3}
   - {fileID: 8613430567458801659, guid: 02a13235b4f739f439fe4debedf1492a, type: 3}
-  currentShip: {fileID: 0}
-  currentCustomer: {fileID: 0}
-  finalBuyingPrice: 0
-  inter: {fileID: 0}
-  boa: {fileID: 0}
-  sna: {fileID: 0}
-  offer: {fileID: 0}
   BoastPanel: {fileID: 1619855493}
-  incomeText: {fileID: 0}
+  incomeText: {fileID: 785781607}
+  speechBubble: {fileID: 2019873511}
 --- !u!4 &1286412933
 Transform:
   m_ObjectHideFlags: 0

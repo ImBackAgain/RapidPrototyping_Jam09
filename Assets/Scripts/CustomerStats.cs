@@ -5,35 +5,6 @@ using UnityEngine.UI;
 
 public class CustomerStats : MonoBehaviour
 {
-    // Customer syntax
-
-    // Start of conversation
-    private string[] greetings = { "Hi there!", "Whatta ya got?", "What're ya sellin'?", "Is this the right place?", "Can I get some service, please?" };
-    // Responce after player use boast
-    private string[] boastResponse = { "You don't say!", "I hadn't considered that...", "I'll take your word for it.", "Impressive!", "Wow!" };
-    // Responce after player give snack
-    private string[] snackResponse = { "Thank you!", "Thanks!", "For me? Thanks!", "Talk about customer service!", "You have my attention" };
-    // Interview responce for value appearance
-    private string[] appearanceResponse = { "I guess it would have to be the looks?", "Style is everything!", "I want something that looks cool", "Something that'll turn heads", "One that looks as good as I do" };
-    // Interview responce for value interior
-    private string[] interiorResponse = { "Something that looks good from the inside", "A luxury interior!", "Comfortable seats for long trips", "CUP HOLDERS", "Lots of flashing buttons!" };
-    // Interview responce for value safety
-    private string[] safteyResponse = { "Something that'll keep my family safe", "Got anything that can blow up a small planet?", "Guns. Lots of them. Don't ask.", "State of the art defense system", "Airbags. Wait, do you need airbags in space?" };
-    // Interview responce for value speed
-    private string[] speedResponse = { "GOTTA GO FAST", "The fastest ya got", "Speed is key!", "I want to break some speed records", "Something quick would be nice" };
-    // Interview responce for want smaller ship
-    private string[] sizeResponseSmall = { "Something that doesn't take up too much space", "The smaller the better", "I don't need anything too big", "A smaller one will do", "Itsy bitsy teeny weeny spacey shipy" };
-    // Interview responce for want regular ship
-    private string[] sizeResponseRegular = { "Something not too big or too small", "Something sized juuuuuust right", "Average sized would be fine", "Got anything regular sized?", "I'm not looking for anything crazy for size" };
-    // Interview responce for want large ship
-    private string[] sizeResponseLarge = { "Biggest ya got!", "I need something to fit the whole family", "BIG SHIP PLEASE", "I would prefer something on the large side", "Something big enough to fit an asteroid. No reason." };
-    // Responce when price offered too cheap
-    private string[] purchaseResponseCheap = { "You're practically giving it away!", "What a steal!", "How do you stay in business with such low prices?!", "Haha, sucker!", "Way less than I was expecting!" };
-    // Responce when price offered just about right
-    private string[] purchaseResponseAverage = { "You got yourself a deal", "Sounds reasonable", "Sure, sounds fair", "A fair price", "I can do that" };
-    // Responce when price offered too high
-    private string[] purchaseResponseExpensive = { "I can't afford that", "No way, pal", "That's way too expensive", "For that hunk of junk?! No way!", "You're out of your mind!" };
-
     // Customer's rank of the most important thing to them
     // each stat is given a rank from 1 to 5 where 5 being the most important and 1 being the least important
     // For example，if appearance = 5, interior = 4, safety = 3, speed = 2 and size = 1, customer value apearance > interior > safety > speed > size
@@ -46,47 +17,58 @@ public class CustomerStats : MonoBehaviour
     // Customer preference for ship size, there are 3 kinds: small, regular and large
     public ShipStats.SizeCategory sizePreference;
 
+    // Weight of the stats, represent how important of each stat to the final decision making, used for the math part
+    float appearanceWeight;
+    float interiorWeight;
+    float safetyWeight;
+    float speedWeight;
+    float sizeWeight;
+
     // Saved for adding customer character system
     public enum CustomerModifier { None }
-    public CustomerModifier modifier =  CustomerModifier.None;    
+    public CustomerModifier modifier = CustomerModifier.None;
 
     // UI used to display amount of customer patient
-    private Text patienceText; 
+    private Text patienceText;
     // Current value for customer patience, an int between 0 and 100, indicate percent of patient left, start value is 100 for all customer
     private float patience;
 
+    // Used to add customer to GameManager class
     private GameManager manager;
-    private AudioManager audioMng  = null;
+    // For use of audio manager
+    private AudioManager audioMng = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        // All weight values are set in the Inspector
+        // Customer rank values are manualy set in the customer prefabs
 
-        speechBubble = GameObject.Find("SpeechText").GetComponent<Text>();
-        speechBubble.text = greetings[Random.Range(0, greetings.Length)];
+        // Locate GameManager and add current customer
         manager = FindObjectOfType<GameManager>();
-        manager.currentCustomer = this;
+        manager.SetCustomer(this);
 
+        // Locate patience UI and initialize patience value
         patienceText = GameObject.Find("CustomerPatience").GetComponent<Text>();
         patience = 100.0f;
         patienceText.text = "Customer Patience: " + patience + "%";
 
-        //initialize modifiers
-        appearanceModifier = convertWeightToModifier(appearanceRank);
-        interiorModifier = convertWeightToModifier(interiorRank);
-        safetyModifier = convertWeightToModifier(safetyRank);
-        speedModifier = convertWeightToModifier(speedRank);
-        sizeModifier = 1f;
+        // Initialize weights
+        appearanceWeight = convertRankToWeight(appearanceRank);
+        interiorWeight = convertRankToWeight(interiorRank);
+        safetyWeight = convertRankToWeight(safetyRank);
+        speedWeight = convertRankToWeight(speedRank);
+        sizeWeight = 1f;
 
+        // Locate audio manager
         audioMng = FindObjectOfType<AudioManager>();
         if (audioMng == null)
             Debug.LogError("\tNo GameObject with the [ AudioManager ] script was found in the current scene!");
     }
 
-    public float convertWeightToModifier(int weight)
+    // Convert rank value to weight value, basically higher the rank, higher the weight
+    public float convertRankToWeight(int rank)
     {
-        switch (weight)
+        switch (rank)
         {
             case 1:
                 return 1f;
@@ -105,164 +87,123 @@ public class CustomerStats : MonoBehaviour
         }
     }
 
-
-    public void Interview(int preference)
+    // The customer accept the boast and change their weight accordingly
+    //1 = appearance, 2 = interior, 3 = safetly, 4 = speed, and 5 = size
+    public void TakeBoast(int stat)
     {
-        if (appearanceRank == preference)
-            speechBubble.text = appearanceResponse[Random.Range(0, appearanceResponse.Length)];
-        else if (interiorRank == preference)
-            speechBubble.text = interiorResponse[Random.Range(0, interiorResponse.Length)];
-        else if (safetyRank == preference)
-            speechBubble.text = safteyResponse[Random.Range(0, safteyResponse.Length)];
-        else if (speedRank == preference)
-            speechBubble.text = speedResponse[Random.Range(0, speedResponse.Length)];
-        else if (sizeRank == preference)
-        {
-            switch (sizePreference)
-            {
-                case ShipStats.SizeCategory.Large:
-                    speechBubble.text = sizeResponseLarge[Random.Range(0, sizeResponseLarge.Length)];
-                    break;
-                case ShipStats.SizeCategory.Regular:
-                    speechBubble.text = sizeResponseRegular[Random.Range(0, sizeResponseRegular.Length)];
-                    break;
-                case ShipStats.SizeCategory.Small:
-                    speechBubble.text = sizeResponseSmall[Random.Range(0, sizeResponseSmall.Length)];
-                    break;
-            }
-        }
-
-        UpdatePatience(-10.0f);
-    }
-
-   
-    public void Boast(int stat)
-    {
-        speechBubble.text = boastResponse[Random.Range(0, boastResponse.Length)];
-
-        // MORE PLACEHOLDER MATH. SHOULD CHANGE BASED ON HOW MUCH THEY LIKE THE STAT
         switch (stat)
-        {       
+        {
             case 1:
-                appearanceModifier = convertWeightToModifier(appearanceRank + 1);
+                appearanceWeight = convertRankToWeight(appearanceRank + 1);
                 break;
             case 2:
-                interiorModifier = convertWeightToModifier(interiorRank + 1);
+                interiorWeight = convertRankToWeight(interiorRank + 1);
                 break;
             case 3:
-                safetyModifier = convertWeightToModifier(safetyRank + 1);
+                safetyWeight = convertRankToWeight(safetyRank + 1);
                 break;
             case 4:
-                speedModifier = convertWeightToModifier(speedRank + 1);
+                speedWeight = convertRankToWeight(speedRank + 1);
                 break;
             case 5:
                 sizeRank += sizeRank;
                 break;
-               
         }
 
         UpdatePatience(-10.0f);
     }
 
-    public void OfferSnacks()
-    {
-        // MORE PLACEHOLDER VALUES
-        speechBubble.text = snackResponse[Random.Range(0, snackResponse.Length)];
-        UpdatePatience(-100.0f);
-    }
-
-    public void MakeOffer(float amount, ShipStats ship)
-    {
-        // THIS IS ALL PLACEHOLDER MATH THAT ALL NEEDS TO BE REPLACED!!!
-
-        //size modifier math
+    // Yuanchao's Math code
+    // Takes the ship that the player was tring to sale and returns maximum offer the customer can accept
+    public float CalculateMaxOffer(ShipStats ship)
+    { 
+ 
+        // Math for size
         if (sizePreference != ship.size)
         {
             if (ship.size == ShipStats.SizeCategory.Small)
             {
                 if (sizeRank == 1)
                 {
-                    sizeModifier = 1;
+                    sizeWeight = 1;
                 }
                 else if (sizeRank == 2)
                 {
-                    sizeModifier = 0.98f;
+                    sizeWeight = 0.98f;
                 }
                 else if (sizeRank == 3)
                 {
-                    sizeModifier = 0.96f;
+                    sizeWeight = 0.96f;
                 }
                 else if (sizeRank == 4)
                 {
-                    sizeModifier = 0.93f;
+                    sizeWeight = 0.93f;
                 }
                 else if (sizeRank == 5)
                 {
-                    sizeModifier = 0.90f;
+                    sizeWeight = 0.90f;
                 }
                 else if (sizeRank == 6)
                 {
-                    sizeModifier = 0.85f;
+                    sizeWeight = 0.85f;
                 }
             }
             else if (ship.size == ShipStats.SizeCategory.Regular)
             {
                 if (sizeRank == 1)
                 {
-                    sizeModifier = 1;
+                    sizeWeight = 1;
                 }
                 else if (sizeRank == 2)
                 {
-                    sizeModifier = 0.95f;
+                    sizeWeight = 0.95f;
                 }
                 else if (sizeRank == 3)
                 {
-                    sizeModifier = 0.90f;
+                    sizeWeight = 0.90f;
                 }
                 else if (sizeRank == 4)
                 {
-                    sizeModifier = 0.85f;
+                    sizeWeight = 0.85f;
                 }
                 else if (sizeRank == 5)
                 {
-                    sizeModifier = 0.80f;
+                    sizeWeight = 0.80f;
                 }
                 else if (sizeRank == 6)
                 {
-                    sizeModifier = 0.75f;
+                    sizeWeight = 0.75f;
                 }
             }
             else if (ship.size == ShipStats.SizeCategory.Large)
             {
                 if (sizeRank == 1)
                 {
-                    sizeModifier = 1;
+                    sizeWeight = 1;
                 }
                 else if (sizeRank == 2)
                 {
-                    sizeModifier = 0.90f;
+                    sizeWeight = 0.90f;
                 }
                 else if (sizeRank == 3)
                 {
-                    sizeModifier = 0.70f;
+                    sizeWeight = 0.70f;
                 }
                 else if (sizeRank == 4)
                 {
-                    sizeModifier = 0.40f;
+                    sizeWeight = 0.40f;
                 }
                 else if (sizeRank == 5)
                 {
-                    sizeModifier = 0.20f;
+                    sizeWeight = 0.20f;
                 }
                 else if (sizeRank == 6)
                 {
-                    sizeModifier = 0.10f;
+                    sizeWeight = 0.10f;
                 }
             }
 
         }
-            
-       
 
         //patience f(x)=0.003x+0.8
         //each stats has a value
@@ -272,56 +213,42 @@ public class CustomerStats : MonoBehaviour
         safetyValue = ship.safety / (ship.appearance + ship.interior + ship.safety + ship.speed) * ship.value;
         speedValue = ship.speed / (ship.appearance + ship.interior + ship.safety + ship.speed) * ship.value;
 
-        float maximumOffer = (appearanceValue * appearanceModifier) + (interiorValue * interiorModifier) + (safetyValue * safetyModifier) + (speedValue * speedModifier)
-            * (0.003f * patience + 0.8f) * sizeModifier;
+        float maximumOffer = (appearanceValue * appearanceWeight) + (interiorValue * interiorWeight) + (safetyValue * safetyWeight) + (speedValue * speedWeight)
+            * (0.003f * patience + 0.8f) * sizeWeight;
 
-        if (amount <= maximumOffer)
-        {
-            manager.AddIncome(amount);
-            if (amount / maximumOffer < 0.85f)
-            {
-                speechBubble.text = purchaseResponseCheap[Random.Range(0, purchaseResponseCheap.Length)];
-                StartCoroutine("SpawnNextCustomer");
-            }
-            else
-            {
-                speechBubble.text = purchaseResponseAverage[Random.Range(0, purchaseResponseAverage.Length)];
-                StartCoroutine("SpawnNextCustomer");
-            }
-        }
-        else 
-        {
-            if (amount >= maximumOffer && amount < maximumOffer * 1.2f)
-                UpdatePatience(-10.0f);
-            else if (amount >= maximumOffer * 1.2f && amount < maximumOffer * 1.5f)
-                UpdatePatience(-20.0f);
-            else if (amount >= maximumOffer * 1.5f && amount < maximumOffer * 2f)
-                UpdatePatience(-40.0f);
-            else if (amount >= maximumOffer * 2f && amount < maximumOffer * 3f)
-                UpdatePatience(-70.0f);
-            else if (amount >= maximumOffer * 3f)
-                UpdatePatience(-100.0f);
-            speechBubble.text = purchaseResponseExpensive[Random.Range(0, purchaseResponseExpensive.Length)];
-        }
+        return maximumOffer;
+
     }
 
-    private void UpdatePatience(float amount)
+    // SUBJECT TO CHANGE!!!!!!!!!!!!!!!!!!!!!!!!!
+    // Update patient value of customer
+    public void UpdatePatience(float changeOfPatience)
     {
-        // ALL CALLS TO THIS HAVE PLACEHOLDER VALUES OF -1.0 RIGHT NOW
-        patience += amount;
+        patience += changeOfPatience;
         patience = Mathf.Clamp(patience, 0.0f, 100.0f);
         patienceText.text = "Customer Patience: " + patience + "%";
         if (patience == 0)
-            StartCoroutine("SpawnNextCustomer");
+            // Add announcement when customer is out of patient
+            CustomerLeave("");
     }
-
+    
+    // SUBJECT TO CHANGE!!!!!!!!!!!!!!!!!!!!!!!!!
+    // Display announcement when current customer leaves the shop and spawn a new customer
+    public void CustomerLeave(string announcement)
+    {
+        // Add code to display announcement
+        StartCoroutine("SpawnNextCustomer");
+    }
+    // When the current customer is out of the shop (out of patient or already striked a deal), wait for 2 seconds to let player read announcement and spawn a new customer
     private IEnumerator SpawnNextCustomer()
     {
-        GameObject.Find("Interview").GetComponent<Button>().interactable = false;          //block buttons
+        // Froze all game buttons
+        GameObject.Find("Interview").GetComponent<Button>().interactable = false;
         GameObject.Find("Boast").GetComponent<Button>().interactable = false;
         GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
         GameObject.Find("Offer").GetComponent<Button>().interactable = false;
 
+        // Wait for 2 seconds, create new customer and destory current one
         while (true)
         {
             yield return new WaitForSeconds(2.0f);
