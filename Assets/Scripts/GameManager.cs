@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public Text netIncomeText;
     public Text speechBubble;
     public Text feedbackText;
+    public GameObject feedbackPanel;
     public GameObject shipPromptPanel;
 
     // Pannel Controller object
@@ -128,6 +129,7 @@ public class GameManager : MonoBehaviour
         incomeText = GameObject.Find("TotalIncome").GetComponent<Text>();
         netIncomeText = GameObject.Find("NetIncome").GetComponent<Text>();
         actionsText = GameObject.Find("DealerActions").GetComponent<Text>();
+        feedbackPanel = GameObject.Find("FeedbackPanel");
         shipPromptPanel = GameObject.Find("ShipPromptPanel");
 
         // Locate stats pannel controller
@@ -137,6 +139,7 @@ public class GameManager : MonoBehaviour
         //speechBubble.text = greetings[Random.Range(0, greetings.Length)];
         actionsText.text = dealerActions.ToString();
         feedbackText.text = "";
+        feedbackPanel.SetActive(false);
 
         // Set initail value for variables
         income = 0.0f;
@@ -402,6 +405,7 @@ public class GameManager : MonoBehaviour
         //Reset content for textbox
         actionsText.text = dealerActions.ToString();
         feedbackText.text = "";
+        feedbackPanel.SetActive(false);
 
         // Play audio effect accordingly
         audioMng.PlayAudio("Customer Arrives");
@@ -486,6 +490,7 @@ public class GameManager : MonoBehaviour
     public void UpdateFeedback(string announcement)
     {
         feedbackText.text = announcement;
+        feedbackPanel.SetActive(true);
     }
 
     // Greeting new customer

@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: df269d1fc4b3243af90d384f1b1e2658
+guid: 8eafe3970a7074226a46efad8767cbce
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2112439727279425765
-    second: money 1_0
-  - first:
-      213: 5640131563967020001
-    second: money 1_1
+      213: -1205275093623839882
+    second: goal panel_0
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -92,13 +89,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: money 1_0
+      name: goal panel_0
       rect:
         serializedVersion: 2
-        x: 65
-        y: 223
-        width: 371
-        height: 71
+        x: 71
+        y: 13
+        width: 358
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -106,29 +103,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9156127800fe4580a36f0f13d302f03
-      internalID: 2112439727279425765
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: money 1_1
-      rect:
-        serializedVersion: 2
-        x: 65
-        y: 128
-        width: 354
-        height: 75
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e27c3684754ed4be7881eaa1b5b85191
-      internalID: 5640131563967020001
+      spriteID: 4158a6fff4e85494a8ee17f4c34ae7d8
+      internalID: -1205275093623839882
       vertices: []
       indices: 
       edges: []
