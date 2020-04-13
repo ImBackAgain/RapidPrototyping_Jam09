@@ -764,7 +764,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 508, y: 0.000011444092}
+  m_AnchoredPosition: {x: 570, y: 7}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &569902067
@@ -1109,7 +1109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 508, y: -196}
+  m_AnchoredPosition: {x: 570, y: -220}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &709868565
@@ -1812,7 +1812,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 508, y: -99}
+  m_AnchoredPosition: {x: 570, y: -106}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1619802377
@@ -2003,7 +2003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c86c528675c4c4a858e8b6c67dd675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startGameSceneName: UIDevelopmentScene
+  startGameSceneName: PlayScene
   soundTestSceneName: JukeboxScene
   mainMenuParent: {fileID: 1394603187}
   titleText: {fileID: 636039415}
@@ -2052,7 +2052,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 508, y: 104}
+  m_AnchoredPosition: {x: 570, y: 118}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1854262190
