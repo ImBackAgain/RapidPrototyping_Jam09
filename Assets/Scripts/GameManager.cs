@@ -531,7 +531,7 @@ public class GameManager : MonoBehaviour
     {
         // storing buttons interactable state
         interviewBtnState = GameObject.Find("Interview").GetComponent<Button>().interactable;
-        boastBtnState = GameObject.Find("Interview").GetComponent<Button>().interactable;
+        boastBtnState = GameObject.Find("Boast").GetComponent<Button>().interactable;
         snackBtnState = GameObject.Find("Snacks").GetComponent<Button>().interactable;
         offerBtnState = GameObject.Find("Offer").GetComponent<Button>().interactable;
 
