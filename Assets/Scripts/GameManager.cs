@@ -255,6 +255,10 @@ public class GameManager : MonoBehaviour
                     speechBubble.text = purchaseResponseAverage[Random.Range(0, purchaseResponseAverage.Length)];
                     currentCustomer.OutOfActions("Perfect Price: $" + amount);
                 }
+
+                // If it has been accepted, just decrement the dealer action count for the visual of the thing
+                dealerActions--;
+                actionsText.text = dealerActions.ToString();
             }
             //When customer can't accept the offer made, customer becomes inpatient
             else
@@ -270,9 +274,11 @@ public class GameManager : MonoBehaviour
                 else if (amount >= maximumOffer * 3f)
                     currentCustomer.UpdatePatience(-100.0f);
                     speechBubble.text = purchaseResponseExpensive[Random.Range(0, purchaseResponseExpensive.Length)];
+
+                // If it has not been accepted, check as usual to see if the dealer is out of actions
+                DealerActionCountdown();
             }
 
-            DealerActionCountdown();
         }
 
         // Make sure offer panel is inaccesible after offer is made
@@ -425,7 +431,7 @@ public class GameManager : MonoBehaviour
         actionsText.text = dealerActions.ToString();
         if (dealerActions == 0)
         {
-            currentCustomer.OutOfActions("");
+            currentCustomer.OutOfActions("Out of Actions");
         }
     }
 
