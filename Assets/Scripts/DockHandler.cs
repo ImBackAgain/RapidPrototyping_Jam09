@@ -12,11 +12,11 @@ public class DockHandler : MonoBehaviour, IPointerClickHandler
         GameManager.instance.GetCurrentShip(transform.parent.GetComponentInChildren<ShipStats>(), transform.parent);
     }
 
-    public void TurnOnDefault()
-    {
-        if (isDefault)
-        {
-            GameManager.instance.GetCurrentShip(transform.parent.GetComponentInChildren<ShipStats>(), transform.parent);
-        }
-    }
+    //public void TurnOnDefault()
+    //{
+    //    if (isDefault)
+    //    {
+    //        GameManager.instance.GetCurrentShip(transform.parent.GetComponentInChildren<ShipStats>(), transform.parent);
+    //    }
+    //}
 }

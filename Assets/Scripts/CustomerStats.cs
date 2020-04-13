@@ -33,8 +33,8 @@ public class CustomerStats : MonoBehaviour
     // Current value for customer patience, an int between 0 and 100, indicate percent of patient left, start value is 100 for all customer
     private float patience;
 
-    // Used to add customer to GameManager class
-    private GameManager manager;
+    // Used to add customer to GameManager class (fix: use GameManager singleton directly)
+    //private GameManager manager;
     // For use of audio manager
     private AudioManager audioMng = null;
 
@@ -43,9 +43,9 @@ public class CustomerStats : MonoBehaviour
     {
         // Customer rank values are manualy set in the customer prefabs
 
-        // Locate GameManager and add current customer
-        manager = FindObjectOfType<GameManager>();
-        manager.SetCustomer(this);
+        // Locate GameManager and add current customer (fix: use GameManager singleton directly)
+        //manager = FindObjectOfType<GameManager>();
+        GameManager.instance.SetCustomer(this);
 
         // Locate patience UI and initialize patience value
         patienceText = GameObject.Find("CustomerPatience").GetComponent<Text>();
@@ -65,7 +65,7 @@ public class CustomerStats : MonoBehaviour
             Debug.LogError("\tNo GameObject with the [ AudioManager ] script was found in the current scene!");
 
         // Greet new customer
-        manager.Greeting();
+        GameManager.instance.Greeting();
     }
 
     // Convert rank value to weight value, basically higher the rank, higher the weight
@@ -268,7 +268,7 @@ public class CustomerStats : MonoBehaviour
         patienceText.text = patience.ToString();
         if (patience == 0)
         {
-            manager.NoSaleResponce();
+            GameManager.instance.NoSaleResponce();
             OutOfActions("Out of Patience");
         }
 
@@ -277,7 +277,7 @@ public class CustomerStats : MonoBehaviour
     // Display announcement when current customer leaves the shop and spawn a new customer
     public void OutOfActions(string announcement)
     {
-        manager.UpdateFeedback(announcement);
+        GameManager.instance.UpdateFeedback(announcement);
         StartCoroutine("SpawnNextCustomer");
     }
     // When the current customer is out of the shop (out of patient or already striked a deal), wait for 2 seconds to let player read announcement and spawn a new customer
@@ -293,9 +293,17 @@ public class CustomerStats : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(2.0f);
-            manager.SpawnOneShip(manager.currentShipParent);
-            manager.SpawnCustomer();
+            // only remove sold ship
+            if (GameManager.instance.currentSoldShipParent != null)
+            {
+                GameManager.instance.SpawnOneShip(GameManager.instance.currentSoldShipParent);
+                GameManager.instance.currentSoldShipParent = null;
+            }
+            // remove the current ship selection
+            GameManager.instance.SpawnCustomer();
             Destroy(gameObject);
+            GameManager.instance.RemoveShipSelection();
+            GameManager.instance.InitUIComponets();
         }
     }
 }

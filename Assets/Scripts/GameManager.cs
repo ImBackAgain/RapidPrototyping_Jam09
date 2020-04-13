@@ -19,12 +19,14 @@ public class GameManager : MonoBehaviour
     private int currentInterviewRank;
     // Current Customer that the player is talking to
     private CustomerStats currentCustomer;
-    // 
-    public Transform currentShipParent;
+    //  Parent of the ship being selected
+    private Transform currentShipParent;
+    // Parent of the ship being sold
+    public Transform currentSoldShipParent;
 
-    // The one and only GameManager instance, not currently used
+    // The one and only GameManager instance
     public static GameManager instance;
-    // A ship being selected, not currently used
+    // A ship being selected
     private ShipStats currentShip;
     // Final price decided between customer and player, not currently used
     private float finalBuyingPrice;
@@ -33,9 +35,10 @@ public class GameManager : MonoBehaviour
     public GameObject BoastPanel;
     public GameObject OfferPanel;
     public Text incomeText;
-    public Text totalIncomeText;
+    public Text netIncomeText;
     public Text speechBubble;
     public Text feedbackText;
+    public Text promptText;
 
     // Pannel Controller object
     private StatsPannelController statsPannelController;
@@ -111,9 +114,10 @@ public class GameManager : MonoBehaviour
         // Find the dialogue UI
         speechBubble = GameObject.Find("SpeechText").GetComponent<Text>();
         feedbackText = GameObject.Find("FeedbackLine").GetComponent<Text>();
-        incomeText = GameObject.Find("CurentIncome").GetComponent<Text>();
-        totalIncomeText = GameObject.Find("TotalIncome").GetComponent<Text>();
+        incomeText = GameObject.Find("TotalIncome").GetComponent<Text>();
+        netIncomeText = GameObject.Find("NetIncome").GetComponent<Text>();
         actionsText = GameObject.Find("DealerActions").GetComponent<Text>();
+        promptText = GameObject.Find("PromptText").GetComponent<Text>();
 
         // Locate stats pannel controller
         statsPannelController = FindObjectOfType<StatsPannelController>();
@@ -134,6 +138,7 @@ public class GameManager : MonoBehaviour
         SpawnCustomer();
 
         BoastPanel.SetActive(false);
+        InitUIComponets();
     }
 
     // Update is called once per frame
@@ -179,6 +184,8 @@ public class GameManager : MonoBehaviour
         // Each customer can only be interviewed 3 times
         if (currentInterviewRank == 2)
             GameObject.Find("Interview").GetComponent<Button>().interactable = false;
+
+        DealerActionCountdown();
     }
 
     // Currently linked to boast button in UI, activate the boast panel
@@ -193,9 +200,11 @@ public class GameManager : MonoBehaviour
     {
         speechBubble.text = boastResponse[Random.Range(0, boastResponse.Length)];
         currentCustomer.TakeBoast(stat);
-        // Can only boast to each customer once
+        // Can only boast to each customer once (perhaps not)
         BoastPanel.SetActive(false);
-        GameObject.Find("Boast").GetComponent<Button>().interactable = false;
+        //GameObject.Find("Boast").GetComponent<Button>().interactable = false;
+
+        DealerActionCountdown();
     }
 
     // Behavior for offer snack for customer, currently works as debug method for spawn new customer, need to change to add patience when offer snack
@@ -205,6 +214,8 @@ public class GameManager : MonoBehaviour
         currentCustomer.UpdatePatience(100.0f);
         // Each customer can only be offered once
         GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
+        
+        DealerActionCountdown();
     }
 
     // Activate offer input panel
@@ -212,6 +223,7 @@ public class GameManager : MonoBehaviour
     {
         // THIS IS A PLACEHOLDER AND DOES NOT ALLOW FOR PLAYER CHOICE
         OfferPanel.SetActive(true);
+        GameObject.Find("Offer").GetComponent<Button>().interactable = false;
         GameObject.Find("Offer").GetComponent<Button>().interactable = false;
     }
 
@@ -231,11 +243,12 @@ public class GameManager : MonoBehaviour
             //When customer accept the offer
             if (amount <= maximumOffer)
             {
+                currentSoldShipParent = currentShipParent;
                 AddIncome(amount, ship.value);
                 if (amount / maximumOffer < 0.85f)
                 {
                     speechBubble.text = purchaseResponseCheap[Random.Range(0, purchaseResponseCheap.Length)];
-                    currentCustomer.OutOfActions("Perfect Price: $" + amount);
+                    currentCustomer.OutOfActions("Perfect Price: $" + maximumOffer);
                 }
                 else
                 {
@@ -291,13 +304,12 @@ public class GameManager : MonoBehaviour
         }
 
         AddIncome(0.0f, 0.0f);
-        //totalIncomeText.text = "/ " + totalShipValue;
 
-        GameObject[] docks = GameObject.FindGameObjectsWithTag("ShipDock");
-        foreach (GameObject dock in docks)
-        {
-            dock.GetComponent<DockHandler>().TurnOnDefault();
-        }
+        //GameObject[] docks = GameObject.FindGameObjectsWithTag("ShipDock");
+        //foreach (GameObject dock in docks)
+        //{
+        //    dock.GetComponent<DockHandler>().TurnOnDefault();
+        //}
     }
 
     // Yuanchao's code of spawn only one ship
@@ -376,7 +388,8 @@ public class GameManager : MonoBehaviour
     {
         income += price;
         netIncome += price - value;
-        incomeText.text = "Total income: " + income + " Net Income: " + netIncome;
+        incomeText.text = income.ToString();
+        netIncomeText.text = netIncome.ToString();
         //incomeText.text = "Amount Earned: " + income + " / " + totalShipValue;
         int randomSound = Random.Range(1, 4);
         audioMng.PlayAudio("Spaceship Sold " + randomSound);
@@ -389,6 +402,9 @@ public class GameManager : MonoBehaviour
         currentShip = selectedShip;
         currentShipParent = parent;
         ActivateCurrentShipDock(parent.Find("Dock"));
+
+        BoastPanel.SetActive(false);
+        ActivateUIComponetsOnShipSelect();
     }
 
     //
@@ -454,5 +470,33 @@ public class GameManager : MonoBehaviour
     public void NoSaleResponce()
     {
         speechBubble.text = leaveNoSaleResponse[Random.Range(0, leaveNoSaleResponse.Length)];
+    }
+
+    public void RemoveShipSelection()
+    {
+        currentShipParent = null;
+        currentShip = null;
+        GameObject[] docks = GameObject.FindGameObjectsWithTag("ShipDock");
+        foreach (GameObject dock in docks)
+        {
+            dock.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+        }
+        statsPannelController.UpdateStats("Model", "Size", 0, 0, 0, 0, 0);
+    }
+
+    public void InitUIComponets()
+    {
+        GameObject.Find("Boast").GetComponent<Button>().interactable = false;
+        GameObject.Find("Offer").GetComponent<Button>().interactable = false;
+        //show prompt
+        promptText.gameObject.SetActive(true);
+    }
+
+    public void ActivateUIComponetsOnShipSelect()
+    {
+        GameObject.Find("Boast").GetComponent<Button>().interactable = true;
+        GameObject.Find("Offer").GetComponent<Button>().interactable = true;
+        //hide prompt
+        promptText.gameObject.SetActive(false);
     }
 }
