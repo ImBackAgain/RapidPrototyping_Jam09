@@ -1,15 +1,6 @@
 # RapidPrototyping_Jam09
 A game jam title using open-source / free art and audio assets.
 
-## BUG LIST
-
-- [ ] For some reason, the offered price is now being displayed as the "perfect price" after a sale. 
-- [ ] A ship is being removed from rotation even if no sale is made. 
-- [ ] The removed ship is still being selected during a new round, even as the visible selection is on a new ship. 
-- [ ] Revenue and profits require visual correction. 
-- [ ] Dealer actions are no longer counted, and boasting is (mistakenly) no longer a repeatable activity.
-- [ ] Quoting a price breaks the game with a problem with some "offer panel."
-
 ## PLAYER README
 
 It's getter tougher and tougher to make an honest spacebuck these days.

@@ -57,6 +57,17 @@ public class GameManager : MonoBehaviour
     // For use of AudioManager
     private AudioManager audioMng = null;
 
+    // state of the ship states panel
+    private bool isShipStatsPanelInit = false;
+
+    // state of the popup window
+    private bool isPopUp = false;
+    // store buttons state for popupwindow func, don't use tme for other purposes
+    private bool interviewBtnState;
+    private bool snackBtnState;
+    private bool boastBtnState;
+    private bool offerBtnState;
+
     // Customer syntax
     // Start of conversation
     private string[] greetings = { "Hi there!", "Whatta ya got?", "What're ya sellin'?", "Is this the right place?", "Can I get some service, please?" };
@@ -130,6 +141,7 @@ public class GameManager : MonoBehaviour
         // Set initail value for variables
         income = 0.0f;
         netIncome = 0.0f;
+        isPopUp = false;
         //totalShipValue = 0.0f;
         dealerActions = maxActions;
         ships = new List<ShipStats>();
@@ -214,7 +226,7 @@ public class GameManager : MonoBehaviour
         currentCustomer.UpdatePatience(100.0f);
         // Each customer can only be offered once
         GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
-        
+
         DealerActionCountdown();
     }
 
@@ -223,8 +235,14 @@ public class GameManager : MonoBehaviour
     {
         // THIS IS A PLACEHOLDER AND DOES NOT ALLOW FOR PLAYER CHOICE
         OfferPanel.SetActive(true);
-        GameObject.Find("Offer").GetComponent<Button>().interactable = false;
-        GameObject.Find("Offer").GetComponent<Button>().interactable = false;
+        ShowPopUpWindow();
+    }
+
+    public void CancelPrice()
+    {
+        GameObject.Find("InputPrice").GetComponent<InputField>().text = "0";
+        OfferPanel.SetActive(false);
+        HidePopUpWindow();
     }
 
     // Take input price and calculate customer behavior
@@ -233,7 +251,7 @@ public class GameManager : MonoBehaviour
         float amount = float.Parse(GameObject.Find("InputPrice").GetComponent<InputField>().text);
         if (amount <= 0)
         {
-            ;//Error input
+            return;//Error input
         }
         else
         {
@@ -269,7 +287,7 @@ public class GameManager : MonoBehaviour
                     currentCustomer.UpdatePatience(-70.0f);
                 else if (amount >= maximumOffer * 3f)
                     currentCustomer.UpdatePatience(-100.0f);
-                    speechBubble.text = purchaseResponseExpensive[Random.Range(0, purchaseResponseExpensive.Length)];
+                speechBubble.text = purchaseResponseExpensive[Random.Range(0, purchaseResponseExpensive.Length)];
             }
 
             DealerActionCountdown();
@@ -277,7 +295,7 @@ public class GameManager : MonoBehaviour
 
         // Make sure offer panel is inaccesible after offer is made
         OfferPanel.SetActive(false);
-        GameObject.Find("Offer").GetComponent<Button>().interactable = true;
+        HidePopUpWindow();
     }
 
     // Spawn new ship that wasn't currently in stock
@@ -398,13 +416,17 @@ public class GameManager : MonoBehaviour
     // Select a ship
     public void GetCurrentShip(ShipStats selectedShip, Transform parent)
     {
+        if (isPopUp) return;
         statsPannelController.UpdateStats(selectedShip.model, selectedShip.size.ToString(), selectedShip.appearance, selectedShip.interior, selectedShip.safety, selectedShip.speed, Mathf.FloorToInt(selectedShip.value));
         currentShip = selectedShip;
         currentShipParent = parent;
         ActivateCurrentShipDock(parent.Find("Dock"));
 
         BoastPanel.SetActive(false);
-        ActivateUIComponetsOnShipSelect();
+        if (!isShipStatsPanelInit)
+        {
+            ActivateUIComponetsOnShipSelect();
+        }
     }
 
     //
@@ -490,13 +512,45 @@ public class GameManager : MonoBehaviour
         GameObject.Find("Offer").GetComponent<Button>().interactable = false;
         //show prompt
         shipPromptPanel.SetActive(true);
+        // no data on the panel
+        isShipStatsPanelInit = false;
     }
 
     public void ActivateUIComponetsOnShipSelect()
     {
+        
         GameObject.Find("Boast").GetComponent<Button>().interactable = true;
         GameObject.Find("Offer").GetComponent<Button>().interactable = true;
         //hide prompt
         shipPromptPanel.SetActive(false);
+        // panel has been init
+        isShipStatsPanelInit = true;
+    }
+
+    public void ShowPopUpWindow()
+    {
+        // storing buttons interactable state
+        interviewBtnState = GameObject.Find("Interview").GetComponent<Button>().interactable;
+        boastBtnState = GameObject.Find("Interview").GetComponent<Button>().interactable;
+        snackBtnState = GameObject.Find("Snacks").GetComponent<Button>().interactable;
+        offerBtnState = GameObject.Find("Offer").GetComponent<Button>().interactable;
+
+        GameObject.Find("Interview").GetComponent<Button>().interactable = false;
+        GameObject.Find("Boast").GetComponent<Button>().interactable = false;
+        GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
+        GameObject.Find("Offer").GetComponent<Button>().interactable = false;
+
+        isPopUp = true;
+    }
+
+
+    public void HidePopUpWindow()
+    {
+        GameObject.Find("Interview").GetComponent<Button>().interactable = interviewBtnState;
+        GameObject.Find("Boast").GetComponent<Button>().interactable = boastBtnState;
+        GameObject.Find("Snacks").GetComponent<Button>().interactable = snackBtnState;
+        GameObject.Find("Offer").GetComponent<Button>().interactable = offerBtnState;
+
+        isPopUp = false;
     }
 }
