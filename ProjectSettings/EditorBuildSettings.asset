@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: 
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
@@ -15,9 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/JukeboxScene.unity
     guid: 1b62eb05082ffa84ea4cc157fc3a1149
   - enabled: 0
-    path: Assets/Scenes/YuanchaoScene.unity
+    path: 
     guid: e49841710e3337844be861036a5896ac
   - enabled: 1
     path: Assets/Scenes/PlayScene.unity
     guid: dd55197abb2494a119dcc62f59dd9bc9
+  - enabled: 1
+    path: Assets/Scenes/UIDevelopmentScene.unity
+    guid: 8c1df1f4a09aa4d8daac6ffb142643e8
   m_configObjects: {}

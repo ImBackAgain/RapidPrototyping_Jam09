@@ -22,6 +22,8 @@ public class MainMenu : MonoBehaviour
     public Button soundTestButton;
     public Button creditsButton;
     public Button quitGameButton;
+    public Image Background;
+    public Image CreditsBG;
     [Header("Credits Objects")]
     public GameObject creditsParent;
     public ScrollRect creditsScrollRect;
@@ -57,6 +59,8 @@ public class MainMenu : MonoBehaviour
         soundTestButton.gameObject.SetActive(visible);
         creditsButton.gameObject.SetActive(visible);
         quitGameButton.gameObject.SetActive(visible);
+        Background.enabled = visible;
+        CreditsBG.enabled = !visible;
     }
 
     // CreditsVisibility()
