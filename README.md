@@ -1,7 +1,16 @@
 # RapidPrototyping_Jam09
 A game jam title using open-source / free art and audio assets.
 
-# PLAYER README
+## BUG LIST
+
+- [ ] For some reason, the offered price is now being displayed as the "perfect price" after a sale. 
+- [ ] A ship is being removed from rotation even if no sale is made. 
+- [ ] The removed ship is still being selected during a new round, even as the visible selection is on a new ship. 
+- [ ] Revenue and profits require visual correction. 
+- [ ] Dealer actions are no longer counted, and boasting is (mistakenly) no longer a repeatable activity.
+- [ ] Quoting a price breaks the game with a problem with some "offer panel."
+
+## PLAYER README
 
 It's getter tougher and tougher to make an honest spacebuck these days.
 
@@ -13,9 +22,9 @@ You get five actions per customer.  You can interview customers to get their top
 
 It's up to you to make enough cash to cover your investment.  Ships don't just fall out of the sky, you know.
 
-# CREDITS
+## CREDITS
 
-## Developers
+### Developers
 
 - Robert MacLeod
 - Rongyi Zhao
@@ -23,17 +32,17 @@ It's up to you to make enough cash to cover your investment.  Ships don't just f
 - Richard Hetley
 - Michael Berger
 
-## Visuals
+### Visuals
 
 - _Remastered Tyrian Graphics_ by Daniel Cook
     - Link: https://lostgarden.home.blog/2007/04/05/free-game-graphics-tyrian-ships-and-tiles/
 
-## Audio
+### Audio
 
 
 - Master Document of Audio Sources: https://docs.google.com/document/d/1LZfTJjoZz8YUi9bVAEiWjsTxvr3IlHADiuOPsxVak2k/
 
-# IMPORTANT DEV STEPS
+## IMPORTANT DEV STEPS
 
 1. Download Unity 2019.2.16f1 (see; https://unity3d.com/get-unity/download/archive )
 2. Install Git LFS (see; https://git-lfs.github.com/ )
