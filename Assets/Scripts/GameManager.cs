@@ -281,6 +281,7 @@ public class GameManager : MonoBehaviour
             //When customer can't accept the offer made, customer becomes inpatient
             else
             {
+                speechBubble.text = purchaseResponseExpensive[Random.Range(0, purchaseResponseExpensive.Length)];
                 if (amount >= maximumOffer && amount < maximumOffer * 1.2f)
                     currentCustomer.UpdatePatience(-10.0f);
                 else if (amount >= maximumOffer * 1.2f && amount < maximumOffer * 1.5f)
@@ -291,7 +292,6 @@ public class GameManager : MonoBehaviour
                     currentCustomer.UpdatePatience(-70.0f);
                 else if (amount >= maximumOffer * 3f)
                     currentCustomer.UpdatePatience(-100.0f);
-                    speechBubble.text = purchaseResponseExpensive[Random.Range(0, purchaseResponseExpensive.Length)];
 
                 // If it has not been accepted, check as usual to see if the dealer is out of actions
                 DealerActionCountdown();
@@ -453,28 +453,28 @@ public class GameManager : MonoBehaviour
         actionsText.text = dealerActions.ToString();
         if (dealerActions == 0)
         {
-            currentCustomer.OutOfActions("Out of Actions");
+            StartCoroutine("WaitForTextBeforeEndOfCustomer");
         }
     }
 
-    // Method already exist in customerStats
-    //private IEnumerator WaitForTextBeforeEndOfCustomer()
-    //{
-    // The player has 2 seconds to read whatever text was recently displayed, then another customer will be spawned after another 2 seconds
-    //GameObject.Find("Interview").GetComponent<Button>().interactable = false;          //block buttons
-    //GameObject.Find("Boast").GetComponent<Button>().interactable = false;
-    //GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
-    //GameObject.Find("Offer").GetComponent<Button>().interactable = false;
+    private IEnumerator WaitForTextBeforeEndOfCustomer()
+    {
+        // The player has 2 seconds to read whatever text was recently displayed, then another customer will be spawned after another 2 seconds
+        GameObject.Find("Interview").GetComponent<Button>().interactable = false;          //block buttons
+        GameObject.Find("Boast").GetComponent<Button>().interactable = false;
+        GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
+        GameObject.Find("Offer").GetComponent<Button>().interactable = false;
 
-    //bool stillWaiting = true;
+        bool stillWaiting = true;
 
-    //while (stillWaiting)
-    //{
-    //yield return new WaitForSeconds(2.0f);
-    //currentCustomer.OutOfActions();
-    //stillWaiting = false;
-    //}
-    //}
+        while (stillWaiting)
+        {
+            yield return new WaitForSeconds(2.0f);
+            NoSaleResponce();
+            currentCustomer.OutOfActions("Out of Actions");
+            stillWaiting = false;
+        }
+    }
 
     // Set current customer to a certain custumoer
     public void SetCustomer(CustomerStats customer)
