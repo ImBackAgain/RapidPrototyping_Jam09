@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     public Text netIncomeText;
     public Text speechBubble;
     public Text feedbackText;
-    public Text promptText;
+    public GameObject shipPromptPanel;
 
     // Pannel Controller object
     private StatsPannelController statsPannelController;
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
         incomeText = GameObject.Find("TotalIncome").GetComponent<Text>();
         netIncomeText = GameObject.Find("NetIncome").GetComponent<Text>();
         actionsText = GameObject.Find("DealerActions").GetComponent<Text>();
-        promptText = GameObject.Find("PromptText").GetComponent<Text>();
+        shipPromptPanel = GameObject.Find("ShipPromptPanel");
 
         // Locate stats pannel controller
         statsPannelController = FindObjectOfType<StatsPannelController>();
@@ -489,7 +489,7 @@ public class GameManager : MonoBehaviour
         GameObject.Find("Boast").GetComponent<Button>().interactable = false;
         GameObject.Find("Offer").GetComponent<Button>().interactable = false;
         //show prompt
-        promptText.gameObject.SetActive(true);
+        shipPromptPanel.SetActive(true);
     }
 
     public void ActivateUIComponetsOnShipSelect()
@@ -497,6 +497,6 @@ public class GameManager : MonoBehaviour
         GameObject.Find("Boast").GetComponent<Button>().interactable = true;
         GameObject.Find("Offer").GetComponent<Button>().interactable = true;
         //hide prompt
-        promptText.gameObject.SetActive(false);
+        shipPromptPanel.SetActive(false);
     }
 }
