@@ -299,7 +299,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     speechBubble.text = purchaseResponseAverage[Random.Range(0, purchaseResponseAverage.Length)];
-                    currentCustomer.OutOfActions("Perfect Price: $" + amount);
+                    currentCustomer.OutOfActions("Perfect Price: $" + maximumOffer);
                 }
 
                 // If it has been accepted, just decrement the dealer action count for the visual of the thing
@@ -320,6 +320,8 @@ public class GameManager : MonoBehaviour
                     currentCustomer.UpdatePatience(-70.0f);
                 else if (amount >= maximumOffer * 3f)
                     currentCustomer.UpdatePatience(-100.0f);
+
+                if (currentCustomer.patience == 0) UpdateFeedback("Slow down! $" + maximumOffer + " would've done it");
 
                 // If it has not been accepted, check as usual to see if the dealer is out of actions
                 DealerActionCountdown();

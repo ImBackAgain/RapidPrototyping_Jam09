@@ -31,7 +31,7 @@ public class CustomerStats : MonoBehaviour
     // UI used to display amount of customer patient
     private Text patienceText;
     // Current value for customer patience, an int between 0 and 100, indicate percent of patient left, start value is 100 for all customer
-    private float patience;
+    public float patience;
 
     // Used to add customer to GameManager class (fix: use GameManager singleton directly)
     //private GameManager manager;
@@ -332,7 +332,7 @@ public class CustomerStats : MonoBehaviour
         //Thus, maximumOfffer is in the range (0, 2.75v), where v is the value of the shup.
 
         // Round the highest price to a multiple of 50
-        maximumOffer = Mathf.Round(maximumOffer / 50.0f) * 50;
+        maximumOffer = Mathf.Round(maximumOffer / 10.0f) * 10;
 
         return maximumOffer;
     }
