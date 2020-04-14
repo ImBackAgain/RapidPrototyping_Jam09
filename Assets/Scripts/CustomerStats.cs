@@ -47,7 +47,7 @@ public class CustomerStats : MonoBehaviour
         int random = Random.Range(-5, 5);
 
         if (random < 0) random = 0;
-        modifier = (CustomerModifier)random;
+        //modifier = (CustomerModifier)random;
 
         if (modifier != CustomerModifier.None)
         {

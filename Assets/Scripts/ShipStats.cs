@@ -30,7 +30,7 @@ public class ShipStats : MonoBehaviour
         int random = Random.Range(-5, 5);
 
         if (random < 0) random = 0;
-        modifier = (ShipModifier)random;
+        //modifier = (ShipModifier)random;
 
         if (modifier == ShipModifier.Refurbished)
             value += 50;
