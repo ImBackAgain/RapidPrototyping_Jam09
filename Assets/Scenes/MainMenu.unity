@@ -2396,7 +2396,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 375, y: 800}
+  m_SizeDelta: {x: 375, y: 1100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2130133524
 MonoBehaviour:
@@ -2431,19 +2431,20 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\n<b>Developers:</b>\n\n    - Robert MacLeod (Systems)\n    - Rongyi Zhao
     (Gameplay)\n    - Yuanchao Liu (Math)\n    - Richard Hetley (Graphics)\n    -
-    Michael Berger (Audio)\n\n<b> Adaptation by: </b>\n     -Enan Munzar\n     -Richard
-    Hetley\n     -Lena Ge \n     -Soahm Korgaokar\n     -Ziming Li\n     -Yuanchao
-    Liu\n\r\n\n<b>Visual Assets:</b>\n\n    - <b>Remastered Tyrian Graphics</b>\n
-    \       - Created by Daniel Cook\n    - <b>Main Menu Background</b>\n        -
-    Created by papers.co\n    - <b>Game Background</b>\n        - Created by iCephei\n\n<b>Audio
-    Assets:</b>\n\n    - <b>\"Shaving Mirror\"</b>\n        - Composed by Kevin MacLeod\n
-    \       - Licensed under CC by 4.0\n    - <b>\"Fast Drawing Sounds\"</b>\n        -
-    Recorded by Daniel Simion\n        - Licensed under CC by 3.0\n    - <b>\"Front
-    Desk Bell\"</b>\n        - Recorded by Daniel Simion\n        - Licensed under
-    CC by 3.0\n    - <b>\"Tiny Frog Sounds\"</b>\n        - Recorded by \"snottyboy\"\n
-    \       - Licensed under CC by 3.0\n    - <b>\"Typewriter\"</b>\n        - Recorded
-    by \"tamskp\"\n        - Licensed under CC by 3.0\n    - <b>\"Rocket Thrusters\"</b>\n
-    \       - Recorded by \"dobroride\"\n        - Licensed under Sampling+ 1.0\n"
+    Michael Berger (Audio)\n\n<b> Adaptation by: </b>\n     -Enan Munzar (Systems)\n
+    \    -Richard Hetley (Gameplay)\n     -Lena Ge (Gameplay)\n     -Soahm Korgaokar
+    (Graphics)\n     -Ziming Li (UI)\n     -Yuanchao Liu (Systems)\n\r\n\n<b>Visual
+    Assets:</b>\n\n    - <b>Remastered Tyrian Graphics</b>\n        - Created by Daniel
+    Cook\n    - <b>Main Menu Background</b>\n        - Created by papers.co\n    -
+    <b>Game Background</b>\n        - Created by iCephei\n\n<b>Audio Assets:</b>\n\n
+    \   - <b>\"Shaving Mirror\"</b>\n        - Composed by Kevin MacLeod\n        -
+    Licensed under CC by 4.0\n    - <b>\"Fast Drawing Sounds\"</b>\n        - Recorded
+    by Daniel Simion\n        - Licensed under CC by 3.0\n    - <b>\"Front Desk Bell\"</b>\n
+    \       - Recorded by Daniel Simion\n        - Licensed under CC by 3.0\n    -
+    <b>\"Tiny Frog Sounds\"</b>\n        - Recorded by \"snottyboy\"\n        - Licensed
+    under CC by 3.0\n    - <b>\"Typewriter\"</b>\n        - Recorded by \"tamskp\"\n
+    \       - Licensed under CC by 3.0\n    - <b>\"Rocket Thrusters\"</b>\n        -
+    Recorded by \"dobroride\"\n        - Licensed under Sampling+ 1.0\n"
 --- !u!222 &2130133525
 CanvasRenderer:
   m_ObjectHideFlags: 0
