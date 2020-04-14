@@ -224,9 +224,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "  You current customer is on the left.\n\n\n  Interview to\nfigure out
-    their \ntop 3 priorities.\n\n\n  Snacks keep up\ntheir patience\n\n\n        .
-    . . Mmm, space snacks"
+  m_Text: "  The customer is on the left.\n\n\n  Interview to\nfigure out their \ntop
+    3 priorities.\n\n\n  Snacks keep up\ntheir patience\n\n\n        . . . Mmm, space
+    snacks"
 --- !u!222 &32744630
 CanvasRenderer:
   m_ObjectHideFlags: 0
