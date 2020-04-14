@@ -42,9 +42,10 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Text feedbackText;
     [HideInInspector] public GameObject feedbackPanel;
     [HideInInspector] public GameObject shipPromptPanel;
+    Text customerText;
 
     // Pannel Controller object
-    private StatsPannelController statsPannelController;
+    private StatsPanelController statsPanelController;
     // UI used to display available dealer actions remaining
     private Text actionsText;
     // Current count of actions left, an int between 0 and 5, starting at 5 with each new customer, when it's 0, put customer out of action
@@ -53,10 +54,15 @@ public class GameManager : MonoBehaviour
 
     // Total income earned by this shop
     private float income;
+
     // Net income = Income - shipValue
     [HideInInspector] public float netIncome;
+
     // Total value of all the ships in stock (currently will increase whenever a ship is spawned, but need to be decreased once a ship is sold)
     //private float totalShipValue;
+    //Cela au-desssus, c'est UNUSED
+    //Rest in peace, totalShipValue.
+    
     // For use of AudioManager
     private AudioManager audioMng = null;
 
@@ -74,6 +80,8 @@ public class GameManager : MonoBehaviour
     //Ship pool; Exclude one ship per spwan
     private HashSet<int> exclude = new HashSet<int>();
 
+
+    #region String arrrays. So many string arrrays.
     // Customer syntax
     // Start of conversation
     private string[] greetings = { "Hi there!", "Whatta ya got?", "What're ya sellin'?", "Is this the right place?", "Can I get some service, please?" };
@@ -105,6 +113,7 @@ public class GameManager : MonoBehaviour
     private string[] purchaseResponseExpensive = { "I can't afford that.", "No way, pal.", "That's way too expensive.", "For that hunk of junk?! No way!", "You're out of your mind!" };
     // Response when leaving without a sale
     private string[] leaveNoSaleResponse = { "I have places to be.", "Have your people call my people.", "I'm bored, I'm busy, I'm done here.", "Whatever, I don't like your selection...", "Guess I'm not flying home in a new ride." };
+    #endregion
 
 
     // Make instance a singleton
@@ -139,8 +148,11 @@ public class GameManager : MonoBehaviour
         feedbackPanel = GameObject.Find("FeedbackPanel");
         shipPromptPanel = GameObject.Find("ShipPromptPanel");
 
+        //And customer# UI
+        customerText = GameObject.Find("Customer #").GetComponent<Text>();
+
         // Locate stats pannel controller
-        statsPannelController = FindObjectOfType<StatsPannelController>();
+        statsPanelController = FindObjectOfType<StatsPanelController>();
 
         // Set initial value for text
         //speechBubble.text = greetings[Random.Range(0, greetings.Length)];
@@ -387,7 +399,8 @@ public class GameManager : MonoBehaviour
 
         // When new customer is spawed, reset interviewRank back to maximum (5)
         currentInterviewRank = 5;
-        VisitedCustomerNumber = VisitedCustomerNumber + 1;
+        VisitedCustomerNumber++;
+        customerText.text = "Customer #" + VisitedCustomerNumber;
         // New customer is spawned at this position
         Vector3 spawnPoint = GameObject.FindGameObjectWithTag("CustomerSpawnPoint").transform.position;
         Transform container = GameObject.Find("CustomerContainer").transform;
@@ -400,7 +413,8 @@ public class GameManager : MonoBehaviour
             spawnedCustomer.transform.localScale = new Vector3(spawnedCustomer.transform.localScale.x * 45f, spawnedCustomer.transform.localScale.y * 45f, 1f);
             spawnedCustomer.transform.SetParent(container);
         }
-        // If this is not the first customer, save the index of previous customer to a list of used customer, only spawn from customer prefabs that haven't been used
+        // If this is not the first customer, save the index of previous customer to a list of used customer,
+        // and only spawn from customer prefabs that haven't been used
         else
         {
             HashSet<int> exclude = new HashSet<int>() { previousCustomerIndex };
@@ -449,7 +463,7 @@ public class GameManager : MonoBehaviour
     public void GetCurrentShip(ShipStats selectedShip, Transform parent)
     {
         if (isPopUp) return;
-        statsPannelController.UpdateStats(selectedShip.model, selectedShip.size.ToString(), selectedShip.appearance, selectedShip.interior, selectedShip.safety, selectedShip.speed, Mathf.FloorToInt(selectedShip.value));
+        statsPanelController.UpdateStats(selectedShip.model, selectedShip.size.ToString(), selectedShip.appearance, selectedShip.interior, selectedShip.safety, selectedShip.speed, Mathf.FloorToInt(selectedShip.value), selectedShip.modifier);
         currentShip = selectedShip;
         currentShipParent = parent;
         ActivateCurrentShipDock(parent.Find("Dock"));
@@ -537,7 +551,7 @@ public class GameManager : MonoBehaviour
         {
             dock.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         }
-        statsPannelController.UpdateStats("Model", "Size", 0, 0, 0, 0, 0);
+        statsPanelController.UpdateStats("Model", "Size", 0, 0, 0, 0, 0, ShipModifier.None);
     }
 
     public void InitUIComponets()

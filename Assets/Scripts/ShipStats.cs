@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Saved for future use of special ship characteristics
+public enum ShipModifier { None, Wartorn, Antique, Refurbished, Homely };
 public class ShipStats : MonoBehaviour
 {
     //Name of the ship
@@ -18,14 +20,18 @@ public class ShipStats : MonoBehaviour
     public enum SizeCategory { Small, Regular, Large}
     public SizeCategory size;
 
-    // Saved for future use of special ship characteristics
-    public enum ShipModifier { None }
     public ShipModifier modifier = ShipModifier.None;
 
     // Start is called before the first frame update
     void Start()
     {
         // All values are set in the Inspector
+
+        int random = Random.Range(1, 5);
+        modifier = (ShipModifier)random;
+
+        if (modifier == ShipModifier.Refurbished)
+            value += 50;
     }
 
     public string GenerateTooltip()

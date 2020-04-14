@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatsPannelController : MonoBehaviour
+public class StatsPanelController : MonoBehaviour
 {
     private StarController appearanceStars;
     private StarController interiorStars;
@@ -13,6 +13,10 @@ public class StatsPannelController : MonoBehaviour
     private Text modelTextBox;
     private Text sizeTextBox;
     private Text priceTextBox;
+
+    private Image shipMod;
+
+    Dictionary<ShipModifier, Sprite> modSprites = new Dictionary<ShipModifier, Sprite>();
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +29,17 @@ public class StatsPannelController : MonoBehaviour
         modelTextBox = GameObject.Find("ModelText").GetComponent<Text>();
         sizeTextBox = GameObject.Find("SizeText").GetComponent<Text>();
         priceTextBox = GameObject.Find("ShipPrice").GetComponent<Text>();
+
+        shipMod = GameObject.Find("ShipModIcon").GetComponent<Image>();
+        shipMod.enabled = false;
+
+        foreach (ShipModifier value in new ShipModifier[] { ShipModifier.Antique, ShipModifier.Homely, ShipModifier.Refurbished, ShipModifier.Wartorn})
+        {
+            modSprites.Add(value, Resources.Load<Sprite>(value.ToString()));
+        }
     }
 
-    public void UpdateStats(string model, string size, int appearanceVal, int interiorVal, int safetyVal, int speedVal, int shipPrice)
+    public void UpdateStats(string model, string size, int appearanceVal, int interiorVal, int safetyVal, int speedVal, int shipPrice, ShipModifier mod)
     {
         appearanceStars.UpdateStarNum(appearanceVal);
         interiorStars.UpdateStarNum(interiorVal);
@@ -37,5 +49,13 @@ public class StatsPannelController : MonoBehaviour
         modelTextBox.text = model;
         sizeTextBox.text = size;
         priceTextBox.text = shipPrice.ToString();
+
+        if (mod == ShipModifier.None)
+            shipMod.enabled = false;
+        else
+        {
+            shipMod.enabled = true;
+            shipMod.sprite = modSprites[mod];
+        }
     }
 }
