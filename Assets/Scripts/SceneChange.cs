@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class SoundTestMenu : MonoBehaviour
+public class SceneChange : MonoBehaviour
 {
     [Header("Scene Transition Variables")]
-    public string mainMenuSceneName = "";
+    public string destinationSceneName = "";
 
     // Start()
     void Start()
@@ -16,8 +16,8 @@ public class SoundTestMenu : MonoBehaviour
     }
 
     // This is called by the menu option within the sound test scene
-    public void ReturnFromSoundTestFunc()
+    public void SwitchScenes()
     {
-        SceneManager.LoadScene(mainMenuSceneName);
+        SceneManager.LoadScene(destinationSceneName);
     }
 }
