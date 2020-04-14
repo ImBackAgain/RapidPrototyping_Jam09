@@ -224,9 +224,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "You currrent customer is displayed in the lower left.\n\nInterview them
-    to\nFigure out what \nthey want\n\nSnacks keeep\nthem in a goood \nmoood (once
-    per\ncustomer)"
+  m_Text: "  You current customer is on the left.\n\n\n  Interview to\nfigure out
+    their \ntop 3 priorities.\n\n\n  Snacks keep up\ntheir patience\n\n\n        .
+    . . Mmm, space snacks"
 --- !u!222 &32744630
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -537,7 +537,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 44, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180490670
@@ -565,7 +565,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1195,7 +1195,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 195, y: -43}
+  m_AnchoredPosition: {x: 195, y: 0}
   m_SizeDelta: {x: 362, y: 212}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &236667426
@@ -1382,7 +1382,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 199, y: -43}
+  m_AnchoredPosition: {x: 199, y: 0}
   m_SizeDelta: {x: 520, y: 427}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &317660851
@@ -1572,9 +1572,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Emphasize a feature in your pitch to make the customer care more about
-    it.\n\n\nA ship the \ncustomer likes \ncan selll for\na lot more than\nwhat it's
-    worth.\n\nSwindle them\nout of their savings!"
+  m_Text: "  Once you know your customers, it becomes easier to emphasize the features
+    they like best.\n\n\n  Sell ships\nthey like for\nmore than\nthey're worth\n\n\n
+    \ Much much much more!"
 --- !u!222 &402239998
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1759,7 +1759,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 635.0001, y: 7}
+  m_AnchoredPosition: {x: 603, y: 12}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &569902067
@@ -2140,7 +2140,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 635.0001, y: -235}
+  m_AnchoredPosition: {x: 513, y: -239}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &709868565
@@ -2504,14 +2504,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'If you''re tooo steeep for the customer, you can try again with a diffferent
-    price or a diffferent ship.
-
-
-    But be careful! Go over their budget twice and they''lll show themselves out.
-
-
-    Goood luck, and make Ol'' Papa Pete proud!'
+  m_Text: "  If you're too steep for the customer, you can try again with a different
+    price or a different ship.\n\n\n\n  But you only have so much time, and they only
+    have so much patience!\n\n\n\n  Good luck, and make Ol' Papa Pete proud!"
 --- !u!222 &974668911
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2908,15 +2903,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'At the start of the game, you''lll be given a goal to fulfilll, displayed
-    in the top right corner.
-
-
-
-
-
-    You''lll get a series of customers to try and satisfy, and five actions to do
-    it each time.'
+  m_Text: "  See your goal for the day in the top right corner.\n\n\n\n\n\n  You get
+    five actions per customer, and a lot of customers."
 --- !u!222 &1214001677
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3002,7 +2990,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 635, y: -112}
+  m_AnchoredPosition: {x: 672, y: -113}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1478263928
@@ -3262,14 +3250,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Rake in the dough in the lucrative field of spaceship dealing!
-
-
-    You are Crazy Pete, runnning your spaceship joint.
-
-
-    Figure out what your customers want so you can charge the highest price for whatever
-    you selll them!'
+  m_Text: "  Rake in the dough in the lucrative field of spaceship dealing!\n\n\n
+    \ As Crazy Pete, of Crazy Pete's Space Deals, make the most money you can selling
+    hunks of junk ( ahem, quality spaceships) to customers.\n\n\n  It's up to you
+    to make enough cash to cover your investment. Ships don't just fall out of the
+    sky, you know."
 --- !u!222 &1568956657
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3312,7 +3297,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 43, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1572416669
@@ -3340,7 +3325,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -3757,7 +3742,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 635.0001, y: 142}
+  m_AnchoredPosition: {x: 556, y: 138}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1854262190
@@ -3946,7 +3931,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 44, y: 1}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1886510008
@@ -3974,7 +3959,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -4167,9 +4152,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Select a ship to seee its stats. Selll it for more than its value to make
-    a profit!\n\nHow much the\ncustomer willl \npay depends on \nthe ship's value,\nits
-    stats, how\nmuch they care\nabout each\nstat, and even \ntheir patience.\n"
+  m_Text: "  Select a ship to see its stats. Then crank up the price!\n\n  How much
+    they'll\npay depends on:\n\n- Original value\n- Stats\n        vs. priorities\n
+    \       vs. emphasis\n- Patience\n\n  And modifiers ( when unlocked)"
 --- !u!222 &1918448938
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4212,7 +4197,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 46, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2014390811
@@ -4240,7 +4225,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -4419,7 +4404,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 750, y: 2200}
+  m_SizeDelta: {x: 750, y: 2500}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2130133524
 MonoBehaviour:
@@ -4441,10 +4426,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 62
+    m_FontSize: 46
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 0
     m_MaxSize: 62
     m_Alignment: 0
     m_AlignByGeometry: 1
