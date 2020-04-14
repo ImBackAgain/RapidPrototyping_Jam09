@@ -4465,6 +4465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1286412933}
   - component: {fileID: 1286412932}
+  - component: {fileID: 1286412934}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4535,6 +4536,7 @@ MonoBehaviour:
   - {fileID: 6208744681924399384, guid: 391cc346c8b2a4ac3ac2cdd342436cf0, type: 3}
   - {fileID: 8613430567458801659, guid: 998f1b06057ba4072b736afa1a51e3da, type: 3}
   currentSoldShipParent: {fileID: 0}
+  VisitedCustomerNumber: 0
   BoastPanel: {fileID: 2059518765}
   OfferPanel: {fileID: 1579295459}
   incomeText: {fileID: 0}
@@ -4543,6 +4545,7 @@ MonoBehaviour:
   feedbackText: {fileID: 0}
   feedbackPanel: {fileID: 0}
   shipPromptPanel: {fileID: 0}
+  netIncome: 0
 --- !u!4 &1286412933
 Transform:
   m_ObjectHideFlags: 0
@@ -4557,6 +4560,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1286412934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286412931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3ec912e5baf4eb4c89bddf0b87463e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GoalNetIncome: 3000
+  goaltext: {fileID: 0}
+  TotalCustomerNumber: 10
 --- !u!1 &1290246406
 GameObject:
   m_ObjectHideFlags: 0
@@ -5735,8 +5753,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -12, y: 2.7501}
-  m_SizeDelta: {x: 295, y: 58.5}
+  m_AnchoredPosition: {x: -188, y: 2.7501}
+  m_SizeDelta: {x: 738.6, y: 58.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1638238493
 MonoBehaviour:
@@ -6307,8 +6325,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 358, y: 64}
+  m_AnchoredPosition: {x: -183.1, y: 0}
+  m_SizeDelta: {x: 691, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1812976733
 MonoBehaviour:

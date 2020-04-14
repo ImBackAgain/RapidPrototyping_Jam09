@@ -22,24 +22,26 @@ public class GameManager : MonoBehaviour
     //  Parent of the ship being selected
     private Transform currentShipParent;
     // Parent of the ship being sold
-    public Transform currentSoldShipParent;
+    [HideInInspector] public Transform currentSoldShipParent;
 
     // The one and only GameManager instance
     public static GameManager instance;
     // A ship being selected
     private ShipStats currentShip;
+    // The number of customers visited the shop
+    [HideInInspector] public int VisitedCustomerNumber = 0;
     // Final price decided between customer and player, not currently used
     private float finalBuyingPrice;
 
     //Useful UI components, drag into the place from inspector
     public GameObject BoastPanel;
     public GameObject OfferPanel;
-    public Text incomeText;
-    public Text netIncomeText;
-    public Text speechBubble;
-    public Text feedbackText;
-    public GameObject feedbackPanel;
-    public GameObject shipPromptPanel;
+    [HideInInspector] public Text incomeText;
+    [HideInInspector] public Text netIncomeText;
+    [HideInInspector] public Text speechBubble;
+    [HideInInspector] public Text feedbackText;
+    [HideInInspector] public GameObject feedbackPanel;
+    [HideInInspector] public GameObject shipPromptPanel;
 
     // Pannel Controller object
     private StatsPannelController statsPannelController;
@@ -52,7 +54,7 @@ public class GameManager : MonoBehaviour
     // Total income earned by this shop
     private float income;
     // Net income = Income - shipValue
-    private float netIncome;
+    [HideInInspector] public float netIncome;
     // Total value of all the ships in stock (currently will increase whenever a ship is spawned, but need to be decreased once a ship is sold)
     //private float totalShipValue;
     // For use of AudioManager
@@ -68,6 +70,9 @@ public class GameManager : MonoBehaviour
     private bool snackBtnState;
     private bool boastBtnState;
     private bool offerBtnState;
+
+    //Ship pool; Exclude one ship per spwan
+    private HashSet<int> exclude = new HashSet<int>();
 
     // Customer syntax
     // Start of conversation
@@ -226,7 +231,7 @@ public class GameManager : MonoBehaviour
     public void Snacks()
     {
         speechBubble.text = snackResponse[Random.Range(0, snackResponse.Length)];
-        currentCustomer.UpdatePatience(100.0f);
+        currentCustomer.UpdatePatience(20.0f);
         // Each customer can only be offered once
         GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
 
@@ -311,8 +316,7 @@ public class GameManager : MonoBehaviour
     private void SpawnShips()
     {
         // Find spawn location for the ship
-        GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("ShipSpawnPoint");
-        HashSet<int> exclude = new HashSet<int>();
+        GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("ShipSpawnPoint");        
 
         foreach (GameObject spawn in spawnPoints)
         {
@@ -341,20 +345,28 @@ public class GameManager : MonoBehaviour
 
     // Yuanchao's code of spawn only one ship
     public void SpawnOneShip(Transform SpawnPointParent)
-    {
+    {        
         Destroy(SpawnPointParent.GetChild(2).gameObject);
-        Transform spawn = SpawnPointParent.GetChild(0);
-        HashSet<int> exclude = new HashSet<int>();
-        IEnumerable<int> range = Enumerable.Range(0, shipPrefabs.Length).Where(i => !exclude.Contains(i));
+        if (exclude.Count == shipPrefabs.Length)
+        {
+            SpawnPointParent.gameObject.SetActive(false);
+            WinCondition.activedocks = WinCondition.activedocks - 1;
+        }
+        else
+        {
+            Transform spawn = SpawnPointParent.GetChild(0);
+            IEnumerable<int> range = Enumerable.Range(0, shipPrefabs.Length).Where(i => !exclude.Contains(i));
 
-        int randomIndex = Random.Range(0, shipPrefabs.Length - exclude.Count);
-        int shipIndex = range.ElementAt(randomIndex);
+            int randomIndex = Random.Range(0, shipPrefabs.Length - exclude.Count);
+            int shipIndex = range.ElementAt(randomIndex);
 
-        GameObject spawnedShip = Instantiate(shipPrefabs[shipIndex], spawn.position, Quaternion.identity);
-        exclude.Add(shipIndex);
+            GameObject spawnedShip = Instantiate(shipPrefabs[shipIndex], spawn.position, Quaternion.identity);
+            exclude.Add(shipIndex);
 
-        spawnedShip.transform.localScale = new Vector3(spawnedShip.transform.localScale.x * 45f, spawnedShip.transform.localScale.y * 45f, 1f);
-        spawnedShip.transform.SetParent(spawn.parent);
+            spawnedShip.transform.localScale = new Vector3(spawnedShip.transform.localScale.x * 45f, spawnedShip.transform.localScale.y * 45f, 1f);
+            spawnedShip.transform.SetParent(spawn.parent);
+        }
+        
 
         //totalShipValue += spawnedShip.GetComponent<ShipStats>().value;
         //totalIncomeText.text = "/ " + totalShipValue;
@@ -364,8 +376,10 @@ public class GameManager : MonoBehaviour
     // Spawn random customer that is different from the current one
     public void SpawnCustomer()
     {
+
         // When new customer is spawed, reset interviewRank back to maximum (5)
         currentInterviewRank = 5;
+        VisitedCustomerNumber = VisitedCustomerNumber + 1;
         // New customer is spawned at this position
         Vector3 spawnPoint = GameObject.FindGameObjectWithTag("CustomerSpawnPoint").transform.position;
         Transform container = GameObject.Find("CustomerContainer").transform;
@@ -502,6 +516,7 @@ public class GameManager : MonoBehaviour
     // Leave no sale responce
     public void NoSaleResponce()
     {
+        WinCondition.FailedCustomerNumber = WinCondition.FailedCustomerNumber + 1;
         speechBubble.text = leaveNoSaleResponse[Random.Range(0, leaveNoSaleResponse.Length)];
     }
 
