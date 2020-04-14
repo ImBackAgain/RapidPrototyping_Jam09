@@ -20,10 +20,14 @@ public class MainMenu : MonoBehaviour
     public Text titleText;
     public Button startGameButton;
     public Button soundTestButton;
-    public Button creditsButton;
+    public Button instructionsButtton;
     public Button quitGameButton;
+    public Button creditsButton;
     public Image Background;
     public Image CreditsBG;
+    [Header("Instructions objects")]
+    public GameObject instrParent;
+    public Button exitInstructionsButtton;
     [Header("Credits Objects")]
     public GameObject creditsParent;
     public ScrollRect creditsScrollRect;
@@ -41,13 +45,17 @@ public class MainMenu : MonoBehaviour
         // Adding the button click listeners
         startGameButton.onClick.AddListener(StartGameFunc);
         soundTestButton.onClick.AddListener(SoundTestFunc);
+        instructionsButtton.onClick.AddListener(InstructionsFunc);
         creditsButton.onClick.AddListener(CreditsFunc);
         quitGameButton.onClick.AddListener(QuitGameFunc);
+
+        exitInstructionsButtton.onClick.AddListener(ExitInstructionsCalllback);
         exitCreditsButton.onClick.AddListener(ExitCreditsFunc);
 
         // Showing the main menu
         MainMenuVisibility(true);
         CreditsVisibility(false);
+        InstructionVisibility(false);
     }
 
     // MainMenuVisibility()
@@ -57,10 +65,16 @@ public class MainMenu : MonoBehaviour
         titleText.gameObject.SetActive(visible);
         startGameButton.gameObject.SetActive(visible);
         soundTestButton.gameObject.SetActive(visible);
+        instructionsButtton.gameObject.SetActive(visible);
         creditsButton.gameObject.SetActive(visible);
         quitGameButton.gameObject.SetActive(visible);
         Background.enabled = visible;
         CreditsBG.enabled = !visible;
+    }
+
+    void InstructionVisibility(bool visible)
+    {
+        instrParent.SetActive(visible);
     }
 
     // CreditsVisibility()
@@ -90,11 +104,24 @@ public class MainMenu : MonoBehaviour
         CreditsVisibility(true);
     }
 
+    void InstructionsFunc()
+    {
+        InstructionVisibility(true);
+        MainMenuVisibility(false);
+    }
+
     // QuitFunc()
     private void QuitGameFunc()
     {
         Debug.Log("\t[ QuitFunc() ] called!");
         Application.Quit();
+    }
+
+    void ExitInstructionsCalllback()
+        //"Function" is so generic though
+    {
+        InstructionVisibility(false);
+        MainMenuVisibility(true);
     }
 
     // ExitCreditsFunc()

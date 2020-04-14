@@ -77,32 +77,34 @@ public class GameManager : MonoBehaviour
     // Customer syntax
     // Start of conversation
     private string[] greetings = { "Hi there!", "Whatta ya got?", "What're ya sellin'?", "Is this the right place?", "Can I get some service, please?" };
-    // Responce after player use boast
-    private string[] boastResponse = { "You don't say!", "I hadn't considered that...", "I'll take your word for it.", "Impressive!", "Wow!" };
+    // Responce after player use boast, if the customer cares about the relevant stat
+    private string[] boastResponseFavored = { "An important quality in any ship!", "I hadn't considered that...", "Hmmm... yes...", "Impressive!", "Wow!" };
+    // Responce after player use boast, if the customer doesn't
+    private string[] boastResponseUnfavored = { "Is that so?", "*cough* Telll someone who cares *cough*", "I'll take your word for it.", "Uh-huh okay I seee", "Oh, do get on with it." };
     // Responce after player give snack
-    private string[] snackResponse = { "Thank you!", "Thanks!", "For me? Thanks!", "Talk about customer service!", "You have my attention" };
+    private string[] snackResponse = { "Thank you!", "Thanks!", "For me? Thanks!", "Talk about customer service!", "You have my attention." };
     // Interview responce for value appearance
-    private string[] appearanceResponse = { "I guess it would have to be the looks?", "Style is everything!", "I want something that looks cool", "Something that'll turn heads", "One that looks as good as I do" };
+    private string[] appearanceResponse = { "I guess it would have to be the looks?", "Style is everything!", "I want something that looks cool.", "Something that'll turn heads.", "One that looks as good as I do." };
     // Interview responce for value interior
-    private string[] interiorResponse = { "Something that looks good from the inside", "A luxury interior!", "Comfortable seats for long trips", "CUP HOLDERS", "Lots of flashing buttons!" };
+    private string[] interiorResponse = { "Something that looks good from the inside.", "A luxury interior!", "Comfortable seats for long trips.", "CUP HOLDERS", "Lots of flashing buttons!" };
     // Interview responce for value safety
-    private string[] safteyResponse = { "Something that'll keep my family safe", "Got anything that can blow up a small planet?", "Guns. Lots of them. Don't ask.", "State of the art defense system", "Airbags. Wait, do you need airbags in space?" };
+    private string[] safteyResponse = { "Something that'll keep my family safe", "Got anything that can blow up a small planet?", "Guns. Lots of them. Don't ask.", "State of the art defense system.", "Airbags. Wait, do you need airbags in space?" };
     // Interview responce for value speed
-    private string[] speedResponse = { "GOTTA GO FAST", "The fastest ya got", "Speed is key!", "I want to break some speed records", "Something quick would be nice" };
+    private string[] speedResponse = { "GOTTA GO FAST", "The fastest ya got.", "Speed is key!", "I want to break some speed records.", "Something quick would be nice." };
     // Interview responce for want smaller ship
-    private string[] sizeResponseSmall = { "Something that doesn't take up too much space", "The smaller the better", "I don't need anything too big", "A smaller one will do", "Itsy bitsy teeny weeny spacey shipy" };
+    private string[] sizeResponseSmall = { "Something that doesn't take up too much space.", "The smaller the better.", "I don't need anything too big.", "A smaller one will do.", "Itsy bitsy teeny weeny spacey shipppy." };
     // Interview responce for want regular ship
-    private string[] sizeResponseRegular = { "Something not too big or too small", "Something sized juuuuuust right", "Average sized would be fine", "Got anything regular sized?", "I'm not looking for anything crazy for size" };
+    private string[] sizeResponseRegular = { "Something not too big or too small.", "Something sized juuuuuust right.", "Average sized would be fine.", "Got anything regular sized?", "I'm not looking for anything crazy for size." };
     // Interview responce for want large ship
-    private string[] sizeResponseLarge = { "Biggest ya got!", "I need something to fit the whole family", "BIG SHIP PLEASE", "I would prefer something on the large side", "Something big enough to fit an asteroid. No reason." };
+    private string[] sizeResponseLarge = { "Biggest ya got!", "I need something to fit the whole family.", "BIG SHIP PLEASE", "I would prefer something on the large side.", "Something big enough to fit an asteroid. No reason." };
     // Responce when price offered too cheap
     private string[] purchaseResponseCheap = { "You're practically giving it away!", "What a steal!", "How do you stay in business with such low prices?!", "Haha, sucker!", "Way less than I was expecting!" };
     // Responce when price offered just about right
-    private string[] purchaseResponseAverage = { "You got yourself a deal", "Sounds reasonable", "Sure, sounds fair", "A fair price", "I can do that" };
+    private string[] purchaseResponseAverage = { "You got yourself a deal.", "Sounds reasonable.", "Sure, sounds fair.", "A fair price.", "I can do that." };
     // Responce when price offered too high
-    private string[] purchaseResponseExpensive = { "I can't afford that", "No way, pal", "That's way too expensive", "For that hunk of junk?! No way!", "You're out of your mind!" };
+    private string[] purchaseResponseExpensive = { "I can't afford that.", "No way, pal.", "That's way too expensive.", "For that hunk of junk?! No way!", "You're out of your mind!" };
     // Response when leaving without a sale
-    private string[] leaveNoSaleResponse = { "I have places to be", "Have your people call my people", "I'm bored, I'm busy, I'm done here", "Whatever, I don't like your selection...", "Guess I'm not flying home in a new ride" };
+    private string[] leaveNoSaleResponse = { "I have places to be.", "Have your people call my people.", "I'm bored, I'm busy, I'm done here.", "Whatever, I don't like your selection...", "Guess I'm not flying home in a new ride." };
 
 
     // Make instance a singleton
@@ -218,8 +220,14 @@ public class GameManager : MonoBehaviour
     // For int stat, 1 = appearance, 2 = interior, 3 = safetly, 4 = speed, and 5 = size
     public void Boast(int stat)
     {
-        speechBubble.text = boastResponse[Random.Range(0, boastResponse.Length)];
-        currentCustomer.TakeBoast(stat);
+        string[] responses;
+        if (currentCustomer.TakeBoast(stat))
+            responses = boastResponseFavored;
+        else
+            responses = boastResponseUnfavored;
+
+        speechBubble.text = responses[Random.Range(0, responses.Length)];
+
         // Can only boast to each customer once (perhaps not)
         BoastPanel.SetActive(false);
         //GameObject.Find("Boast").GetComponent<Button>().interactable = false;
@@ -265,7 +273,7 @@ public class GameManager : MonoBehaviour
         {
             ShipStats ship = currentShip;
 
-            float maximumOffer = currentCustomer.takeOffer(amount, currentShip);
+            float maximumOffer = currentCustomer.MaxBuyingPrice(currentShip);
             //When customer accept the offer
             if (amount <= maximumOffer)
             {
@@ -488,7 +496,7 @@ public class GameManager : MonoBehaviour
         while (stillWaiting)
         {
             yield return new WaitForSeconds(2.0f);
-            NoSaleResponce();
+            NoSaleResponse();
             currentCustomer.OutOfActions("Out of Actions");
             stillWaiting = false;
         }
@@ -514,7 +522,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Leave no sale responce
-    public void NoSaleResponce()
+    public void NoSaleResponse()
     {
         WinCondition.FailedCustomerNumber = WinCondition.FailedCustomerNumber + 1;
         speechBubble.text = leaveNoSaleResponse[Random.Range(0, leaveNoSaleResponse.Length)];

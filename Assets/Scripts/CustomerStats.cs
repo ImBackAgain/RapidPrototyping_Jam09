@@ -53,10 +53,10 @@ public class CustomerStats : MonoBehaviour
         patienceText.text = patience.ToString();
 
         // Initialize weights
-        appearanceWeight = convertRankToWeight(appearanceRank);
-        interiorWeight = convertRankToWeight(interiorRank);
-        safetyWeight = convertRankToWeight(safetyRank);
-        speedWeight = convertRankToWeight(speedRank);
+        appearanceWeight = ConvertRankToWeight(appearanceRank);
+        interiorWeight = ConvertRankToWeight(interiorRank);
+        safetyWeight = ConvertRankToWeight(safetyRank);
+        speedWeight = ConvertRankToWeight(speedRank);
         sizeWeight = 1f;
 
         // Locate audio manager
@@ -69,7 +69,7 @@ public class CustomerStats : MonoBehaviour
     }
 
     // Convert rank value to weight value, basically higher the rank, higher the weight
-    public float convertRankToWeight(int rank)
+    public float ConvertRankToWeight(int rank)
     {
         switch (rank)
         {
@@ -90,37 +90,47 @@ public class CustomerStats : MonoBehaviour
         }
     }
 
-    // The customer accept the boast and change their weight accordingly
-    //1 = appearance, 2 = interior, 3 = safetly, 4 = speed, and 5 = size
-    public void TakeBoast(int stat)
+    /// <summary>
+    /// Updates the internal stats in response to boasting.
+    /// </summary>
+    /// <param name="stat">int repesenting stat, from 1 to 5 (apppearance, interior, safety, speeed or size in that order)</param>
+    /// <returns>Whether or not the customer favours this stat. Used for response.</returns>
+    public bool TakeBoast(int stat)
     {
+        UpdatePatience(-10.0f);
+
+        int statWeight = 0;
+
         switch (stat)
         {
             case 1:
-                appearanceWeight = convertRankToWeight(appearanceRank + 1);
+                statWeight = appearanceRank;
+                appearanceWeight = ConvertRankToWeight(appearanceRank + 1);
                 break;
             case 2:
-                interiorWeight = convertRankToWeight(interiorRank + 1);
+                statWeight = interiorRank;
+                interiorWeight = ConvertRankToWeight(interiorRank + 1);
                 break;
             case 3:
-                safetyWeight = convertRankToWeight(safetyRank + 1);
+                statWeight = safetyRank;
+                safetyWeight = ConvertRankToWeight(safetyRank + 1);
                 break;
             case 4:
-                speedWeight = convertRankToWeight(speedRank + 1);
+                statWeight = speedRank;
+                speedWeight = ConvertRankToWeight(speedRank + 1);
                 break;
             case 5:
-                sizeRank += sizeRank;
+                statWeight = sizeRank;
+                sizeRank += 1;
                 break;
         }
-
-        UpdatePatience(-10.0f);
+        return statWeight > 3;
     }
 
     // Yuanchao's Math code
-    // Takes the ship that the player was tring to sale , calculate maximum offer and generate customer behavior
-    public float takeOffer(float amount, ShipStats ship)
+    // Takes the ship that the player was tring to sell, calculate maximum offer and generate customer behavior
+    public float MaxBuyingPrice(ShipStats ship)
     {
-
         // Math for size
         if (sizePreference != ship.size)
         {
@@ -223,8 +233,6 @@ public class CustomerStats : MonoBehaviour
         maximumOffer = Mathf.Round(maximumOffer / 50.0f) * 50;
 
         return maximumOffer;
-
-
     }
 
     // Update patient value of customer
@@ -235,7 +243,7 @@ public class CustomerStats : MonoBehaviour
         patienceText.text = patience.ToString();
         if (patience == 0)
         {
-            GameManager.instance.NoSaleResponce();
+            GameManager.instance.NoSaleResponse();
             OutOfActions("Out of Patience");
         }
 
@@ -257,8 +265,8 @@ public class CustomerStats : MonoBehaviour
         GameObject.Find("Offer").GetComponent<Button>().interactable = false;
 
         // Wait for 2 seconds, create new customer and destory current one
-        while (true)
-        {
+        //while (true)
+        //{
             yield return new WaitForSeconds(2.0f);
             // only remove sold ship
             if (GameManager.instance.currentSoldShipParent != null)
@@ -271,6 +279,6 @@ public class CustomerStats : MonoBehaviour
             Destroy(gameObject);
             GameManager.instance.RemoveShipSelection();
             GameManager.instance.InitUIComponets();
-        }
+        //}
     }
 }

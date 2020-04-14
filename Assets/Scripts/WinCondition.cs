@@ -28,6 +28,7 @@ public class WinCondition : MonoBehaviour
     {
         WinConditions(CurrentLevelWinCondition);
     }
+
     void WinConditions(int ConditionIndex)                    //condition logics
     {
         switch (ConditionIndex)
