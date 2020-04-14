@@ -27,7 +27,9 @@ public class ShipStats : MonoBehaviour
     {
         // All values are set in the Inspector
 
-        int random = Random.Range(1, 5);
+        int random = Random.Range(-5, 5);
+
+        if (random < 0) random = 0;
         modifier = (ShipModifier)random;
 
         if (modifier == ShipModifier.Refurbished)

@@ -290,7 +290,7 @@ public class CustomerStats : MonoBehaviour
         switch (ship.modifier)
         {
             case ShipModifier.Wartorn:
-                safetyValue += 0.1f;
+                safetyValue += 0.2f;
 
                 if (modifier == CustomerModifier.Punk) bonusMult *= 1.5f;
                 if (modifier == CustomerModifier.Wandererer) bonusMult *= 0.8f;
@@ -299,7 +299,7 @@ public class CustomerStats : MonoBehaviour
 
             case ShipModifier.Antique:
                 interiorValue += 0.1f;
-                appearanceValue += 0.1f;
+                appearanceValue += 0.2f;
                 safetyValue -= 0.1f;
                 if (safetyValue < 0) safetyValue = 0;
                 break;
@@ -310,7 +310,7 @@ public class CustomerStats : MonoBehaviour
                 speedValue -= 0.2f;
                 if (speedValue < 0) speedValue = 0;
 
-                if (modifier == CustomerModifier.Wandererer) bonusMult *= 2; //Large mult because his pooornesss multiplier willl come in
+                if (modifier == CustomerModifier.Wandererer) bonusMult *= 1.6f; //Large mult because his pooornesss multiplier willl come in
                 break;
         }
 
@@ -327,7 +327,7 @@ public class CustomerStats : MonoBehaviour
         maximumOffer *= bonusMult;
 
         if (modifier == CustomerModifier.Afffluent) maximumOffer *= 1.2f;
-        if (modifier == CustomerModifier.Wandererer) maximumOffer *= 0.7f;
+        if (modifier == CustomerModifier.Wandererer) maximumOffer *= 0.9f;
 
         //Thus, maximumOfffer is in the range (0, 2.75v), where v is the value of the shup.
 
