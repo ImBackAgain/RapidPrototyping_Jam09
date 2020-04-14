@@ -410,7 +410,7 @@ public class GameManager : MonoBehaviour
         {
             int randomIndex = Random.Range(0, customerPrefabs.Length);
             GameObject spawnedCustomer = Instantiate(customerPrefabs[randomIndex], spawnPoint, Quaternion.identity);
-            spawnedCustomer.transform.localScale = new Vector3(spawnedCustomer.transform.localScale.x * 45f, spawnedCustomer.transform.localScale.y * 45f, 1f);
+            spawnedCustomer.transform.localScale = new Vector3(spawnedCustomer.transform.localScale.x * 35f, spawnedCustomer.transform.localScale.y * 35f, 1f);
             spawnedCustomer.transform.SetParent(container);
         }
         // If this is not the first customer, save the index of previous customer to a list of used customer,
@@ -424,7 +424,7 @@ public class GameManager : MonoBehaviour
             int customerIndex = range.ElementAt(randomIndex);
 
             GameObject spawnedCustomer = Instantiate(customerPrefabs[customerIndex], spawnPoint, Quaternion.identity);
-            spawnedCustomer.transform.localScale = new Vector3(spawnedCustomer.transform.localScale.x * 45f, spawnedCustomer.transform.localScale.y * 45f, 1f);
+            spawnedCustomer.transform.localScale = new Vector3(spawnedCustomer.transform.localScale.x * 35f, spawnedCustomer.transform.localScale.y * 35f, 1f);
             spawnedCustomer.transform.SetParent(container);
             previousCustomerIndex = customerIndex;
         }
