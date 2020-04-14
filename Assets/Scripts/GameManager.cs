@@ -321,7 +321,7 @@ public class GameManager : MonoBehaviour
                 else if (amount >= maximumOffer * 3f)
                     currentCustomer.UpdatePatience(-100.0f);
 
-                if (currentCustomer.patience == 0) UpdateFeedback("Slow down! $" + maximumOffer + " would've done it");
+                if (currentCustomer.patience == 0) UpdateFeedback("$" + maximumOffer + " Would've Done It...");
 
                 // If it has not been accepted, check as usual to see if the dealer is out of actions
                 DealerActionCountdown();

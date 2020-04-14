@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43722a8f954dc49eb9f4514ee07c2c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuSceneName: MainMenu
+  destinationSceneName: MainMenu
 --- !u!4 &413666280
 Transform:
   m_ObjectHideFlags: 0
@@ -334,7 +334,7 @@ MonoBehaviour:
 
     3 - Spaceship Sold 1
 
-    4 - Spaceshol Sold 2
+    4 - Spaceship Sold 2
 
     5 - Spaceship Sold 3
 
@@ -611,7 +611,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 413666279}
-          m_MethodName: ReturnFromSoundTestFunc
+          m_MethodName: SwitchScenes
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

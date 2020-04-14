@@ -34,7 +34,7 @@ public class WinCondition : MonoBehaviour
         switch (ConditionIndex)
         {
             case 0:                                        //win condition 0
-                if (GameManager.instance.netIncome >= 500)
+                if (GameManager.instance.netIncome >= 5000)
                     StartCoroutine("Win");
                 break;
             case 1:                                        //win condition 1
@@ -63,16 +63,16 @@ public class WinCondition : MonoBehaviour
         switch (ConditionIndex)
         {
             case 0:                                        //win condition 0 text
-                goaltext.text = "Goal: Earn 5000 net income";
+                goaltext.text = "Goal: Earn $5000 Profit";
                 break;
             case 1:                                        //win condition 1 text
-                goaltext.text = "Goal: Earn " + GoalNetIncome + " net income within " + TotalCustomerNumber + " customers";
+                goaltext.text = "Goal: Earn $" + GoalNetIncome + " Profit within " + TotalCustomerNumber + " Customers";
                 break;
             case 2:                                        //win condition 2 text
-                goaltext.text = "Goal: Do not fail any single deal";
+                goaltext.text = "Goal: Do Not Fail a Single Deal in " + TotalCustomerNumber + " Customers";
                 break;
             default:                                       //other conditions text
-                goaltext.text = "Goal: Earn as much money as you can";
+                goaltext.text = "Goal: Empty Your Inventory (Sell 30 Ships)";
                 break;
         }
     }
