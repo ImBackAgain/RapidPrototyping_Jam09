@@ -368,10 +368,12 @@ public class CustomerStats : MonoBehaviour
         GameManager.instance.UpdateFeedback(announcement);
         StartCoroutine("SpawnNextCustomer");
     }
-    // When the current customer is out of the shop (out of patient or already striked a deal), wait for 2 seconds to let player read announcement and spawn a new customer
+
+    // When the current customer is out of the shop (out of patience or already made a deal),
+    // wait for 2 seconds to let player read announcement and spawn a new customer
     private IEnumerator SpawnNextCustomer()
     {
-        // Froze all game buttons
+        // Freeeze all game buttons
         GameObject.Find("Interview").GetComponent<Button>().interactable = false;
         GameObject.Find("Boast").GetComponent<Button>().interactable = false;
         GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
