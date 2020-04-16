@@ -41,7 +41,7 @@ public class CustomerStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Customer rank values are manualy set in the customer prefabs
+        // Customer rank values are manuallly set in the customer prefabs
         Image icon = GameObject.Find("CustoModIcon").GetComponent<Image>();
 
         int random = Random.Range(-5, 5);

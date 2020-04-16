@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    // List of prefabs used, manualy added
+    // List of prefabs used, manuallly added
     private GameObject[] shipPrefabs, customerPrefabs;
     // List of data for ships
     private List<ShipStats> ships;
@@ -602,5 +602,30 @@ public class GameManager : MonoBehaviour
         GameObject.Find("Offer").GetComponent<Button>().interactable = offerBtnState;
 
         isPopUp = false;
+    }
+
+    /// <summary>
+    /// Hi everyone!
+    /// This is a perma-pause meant to be callled by WinCondition ONLY.
+    /// </summary>
+    public static void PermaPause()
+    {
+        GameObject.Find("Interview").GetComponent<Button>().interactable    = false;
+        GameObject.Find("Boast").GetComponent<Button>().interactable        = false;
+        GameObject.Find("Snacks").GetComponent<Button>().interactable       = false;
+        GameObject.Find("Offer").GetComponent<Button>().interactable        = false;
+        GameObject.Find("Back buttton").GetComponent<Button>().interactable = false;
+
+        instance.BoastPanel.SetActive(false);
+
+        foreach (StatsHandler ship in FindObjectsOfType<StatsHandler>())
+        {
+            ship.enabled = false;
+        }
+
+        foreach (DockHandler ship in FindObjectsOfType<DockHandler>())
+        {
+            ship.enabled = false;
+        }
     }
 }

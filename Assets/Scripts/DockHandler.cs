@@ -10,6 +10,7 @@ public class DockHandler : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         GameManager.instance.GetCurrentShip(transform.parent.GetComponentInChildren<ShipStats>(), transform.parent);
+        //print("hei");
     }
 
     //public void TurnOnDefault()

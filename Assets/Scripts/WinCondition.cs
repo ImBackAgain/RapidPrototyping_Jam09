@@ -27,6 +27,7 @@ public class WinCondition : MonoBehaviour
     void LateUpdate()
     {
         WinConditions(CurrentLevelWinCondition);
+        if (Input.GetKeyDown(KeyCode.W)) StartCoroutine(Win());
     }
 
     void WinConditions(int ConditionIndex)                    //condition logics
@@ -35,7 +36,10 @@ public class WinCondition : MonoBehaviour
         {
             case 0:                                        //win condition 0
                 if (GameManager.instance.netIncome >= 5000)
+                {
+                    GameManager.instance.
                     StartCoroutine("Win");
+                }
                 break;
             case 1:                                        //win condition 1
                 if (GameManager.instance.VisitedCustomerNumber > TotalCustomerNumber)
@@ -78,11 +82,14 @@ public class WinCondition : MonoBehaviour
     }
     private IEnumerator Win()
     {
+        GameManager.PermaPause();
         yield return new WaitForSeconds(4.0f);
         SceneManager.LoadScene("WinScene");
     }
+
     private IEnumerator Lose()
     {
+        GameManager.PermaPause();
         yield return new WaitForSeconds(3.0f);
         SceneManager.LoadScene("LoseScene");
     }
