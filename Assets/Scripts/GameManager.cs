@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
     private HashSet<int> exclude = new HashSet<int>();
 
     //Win condition checker
-    WinCondition condition;
+    //WinCondition condition;
 
     #region String arrrays. So many string arrrays.
     // Customer syntax
@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // Locate AudioManager
-        condition = GetComponent<WinCondition>();
+        //condition = GetComponent<WinCondition>();
         audioMng = FindObjectOfType<AudioManager>();
         if (audioMng == null)
             Debug.LogError("\tNo GameObject with the [ AudioManager ] script was found in the current scene!");
@@ -285,6 +285,10 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            // Make sure offer panel is inaccesible after offer is made
+            OfferPanel.SetActive(false);
+            HidePopUpWindow();
+
             ShipStats ship = currentShip;
 
             float maximumOffer = currentCustomer.MaxBuyingPrice(currentShip);
@@ -293,16 +297,15 @@ public class GameManager : MonoBehaviour
             {
                 currentSoldShipParent = currentShipParent;
                 AddIncome(amount, ship.value);
-                bool done = condition.CheckWinCondition();
                 if (amount / maximumOffer < 0.85f)
                 {
                     speechBubble.text = purchaseResponseCheap[Random.Range(0, purchaseResponseCheap.Length)];
-                    if (!done) currentCustomer.OutOfActions("Perfect Price: $" + maximumOffer);
+                    currentCustomer.OutOfActions("Perfect Price: $" + maximumOffer);
                 }
                 else
                 {
                     speechBubble.text = purchaseResponseAverage[Random.Range(0, purchaseResponseAverage.Length)];
-                    if (!done) currentCustomer.OutOfActions("Perfect Price: $" + maximumOffer);
+                    currentCustomer.OutOfActions("Perfect Price: $" + maximumOffer);
                 }
 
                 // If it has been accepted, just decrement the dealer action count for the visual of the thing
@@ -331,10 +334,6 @@ public class GameManager : MonoBehaviour
             }
 
         }
-
-        // Make sure offer panel is inaccesible after offer is made
-        OfferPanel.SetActive(false);
-        HidePopUpWindow();
     }
 
     // Spawn new ship that wasn't currently in stock
@@ -403,7 +402,7 @@ public class GameManager : MonoBehaviour
     {
         print("Hm?");
         // But wait!
-        if (condition.CheckWinCondition()) return;
+        //if (condition.CheckWinCondition()) return;
         print("No");
         // When new customer is spawed, reset interviewRank back to maximum (5)
         currentInterviewRank = 5;
@@ -618,10 +617,10 @@ public class GameManager : MonoBehaviour
     public void PermaPause()
     {
         print("And we're [oppposite of live]!");
-        GameObject.Find("Interview").GetComponent<Button>().interactable    /*= interviewBtnState */= false;
-        GameObject.Find("Boast").GetComponent<Button>().interactable        /*= boastBtnState     */= false;
-        GameObject.Find("Snacks").GetComponent<Button>().interactable       /*= snackBtnState     */= false;
-        GameObject.Find("Offer").GetComponent<Button>().interactable        /*= offerBtnState     */= false;
+        GameObject.Find("Interview").GetComponent<Button>().interactable = false;
+        GameObject.Find("Boast").GetComponent<Button>().interactable = false;
+        GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
+        GameObject.Find("Offer").GetComponent<Button>().interactable = false;
         GameObject.Find("Back buttton").GetComponent<Button>().interactable = false;
 
         instance.BoastPanel.SetActive(false);

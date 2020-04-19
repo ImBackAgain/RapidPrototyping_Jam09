@@ -19,7 +19,7 @@ public class WinCondition : MonoBehaviour
     [Header("For \"Profit\" and \"ProfitByCustomer\"")]
     public float GoalNetIncome;
 
-
+    public static WinCondition instance;
     
     [HideInInspector] public Text goaltext;
     [Space(10)]
@@ -29,8 +29,27 @@ public class WinCondition : MonoBehaviour
     public static int FailedCustomerNumber = 0;
     // mark the number of active docks, indicating the last 5 ships 
     public static int activedocks = 5;
+
+    // Make instance a singleton
+    void Awake()
+    {
+        if (instance != null)
+            Destroy(instance);
+        instance = this;
+    }
+
+    void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
+    }
+
     void Start()
     {
+        FailedCustomerNumber = 0;
+        activedocks = 5;
         goaltext = GameObject.Find("GoalPanelText").GetComponent<Text>();
         //CurrentLevelWinCondition = Random.Range(0, 4);//draw a goal from the pool
         WinConditionsText(CurrentLevelWinCondition); //display the goal

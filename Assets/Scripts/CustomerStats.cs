@@ -148,7 +148,7 @@ public class CustomerStats : MonoBehaviour
             }
         }
         else
-        { 
+        {
             switch (stat)
             {
                 case 1:
@@ -185,7 +185,7 @@ public class CustomerStats : MonoBehaviour
         // Math for size
         if (sizePreference != ship.size)
         {
-            switch(ship.size)
+            switch (ship.size)
             {
                 case ShipStats.SizeCategory.Small:
                     if (sizeRank == 1)
@@ -242,7 +242,7 @@ public class CustomerStats : MonoBehaviour
                     break;
 
                 case ShipStats.SizeCategory.Large:
-            
+
                     if (sizeRank == 1)
                     {
                         sizeWeight = 1;
@@ -278,9 +278,9 @@ public class CustomerStats : MonoBehaviour
         float totalValue = (ship.appearance + ship.interior + ship.safety + ship.speed);
 
         appearanceValue = ship.appearance / totalValue;
-        interiorValue   = ship.interior   / totalValue;
-        safetyValue     = ship.safety     / totalValue;
-        speedValue      = ship.speed      / totalValue;
+        interiorValue = ship.interior / totalValue;
+        safetyValue = ship.safety / totalValue;
+        speedValue = ship.speed / totalValue;
         // These are alll in (0, 1). 
 
         float maximumOffer = 0;
@@ -314,14 +314,14 @@ public class CustomerStats : MonoBehaviour
                 break;
         }
 
-        maximumOffer += (appearanceValue    * appearanceWeight);    // So these are each within
-        maximumOffer += (interiorValue      * interiorWeight);      // the range (0, 2.5), since
-        maximumOffer += (safetyValue        * safetyWeight);        // 2.5 is the highest posssible weight value
-        maximumOffer += (speedValue         * speedWeight);
+        maximumOffer += (appearanceValue * appearanceWeight);    // So these are each within
+        maximumOffer += (interiorValue * interiorWeight);      // the range (0, 2.5), since
+        maximumOffer += (safetyValue * safetyWeight);        // 2.5 is the highest posssible weight value
+        maximumOffer += (speedValue * speedWeight);
         //The above is within the range (0, 2.5)
 
         maximumOffer *= (0.003f * patience + 0.8f) * sizeWeight;
-                     // (0.8, 1.1)                 * (0, 1)
+        // (0.8, 1.1)                 * (0, 1)
         maximumOffer *= ship.value;
 
         maximumOffer *= bonusMult;
@@ -364,7 +364,8 @@ public class CustomerStats : MonoBehaviour
 
     // Display announcement when current customer leaves the shop and spawn a new customer
     public void OutOfActions(string announcement)
-    {        
+    {
+        if (WinCondition.instance.CheckWinCondition()) return;
         GameManager.instance.UpdateFeedback(announcement);
         StartCoroutine("SpawnNextCustomer");
     }
@@ -382,18 +383,18 @@ public class CustomerStats : MonoBehaviour
         // Wait for 2 seconds, create new customer and destory current one
         //while (true)
         //{
-            yield return new WaitForSeconds(2.0f);
-            // only remove sold ship
-            if (GameManager.instance.currentSoldShipParent != null)
-            {
-                GameManager.instance.SpawnOneShip(GameManager.instance.currentSoldShipParent);
-                GameManager.instance.currentSoldShipParent = null;
-            }
-            // remove the current ship selection
-            GameManager.instance.SpawnCustomer();
-            Destroy(gameObject);
-            GameManager.instance.RemoveShipSelection();
-            GameManager.instance.InitUIComponets();
+        yield return new WaitForSeconds(2.0f);
+        // only remove sold ship
+        if (GameManager.instance.currentSoldShipParent != null)
+        {
+            GameManager.instance.SpawnOneShip(GameManager.instance.currentSoldShipParent);
+            GameManager.instance.currentSoldShipParent = null;
+        }
+        // remove the current ship selection
+        GameManager.instance.SpawnCustomer();
+        Destroy(gameObject);
+        GameManager.instance.RemoveShipSelection();
+        GameManager.instance.InitUIComponets();
         //}
     }
 }
