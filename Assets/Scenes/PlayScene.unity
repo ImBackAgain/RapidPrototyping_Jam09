@@ -4797,10 +4797,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ec912e5baf4eb4c89bddf0b87463e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentLevelWinCondition: 0
+  CurrentLevelWinCondition: 1
   GoalNetIncome: 100
   goaltext: {fileID: 0}
-  TotalCustomerNumber: 10
+  TotalCustomerNumber: 1
 --- !u!1 &1290246406
 GameObject:
   m_ObjectHideFlags: 0
