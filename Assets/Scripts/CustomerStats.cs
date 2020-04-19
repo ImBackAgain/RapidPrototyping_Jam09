@@ -365,8 +365,8 @@ public class CustomerStats : MonoBehaviour
     // Display announcement when current customer leaves the shop and spawn a new customer
     public void OutOfActions(string announcement)
     {
-        if (WinCondition.instance.CheckWinCondition()) return;
         GameManager.instance.UpdateFeedback(announcement);
+        if (WinCondition.instance.CheckWinCondition()) return;
         StartCoroutine("SpawnNextCustomer");
     }
 
