@@ -287,10 +287,9 @@ public class GameManager : MonoBehaviour
             //When customer accept the offer
             if (amount <= maximumOffer)
             {
-                bool done = condition.CheckWinCondition();
-
                 currentSoldShipParent = currentShipParent;
                 AddIncome(amount, ship.value);
+                bool done = condition.CheckWinCondition();
                 if (amount / maximumOffer < 0.85f)
                 {
                     speechBubble.text = purchaseResponseCheap[Random.Range(0, purchaseResponseCheap.Length)];
@@ -305,7 +304,6 @@ public class GameManager : MonoBehaviour
                 // If it has been accepted, just decrement the dealer action count for the visual of the thing
                 dealerActions--;
                 actionsText.text = dealerActions.ToString();
-                condition.CheckWinCondition();
             }
             //When customer can't accept the offer made, customer becomes inpatient
             else
@@ -399,7 +397,10 @@ public class GameManager : MonoBehaviour
     // Spawn random customer that is different from the current one
     public void SpawnCustomer()
     {
-
+        print("Hm?");
+        // But wait!
+        if (condition.CheckWinCondition()) return;
+        print("No");
         // When new customer is spawed, reset interviewRank back to maximum (5)
         currentInterviewRank = 5;
         VisitedCustomerNumber++;
@@ -538,7 +539,7 @@ public class GameManager : MonoBehaviour
         speechBubble.text = greetings[Random.Range(0, greetings.Length)];
     }
 
-    // Leave no sale responce
+    // Leave no sale response
     public void NoSaleResponse()
     {
         WinCondition.FailedCustomerNumber = WinCondition.FailedCustomerNumber + 1;
@@ -597,6 +598,7 @@ public class GameManager : MonoBehaviour
 
     public void HidePopUpWindow()
     {
+        print("HidePopUpWindow?");
         GameObject.Find("Interview").GetComponent<Button>().interactable = interviewBtnState;
         GameObject.Find("Boast").GetComponent<Button>().interactable = boastBtnState;
         GameObject.Find("Snacks").GetComponent<Button>().interactable = snackBtnState;
@@ -611,10 +613,11 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void PermaPause()
     {
-        GameObject.Find("Interview").GetComponent<Button>().interactable    = interviewBtnState = false;
-        GameObject.Find("Boast").GetComponent<Button>().interactable        = boastBtnState = false;
-        GameObject.Find("Snacks").GetComponent<Button>().interactable       = snackBtnState = false;
-        GameObject.Find("Offer").GetComponent<Button>().interactable        = offerBtnState = false;
+        print("And we're [oppposite of live]!");
+        GameObject.Find("Interview").GetComponent<Button>().interactable    /*= interviewBtnState */= false;
+        GameObject.Find("Boast").GetComponent<Button>().interactable        /*= boastBtnState     */= false;
+        GameObject.Find("Snacks").GetComponent<Button>().interactable       /*= snackBtnState     */= false;
+        GameObject.Find("Offer").GetComponent<Button>().interactable        /*= offerBtnState     */= false;
         GameObject.Find("Back buttton").GetComponent<Button>().interactable = false;
 
         instance.BoastPanel.SetActive(false);

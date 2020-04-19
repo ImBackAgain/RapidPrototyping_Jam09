@@ -45,33 +45,37 @@ public class WinCondition : MonoBehaviour
 
     public bool CheckWinCondition()        //condition logics
     {
-        print("checking win condition");
-        int ConditionIndex = (int)CurrentLevelWinCondition;
-        switch (ConditionIndex)
+        //print("checking win condition");
+        switch (CurrentLevelWinCondition)
         {
-            case 0:                                        //win condition 0
+            case ConditionType.Profit:
+                print("Profit?");
+                print(GameManager.instance.netIncome + " >= " + GoalNetIncome + "?");
                 if (GameManager.instance.netIncome >= GoalNetIncome)
                 {
                     StartCoroutine("Win");
-                }
-                return true;
-            case 1:                                        //win condition 1
-                if (GameManager.instance.VisitedCustomerNumber > TotalCustomerNumber)
-                {
-                    if (GameManager.instance.netIncome >= GoalNetIncome)
-                        StartCoroutine("Win");
-                    else
-                        StartCoroutine("Lose");
                     return true;
                 }
                 break;
-            case 2:                                        //win condition 2
+            case ConditionType.ProfitByCustomer:
+                if (GameManager.instance.netIncome >= GoalNetIncome)
+                {
+                    StartCoroutine("Win");
+                    return true;
+                }
+                else if (GameManager.instance.VisitedCustomerNumber >= TotalCustomerNumber)
+                {
+                    StartCoroutine("Lose");
+                    return true;
+                }
+                break;
+            case ConditionType.NoFailure:
                 if (FailedCustomerNumber > 0)
                 {
                     StartCoroutine("Lose");
                     return true;
                 }
-                if (GameManager.instance.VisitedCustomerNumber > TotalCustomerNumber)
+                if (GameManager.instance.VisitedCustomerNumber >= TotalCustomerNumber)
                 {
                     StartCoroutine("Win");
                     return true;

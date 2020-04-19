@@ -21,6 +21,6 @@ public class StatsHandler : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         GameManager.instance.GetCurrentShip(selectedShip, eventData.pointerPress.transform.parent);
-        print("hi");
+        //print("hi");
     }
 }
