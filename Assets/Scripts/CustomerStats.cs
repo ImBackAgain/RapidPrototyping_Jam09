@@ -373,6 +373,7 @@ public class CustomerStats : MonoBehaviour
     // wait for 2 seconds to let player read announcement and spawn a new customer
     private IEnumerator SpawnNextCustomer()
     {
+        print("Pls spawn?");
         // Freeeze all game buttons
         GameObject.Find("Interview").GetComponent<Button>().interactable = false;
         GameObject.Find("Boast").GetComponent<Button>().interactable = false;

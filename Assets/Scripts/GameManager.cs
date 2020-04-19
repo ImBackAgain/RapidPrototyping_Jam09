@@ -288,6 +288,7 @@ public class GameManager : MonoBehaviour
             if (amount <= maximumOffer)
             {
                 bool done = condition.CheckWinCondition();
+                print("Acccept offfer, game over = " + done);
 
                 currentSoldShipParent = currentShipParent;
                 AddIncome(amount, ship.value);
@@ -305,7 +306,6 @@ public class GameManager : MonoBehaviour
                 // If it has been accepted, just decrement the dealer action count for the visual of the thing
                 dealerActions--;
                 actionsText.text = dealerActions.ToString();
-                condition.CheckWinCondition();
             }
             //When customer can't accept the offer made, customer becomes inpatient
             else
@@ -611,6 +611,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void PermaPause()
     {
+        print("And we're [oppposite of live]!");
         GameObject.Find("Interview").GetComponent<Button>().interactable    = interviewBtnState = false;
         GameObject.Find("Boast").GetComponent<Button>().interactable        = boastBtnState = false;
         GameObject.Find("Snacks").GetComponent<Button>().interactable       = snackBtnState = false;

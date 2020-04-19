@@ -45,7 +45,7 @@ public class WinCondition : MonoBehaviour
 
     public bool CheckWinCondition()        //condition logics
     {
-        print("checking win condition");
+        //print("checking win condition");
         int ConditionIndex = (int)CurrentLevelWinCondition;
         switch (ConditionIndex)
         {
@@ -53,8 +53,9 @@ public class WinCondition : MonoBehaviour
                 if (GameManager.instance.netIncome >= GoalNetIncome)
                 {
                     StartCoroutine("Win");
+                    return true;
                 }
-                return true;
+                break;
             case 1:                                        //win condition 1
                 if (GameManager.instance.VisitedCustomerNumber > TotalCustomerNumber)
                 {
