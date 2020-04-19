@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
     //private float totalShipValue;
     //Cela au-desssus, c'est UNUSED
     //Rest in peace, totalShipValue.
-    
+
     // For use of AudioManager
     private AudioManager audioMng = null;
 
@@ -164,6 +164,10 @@ public class GameManager : MonoBehaviour
         feedbackPanel.SetActive(false);
 
         // Set initail value for variables
+        exclude = new HashSet<int>();
+        VisitedCustomerNumber = 0;
+        previousCustomerIndex = -1;
+
         income = 0.0f;
         netIncome = 0.0f;
         isPopUp = false;
@@ -274,7 +278,7 @@ public class GameManager : MonoBehaviour
     public void ConfirmPrice()
     {
         float amount = float.Parse(GameObject.Find("InputPrice").GetComponent<InputField>().text);
-        
+
         if (amount <= 0)
         {
             return;//Error input
@@ -337,7 +341,7 @@ public class GameManager : MonoBehaviour
     private void SpawnShips()
     {
         // Find spawn location for the ship
-        GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("ShipSpawnPoint");        
+        GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("ShipSpawnPoint");
 
         foreach (GameObject spawn in spawnPoints)
         {
@@ -366,7 +370,7 @@ public class GameManager : MonoBehaviour
 
     // Yuanchao's code of spawn only one ship
     public void SpawnOneShip(Transform SpawnPointParent)
-    {        
+    {
         Destroy(SpawnPointParent.GetChild(2).gameObject);
         if (exclude.Count == shipPrefabs.Length)
         {
@@ -387,7 +391,7 @@ public class GameManager : MonoBehaviour
             spawnedShip.transform.localScale = new Vector3(spawnedShip.transform.localScale.x * 45f, spawnedShip.transform.localScale.y * 45f, 1f);
             spawnedShip.transform.SetParent(spawn.parent);
         }
-        
+
 
         //totalShipValue += spawnedShip.GetComponent<ShipStats>().value;
         //totalIncomeText.text = "/ " + totalShipValue;
@@ -570,7 +574,7 @@ public class GameManager : MonoBehaviour
 
     public void ActivateUIComponetsOnShipSelect()
     {
-        
+
         GameObject.Find("Boast").GetComponent<Button>().interactable = true;
         GameObject.Find("Offer").GetComponent<Button>().interactable = true;
         //hide prompt
