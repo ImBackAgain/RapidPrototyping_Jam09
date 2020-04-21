@@ -3344,7 +3344,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Next Level
+  m_Text: Restart
 --- !u!222 &896421580
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5357,6 +5357,7 @@ MonoBehaviour:
   feedbackText: {fileID: 0}
   feedbackPanel: {fileID: 0}
   shipPromptPanel: {fileID: 0}
+  dealerActions: 0
   netIncome: 0
   nextLevelIsSame: 1
 --- !u!4 &1286412933
