@@ -653,18 +653,25 @@ public class GameManager : MonoBehaviour
             ship.enabled = false;
         }
     }
-
+    [SerializeField][Tooltip("Use with WinCondition's Current Level Win Scene")] bool nextLevelIsSame;
     public void NextLevel()
     {
         string levelname = SceneManager.GetActiveScene().name;
-        string[] levelnum = levelname.Split(new string[] { "Level" }, System.StringSplitOptions.RemoveEmptyEntries);
-        if (Application.CanStreamedLevelBeLoaded("Level" + (int.Parse(levelnum[0]) + 1)))
+        if (nextLevelIsSame)
         {
-            SceneManager.LoadScene("Level" + (int.Parse(levelnum[0]) + 1));
+            SceneManager.LoadScene(levelname);
         }
         else
         {
-            SceneManager.LoadScene("MainMenu");
+            string[] levelnum = levelname.Split(new string[] { "Level" }, System.StringSplitOptions.RemoveEmptyEntries);
+            if (Application.CanStreamedLevelBeLoaded("Level" + (int.Parse(levelnum[0]) + 1)))
+            {
+                SceneManager.LoadScene("Level" + (int.Parse(levelnum[0]) + 1));
+            }
+            else
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
         }
     }
 }

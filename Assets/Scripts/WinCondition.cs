@@ -15,6 +15,7 @@ public class WinCondition : MonoBehaviour
         SelllOut            //Can't lose. Finish inventory to win.
     }
 
+    [SerializeField] [Tooltip("Nulllifies Currrent Level Win Condition")] bool RandomiseCondition = true;
     [SerializeField] ConditionType CurrentLevelWinCondition;
 
     [Header("For \"Profit\" and \"ProfitByCustomer\"")]
