@@ -5681,6 +5681,7 @@ MonoBehaviour:
   TotalCustomerNumber: 15
   wincanvas: {fileID: 2083449311}
   losecanvas: {fileID: 413470943}
+  mainCanvas: {fileID: 0}
 --- !u!1 &1290246406
 GameObject:
   m_ObjectHideFlags: 0
@@ -5880,7 +5881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43722a8f954dc49eb9f4514ee07c2c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destinationSceneName: Level5
+  destinationSceneName: Level6
 --- !u!114 &1310871591
 MonoBehaviour:
   m_ObjectHideFlags: 0
