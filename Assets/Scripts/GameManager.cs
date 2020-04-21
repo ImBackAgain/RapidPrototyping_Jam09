@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     // List of prefabs used, manuallly added
     private GameObject[] shipPrefabs, customerPrefabs;
+    public int TotalShipCount
+    {
+        get { return shipPrefabs.Length; }
+    }
     // List of data for ships
     private List<ShipStats> ships;
     // Initial value for previous customer, set to -1 since the first current customer is at 0
@@ -410,10 +414,10 @@ public class GameManager : MonoBehaviour
     // Spawn random customer that is different from the current one
     public void SpawnCustomer()
     {
-        print("Hm?");
+        //print("Hm?");
         // But wait!
         //if (condition.CheckWinCondition()) return;
-        print("No");
+        //print("No");
         // When new customer is spawed, reset interviewRank back to maximum (5)
         currentInterviewRank = 5;
         VisitedCustomerNumber++;

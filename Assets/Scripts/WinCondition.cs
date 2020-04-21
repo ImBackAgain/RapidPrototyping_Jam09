@@ -52,6 +52,7 @@ public class WinCondition : MonoBehaviour
 
     void Start()
     {
+        CurrentLevelWinCondition = (ConditionType)UnityEngine.Random.Range(0, 4);
         FailedCustomerNumber = 0;
         activedocks = 5;
         goaltext = GameObject.Find("GoalPanelText").GetComponent<Text>();
@@ -129,7 +130,7 @@ public class WinCondition : MonoBehaviour
                 goaltext.text = "Goal: Do Not Fail a Single Deal in " + TotalCustomerNumber + " Customers";
                 break;
             default:                                       //other conditions text
-                goaltext.text = "Goal: Empty Your Inventory (Sell 30 Ships)";
+                goaltext.text = "Goal: Empty Your Inventory (Sell " + GameManager.instance.TotalShipCount + " Ships)";
                 break;
         }
     }

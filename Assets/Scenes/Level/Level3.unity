@@ -1802,7 +1802,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 467.3, y: -56.1}
+  m_AnchoredPosition: {x: 467.30078, y: -56.100006}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &424417204
@@ -3426,7 +3426,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 344.2, y: 423}
+  m_AnchoredPosition: {x: 344.19922, y: 423}
   m_SizeDelta: {x: 233.59998, y: 84.20001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &933623155
@@ -3697,7 +3697,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 374.7, y: 326.3}
+  m_AnchoredPosition: {x: 374.69922, y: 326.3}
   m_SizeDelta: {x: 236.70001, y: 85.31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &940624195
@@ -5358,6 +5358,7 @@ MonoBehaviour:
   feedbackPanel: {fileID: 0}
   shipPromptPanel: {fileID: 0}
   netIncome: 0
+  nextLevelIsSame: 1
 --- !u!4 &1286412933
 Transform:
   m_ObjectHideFlags: 0
@@ -5384,6 +5385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ec912e5baf4eb4c89bddf0b87463e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RandomiseCondition: 1
   CurrentLevelWinCondition: 1
   GoalNetIncome: 2000
   goaltext: {fileID: 0}
@@ -8582,7 +8584,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 952.8, y: -57.999916}
+  m_AnchoredPosition: {x: 952.8008, y: -57.99991}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1926876236
