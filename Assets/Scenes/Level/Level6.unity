@@ -5681,7 +5681,7 @@ MonoBehaviour:
   TotalCustomerNumber: 15
   wincanvas: {fileID: 2083449311}
   losecanvas: {fileID: 413470943}
-  mainCanvas: {fileID: 0}
+  mainCanvas: {fileID: 1083032782}
 --- !u!1 &1290246406
 GameObject:
   m_ObjectHideFlags: 0
