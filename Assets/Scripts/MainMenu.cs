@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour
     [Header("=== Setup Variables ===")]
     [Space(10)]
     public GameObject mainMenuParent;
-    public Text titleText;
+    //public Text titleText; // removed, already have a title text on bg image
     public Button startGameButton;
     public Button soundTestButton;
     public Button instructionsButtton;
@@ -62,7 +62,7 @@ public class MainMenu : MonoBehaviour
     private void MainMenuVisibility(bool visible)
     {
         mainMenuParent.SetActive(visible);
-        titleText.gameObject.SetActive(visible);
+        //titleText.gameObject.SetActive(visible);
         startGameButton.gameObject.SetActive(visible);
         soundTestButton.gameObject.SetActive(visible);
         instructionsButtton.gameObject.SetActive(visible);

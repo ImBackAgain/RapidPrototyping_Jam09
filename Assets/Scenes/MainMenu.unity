@@ -2115,7 +2115,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 37fc1f117ccc84544b53db9aca9d6398, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8b8509651429a44888878043859a4961, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2150,7 +2150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &636039414
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3913,7 +3913,6 @@ MonoBehaviour:
   startGameSceneName: PlayScene
   soundTestSceneName: JukeboxScene
   mainMenuParent: {fileID: 1394603187}
-  titleText: {fileID: 636039415}
   startGameButton: {fileID: 1854262190}
   soundTestButton: {fileID: 569902067}
   instructionsButtton: {fileID: 1478263928}
