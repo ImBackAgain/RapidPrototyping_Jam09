@@ -644,8 +644,10 @@ public class GameManager : MonoBehaviour
         GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
         GameObject.Find("Offer").GetComponent<Button>().interactable = false;
         GameObject.Find("Back buttton").GetComponent<Button>().interactable = false;
+        GameObject.Find("Restart Button").GetComponent<Button>().interactable = false;
 
         instance.BoastPanel.SetActive(false);
+
 
         foreach (StatsHandler ship in FindObjectsOfType<StatsHandler>())
         {

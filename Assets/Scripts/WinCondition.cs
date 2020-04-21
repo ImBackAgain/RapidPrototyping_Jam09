@@ -33,6 +33,7 @@ public class WinCondition : MonoBehaviour
     public static int activedocks = 5;
     public GameObject wincanvas;
     public GameObject losecanvas;
+    [SerializeField] Canvas mainCanvas;
 
     // Make instance a singleton
     void Awake()
@@ -138,7 +139,8 @@ public class WinCondition : MonoBehaviour
     {
         GameManager.instance.PermaPause();       
         yield return new WaitForSeconds(4.0f);
-        wincanvas.SetActive(true);       
+        wincanvas.SetActive(true);
+        mainCanvas.enabled = false;
     }
 
     private IEnumerator Lose()
@@ -146,5 +148,6 @@ public class WinCondition : MonoBehaviour
         GameManager.instance.PermaPause();
         yield return new WaitForSeconds(3.0f);
         losecanvas.SetActive(true);
+        mainCanvas.enabled = false;
     }
 }
