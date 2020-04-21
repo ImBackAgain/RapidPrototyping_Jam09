@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: c19c58bc862a740b493c6adfb8f9705b
+guid: 8b3ec74b4618542f1a692caa3da4a941
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4796494644021147871
-    second: dealer action_0
+      213: 8160413383784283890
+    second: ship amount_0
   - first:
-      213: -7158839760093727076
-    second: dealer action_1
+      213: 5808168646310554007
+    second: ship amount_1
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -92,7 +92,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: dealer action_0
+      name: ship amount_0
       rect:
         serializedVersion: 2
         x: 65
@@ -106,14 +106,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e381a0996c3d146639b73c207df31709
-      internalID: 4796494644021147871
+      spriteID: 8c446d0d886cc4d6fb8224e9bd4c2ac5
+      internalID: 8160413383784283890
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dealer action_1
+      name: ship amount_1
       rect:
         serializedVersion: 2
         x: 291
@@ -127,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5efe86830188d4b6fa44f4add762d41c
-      internalID: -7158839760093727076
+      spriteID: e9cc0ac7f5afe483dbdf0ea4b854b84c
+      internalID: 5808168646310554007
       vertices: []
       indices: 
       edges: []
