@@ -31,6 +31,7 @@ public class WinCondition : MonoBehaviour
     // mark the number of active docks, indicating the last 5 ships 
     public static int activedocks = 5;
     public GameObject wincanvas;
+    public GameObject losecanvas;
 
     // Make instance a singleton
     void Awake()
@@ -142,6 +143,6 @@ public class WinCondition : MonoBehaviour
     {
         GameManager.instance.PermaPause();
         yield return new WaitForSeconds(3.0f);
-        SceneManager.LoadScene("LoseScene");
+        losecanvas.SetActive(true);
     }
 }

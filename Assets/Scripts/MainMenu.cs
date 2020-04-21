@@ -10,6 +10,8 @@ public class MainMenu : MonoBehaviour
     [Header("Scene Transition Variables")]
     public string startGameSceneName = "";
     public string soundTestSceneName = "";
+    public string selectLevelSceneName = "";
+
 
     // Setup Properties
     [Header("Main Menu Objects")]
@@ -23,6 +25,7 @@ public class MainMenu : MonoBehaviour
     public Button instructionsButtton;
     public Button quitGameButton;
     public Button creditsButton;
+    public Button selectLevelButton;
     public Image Background;
     public Image CreditsBG;
     [Header("Instructions objects")]
@@ -32,6 +35,7 @@ public class MainMenu : MonoBehaviour
     public GameObject creditsParent;
     public ScrollRect creditsScrollRect;
     public Button exitCreditsButton;
+
 
     // Start()
     void Start()
@@ -48,6 +52,7 @@ public class MainMenu : MonoBehaviour
         instructionsButtton.onClick.AddListener(InstructionsFunc);
         creditsButton.onClick.AddListener(CreditsFunc);
         quitGameButton.onClick.AddListener(QuitGameFunc);
+        selectLevelButton.onClick.AddListener(SelectLevelFunc);
 
         exitInstructionsButtton.onClick.AddListener(ExitInstructionsCalllback);
         exitCreditsButton.onClick.AddListener(ExitCreditsFunc);
@@ -83,6 +88,12 @@ public class MainMenu : MonoBehaviour
         creditsParent.SetActive(visible);
         creditsScrollRect.gameObject.SetActive(visible);
         exitCreditsButton.gameObject.SetActive(visible);
+    }
+
+    // SelectLevelFunc()
+    private void SelectLevelFunc()
+    {
+        SceneManager.LoadScene(selectLevelSceneName);
     }
 
     // StartGameFunc()
