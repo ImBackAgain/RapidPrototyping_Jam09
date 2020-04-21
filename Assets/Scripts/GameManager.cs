@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     // UI used to display available dealer actions remaining
     private Text actionsText;
     // Current count of actions left, an int between 0 and 5, starting at 5 with each new customer, when it's 0, put customer out of action
-    private int dealerActions;
+    [HideInInspector] public int dealerActions;
     private int maxActions = 5;
 
     // Total income earned by this shop
@@ -266,7 +266,7 @@ public class GameManager : MonoBehaviour
     public void Snacks()
     {
         speechBubble.text = snackResponse[Random.Range(0, snackResponse.Length)];
-        currentCustomer.UpdatePatience(20.0f);
+        currentCustomer.UpdatePatience(100.0f);
         // Each customer can only be offered once
         GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
 

@@ -354,7 +354,7 @@ public class CustomerStats : MonoBehaviour
         patience += changeOfPatience;
         patience = Mathf.Clamp(patience, 0.0f, 100.0f);
         patienceText.text = patience.ToString();
-        if (patience == 0)
+        if (patience == 0 && GameManager.instance.dealerActions > 1)
         {
             GameManager.instance.NoSaleResponse();
             OutOfActions("Out of Patience");
