@@ -80,6 +80,8 @@ public class GameManager : MonoBehaviour
 
     //Ship pool; Exclude one ship per spwan
     private HashSet<int> exclude = new HashSet<int>();
+    //Customer pool; Exclude one customer per spwan
+    private HashSet<int> excludecustomer = new HashSet<int>();
 
     //Win condition checker
     //WinCondition condition;
@@ -427,15 +429,16 @@ public class GameManager : MonoBehaviour
             GameObject spawnedCustomer = Instantiate(customerPrefabs[randomIndex], spawnPoint, Quaternion.identity);
             spawnedCustomer.transform.localScale = new Vector3(spawnedCustomer.transform.localScale.x * 35f, spawnedCustomer.transform.localScale.y * 35f, 1f);
             spawnedCustomer.transform.SetParent(container);
+            previousCustomerIndex = randomIndex;
         }
         // If this is not the first customer, save the index of previous customer to a list of used customer,
         // and only spawn from customer prefabs that haven't been used
         else
         {
-            HashSet<int> exclude = new HashSet<int>() { previousCustomerIndex };
-            IEnumerable<int> range = Enumerable.Range(0, shipPrefabs.Length).Where(i => !exclude.Contains(i));
+            excludecustomer.Add(previousCustomerIndex);
+            IEnumerable<int> range = Enumerable.Range(0, shipPrefabs.Length).Where(i => !excludecustomer.Contains(i));
 
-            int randomIndex = Random.Range(0, customerPrefabs.Length - exclude.Count);
+            int randomIndex = Random.Range(0, customerPrefabs.Length - excludecustomer.Count);
             int customerIndex = range.ElementAt(randomIndex);
 
             GameObject spawnedCustomer = Instantiate(customerPrefabs[customerIndex], spawnPoint, Quaternion.identity);
