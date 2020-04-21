@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -180,6 +181,13 @@ public class GameManager : MonoBehaviour
 
         BoastPanel.SetActive(false);
         InitUIComponets();
+
+        GameObject.Find("ShipAmountTotal").GetComponent<Text>().text = "/" + shipPrefabs.Length.ToString();
+    }
+
+    private void Update()
+    {
+        GameObject.Find("ShipAmountLeft").GetComponent<Text>().text = (shipPrefabs.Length - exclude.Count + WinCondition.activedocks).ToString();
     }
 
     // Behavior for interview button
@@ -437,7 +445,7 @@ public class GameManager : MonoBehaviour
         }
 
         //Refresh buttons
-        GameObject.Find("Interview").GetComponent<Button>().interactable = true;
+        GameObject.Find("Interview").GetComponent<Button>().interactable = true;        
         GameObject.Find("Boast").GetComponent<Button>().interactable = true;
         GameObject.Find("Snacks").GetComponent<Button>().interactable = true;
         GameObject.Find("Offer").GetComponent<Button>().interactable = true;
@@ -580,8 +588,8 @@ public class GameManager : MonoBehaviour
 
     public void ActivateUIComponetsOnShipSelect()
     {
-
-        GameObject.Find("Boast").GetComponent<Button>().interactable = true;
+        if (dealerActions != 1)
+            GameObject.Find("Boast").GetComponent<Button>().interactable = true;
         GameObject.Find("Offer").GetComponent<Button>().interactable = true;
         //hide prompt
         shipPromptPanel.SetActive(false);
@@ -640,6 +648,20 @@ public class GameManager : MonoBehaviour
         foreach (DockHandler ship in FindObjectsOfType<DockHandler>())
         {
             ship.enabled = false;
+        }
+    }
+
+    public void NextLevel()
+    {
+        string levelname = SceneManager.GetActiveScene().name;
+        string[] levelnum = levelname.Split(new string[] { "Level" }, System.StringSplitOptions.RemoveEmptyEntries);
+        if (Application.CanStreamedLevelBeLoaded("Level" + (int.Parse(levelnum[0]) + 1)))
+        {
+            SceneManager.LoadScene("Level" + (int.Parse(levelnum[0]) + 1));
+        }
+        else
+        {
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +30,7 @@ public class WinCondition : MonoBehaviour
     public static int FailedCustomerNumber = 0;
     // mark the number of active docks, indicating the last 5 ships 
     public static int activedocks = 5;
+    public GameObject wincanvas;
 
     // Make instance a singleton
     void Awake()
@@ -131,9 +133,9 @@ public class WinCondition : MonoBehaviour
     }
     private IEnumerator Win()
     {
-        GameManager.instance.PermaPause();
+        GameManager.instance.PermaPause();       
         yield return new WaitForSeconds(4.0f);
-        SceneManager.LoadScene("WinScene");
+        wincanvas.SetActive(true);       
     }
 
     private IEnumerator Lose()

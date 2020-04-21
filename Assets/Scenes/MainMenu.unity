@@ -3910,7 +3910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c86c528675c4c4a858e8b6c67dd675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startGameSceneName: PlayScene
+  startGameSceneName: Level1
   soundTestSceneName: JukeboxScene
   mainMenuParent: {fileID: 1394603187}
   startGameButton: {fileID: 1854262190}
