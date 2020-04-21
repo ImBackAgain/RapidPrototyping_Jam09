@@ -507,6 +507,7 @@ public class GameManager : MonoBehaviour
             GameObject.Find("Interview").GetComponent<Button>().interactable = false;
             GameObject.Find("Boast").GetComponent<Button>().interactable = false;
             GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
+            BoastPanel.SetActive(false);
         }
     }
 
