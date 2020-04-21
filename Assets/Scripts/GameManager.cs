@@ -502,6 +502,12 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine("WaitForTextBeforeEndOfCustomer");
         }
+        else if(dealerActions == 1)
+        {
+            GameObject.Find("Interview").GetComponent<Button>().interactable = false;
+            GameObject.Find("Boast").GetComponent<Button>().interactable = false;
+            GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
+        }
     }
 
     private IEnumerator WaitForTextBeforeEndOfCustomer()
