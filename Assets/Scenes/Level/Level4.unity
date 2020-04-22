@@ -5874,7 +5874,7 @@ MonoBehaviour:
   RandomiseCondition: 0
   CurrentLevelWinCondition: 1
   GoalNetIncome: 3000
-  TotalShipCount: 0
+  TotalShipCount: 30
   TotalCustomerNumber: 12
   goaltext: {fileID: 0}
   wincanvas: {fileID: 1759013671}

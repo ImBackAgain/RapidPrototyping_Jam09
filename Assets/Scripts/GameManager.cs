@@ -480,7 +480,7 @@ public class GameManager : MonoBehaviour
         // When new customer is spawed, reset interviewRank back to maximum (5)
         currentInterviewRank = 5;
         VisitedCustomerNumber++;
-        customerText.text = "Customer #" + VisitedCustomerNumber + (customers > 0 ? customers.ToString() : "");
+        customerText.text = "Customer " + VisitedCustomerNumber + (customers > 0 ? "/" + customers : "");
         // New customer is spawned at this position
         Vector3 spawnPoint = GameObject.FindGameObjectWithTag("CustomerSpawnPoint").transform.position;
         Transform container = GameObject.Find("CustomerContainer").transform;
@@ -497,7 +497,7 @@ public class GameManager : MonoBehaviour
         // If this is not the first customer, save the index of previous customer to a list of used customer, and...
         else
         {
-            /*
+            //*
             //DON'T only spawn from customer prefabs that haven't been used, but don't spawn the last customer
             int customerIndex = Random.Range(0, customerPrefabs.Count - 1);
             if (customerIndex >= previousCustomerIndex) customerIndex++;

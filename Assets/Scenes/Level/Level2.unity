@@ -1084,7 +1084,7 @@ GameObject:
   - component: {fileID: 203641064}
   m_Layer: 0
   m_Name: Ship4
-  m_TagString: Untagged
+  m_TagString: ShipSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5389,7 +5389,7 @@ MonoBehaviour:
   RandomiseCondition: 0
   CurrentLevelWinCondition: 2
   GoalNetIncome: 2000
-  TotalShipCount: 0
+  TotalShipCount: 30
   TotalCustomerNumber: 5
   goaltext: {fileID: 0}
   wincanvas: {fileID: 1781542122}
@@ -5731,7 +5731,7 @@ GameObject:
   - component: {fileID: 1490798016}
   m_Layer: 0
   m_Name: Ship3
-  m_TagString: Untagged
+  m_TagString: ShipSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6480,7 +6480,7 @@ GameObject:
   - component: {fileID: 1580530020}
   m_Layer: 0
   m_Name: Ship5
-  m_TagString: Untagged
+  m_TagString: ShipSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9058,7 +9058,7 @@ GameObject:
   - component: {fileID: 1993768330}
   m_Layer: 0
   m_Name: Ship2
-  m_TagString: Untagged
+  m_TagString: ShipSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

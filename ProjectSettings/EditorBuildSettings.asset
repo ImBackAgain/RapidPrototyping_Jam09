@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 9d8e6208d3effb64e8fba06e731f4347
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/JukeboxScene.unity
     guid: 1b62eb05082ffa84ea4cc157fc3a1149
   - enabled: 0
@@ -42,7 +42,7 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelSelect.unity
     guid: 11b80c6929b1fed4c93a6267d70e5ab8
   - enabled: 0
-    path: Assets/__DELETED_GUID_Trash/8d5b5997691929e4cb9386216b09adf8
+    path: Assets/Scenes/Level/Level7.unity
     guid: 8d5b5997691929e4cb9386216b09adf8
   - enabled: 1
     path: Assets/Scenes/Level/Level2.unity

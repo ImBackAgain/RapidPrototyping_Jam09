@@ -38,7 +38,7 @@ public class WinCondition : MonoBehaviour
     [Space(20)]
     public GameObject wincanvas;
     public GameObject losecanvas;
-    [SerializeField] Canvas mainCanvas;
+    Canvas mainCanvas;
 
     // Make instance a singleton
     void Awake()
@@ -47,6 +47,7 @@ public class WinCondition : MonoBehaviour
             Destroy(instance);
         instance = this;
 
+        mainCanvas = GameObject.Find("Canvas").GetComponent<Canvas>();
 
         if (RandomiseCondition)
         {
@@ -118,14 +119,14 @@ public class WinCondition : MonoBehaviour
                 }
                 break;
             case ConditionType.ProfitNoFailure:
+                if (GameManager.instance.netIncome >= GoalNetIncome)
+                {
+                    StartCoroutine("Win");
+                    return true;
+                }
                 if (FailedCustomerNumber > 0)
                 {
                     StartCoroutine("Lose");
-                    return true;
-                }
-                if (GameManager.instance.VisitedCustomerNumber >= TotalCustomerNumber)
-                {
-                    StartCoroutine("Win");
                     return true;
                 }
                 break;
@@ -148,20 +149,19 @@ public class WinCondition : MonoBehaviour
     }
     void WinConditionsText(ConditionType Condition)                 //condition texts
     {
-        int ConditionIndex = (int)Condition;
-        switch (ConditionIndex)
+        switch (Condition)
         {
-            case 0:                                        //win condition 0 text
-                goaltext.text = "Goal: Earn $" + GoalNetIncome + " Profit";
+            case ConditionType.Profit:
+                goaltext.text = "Goal: Earn a net income of $" + GoalNetIncome + ". (You can't lose!)";
                 break;
-            case 1:                                        //win condition 1 text
-                goaltext.text = "Goal: Earn $" + GoalNetIncome + " Profit within " + TotalCustomerNumber + " Customers";
+            case ConditionType.ProfitByCustomer:
+                goaltext.text = "Goal: Earn $" + GoalNetIncome + " within " + TotalCustomerNumber + " customers.";
                 break;
-            case 2:                                        //win condition 2 text
-                goaltext.text = "Goal: Do Not Fail a Single Deal in " + TotalCustomerNumber + " Customers";
+            case ConditionType.ProfitLimitedInventory:
+                goaltext.text = "Goal: Earn $" + GoalNetIncome + ". Watch your ship count.";
                 break;
-            default:                                       //other conditions text
-                goaltext.text = "Goal: Empty Your Inventory (Sell " + GameManager.instance.TotalShipCount + " Ships)";
+            case ConditionType.ProfitNoFailure:
+                goaltext.text = "Goal: Earn $" + GoalNetIncome + " without failing any deals.";
                 break;
         }
     }
