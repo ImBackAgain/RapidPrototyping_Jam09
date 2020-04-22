@@ -12,10 +12,10 @@ EditorBuildSettings:
     path: Assets/Scenes/JukeboxScene.unity
     guid: 1b62eb05082ffa84ea4cc157fc3a1149
   - enabled: 0
-    path: Assets/Scenes/Level/Level1.unity
+    path: Assets/Scenes/Level/OldTutorial1.unity
     guid: 22a9382e11ba31f42a1fc5e1c0ba3148
   - enabled: 0
-    path: Assets/Scenes/Level/Level2.unity
+    path: Assets/Scenes/Level/OldTutorial2.unity
     guid: 4a4503e4af0d8f44f871bfe95dd91b37
   - enabled: 0
     path: Assets/Scenes/PlayScene.unity
@@ -29,19 +29,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level/Level3.unity
     guid: f4a1d63a1e18c2541b49e2a580cb809b
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Level/Level4.unity
     guid: 03d679563d044df44b44069cd02cc9de
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Level/Level5.unity
     guid: c3ff1be0aa1d7504aa725a291cb1283e
   - enabled: 1
-    path: Assets/Scenes/Level/Level6.unity
+    path: Assets/Scenes/Level/ModifierLevel.unity
     guid: 327b9dfe7013c1f45a98941d95911b54
   - enabled: 1
     path: Assets/Scenes/LevelSelect.unity
     guid: 11b80c6929b1fed4c93a6267d70e5ab8
   - enabled: 0
-    path: Assets/Scenes/Level/Level7.unity
+    path: Assets/__DELETED_GUID_Trash/8d5b5997691929e4cb9386216b09adf8
     guid: 8d5b5997691929e4cb9386216b09adf8
+  - enabled: 1
+    path: Assets/Scenes/Level/Level2.unity
+    guid: d61bd4f30912646488fbefb16961918a
+  - enabled: 1
+    path: Assets/Scenes/Level/Level1.unity
+    guid: c671039dc99e4514693ca007bb337e3b
+  - enabled: 1
+    path: Assets/Scenes/Level/Level6.unity
+    guid: 974ccb692139e6b428a9340de9eb336d
   m_configObjects: {}

@@ -5842,7 +5842,9 @@ MonoBehaviour:
   feedbackText: {fileID: 0}
   feedbackPanel: {fileID: 0}
   shipPromptPanel: {fileID: 0}
+  dealerActions: 0
   netIncome: 0
+  nextLevelIsSame: 0
 --- !u!4 &1286412933
 Transform:
   m_ObjectHideFlags: 0
@@ -5869,12 +5871,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ec912e5baf4eb4c89bddf0b87463e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RandomiseCondition: 0
   CurrentLevelWinCondition: 1
   GoalNetIncome: 3000
-  goaltext: {fileID: 0}
   TotalCustomerNumber: 12
+  TotalShipCount: 0
+  goaltext: {fileID: 0}
   wincanvas: {fileID: 1759013671}
   losecanvas: {fileID: 1927539117}
+  mainCanvas: {fileID: 0}
 --- !u!1 &1290246406
 GameObject:
   m_ObjectHideFlags: 0
