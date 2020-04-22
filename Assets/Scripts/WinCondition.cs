@@ -53,15 +53,11 @@ public class WinCondition : MonoBehaviour
         {
             CurrentLevelWinCondition = (ConditionType)UnityEngine.Random.Range(1, 4);
         }
-        switch (CurrentLevelWinCondition)
-        {
-            case ConditionType.Profit:
-                GameManager.Invinciblate();
-                break;
 
-            case ConditionType.ProfitByCustomer:
-                GameManager.CountCustomers(TotalCustomerNumber);
-                break;
+        GameManager.Invinciblate(CurrentLevelWinCondition == ConditionType.Profit);
+        if (CurrentLevelWinCondition == ConditionType.ProfitByCustomer)
+        {
+            GameManager.CountCustomers(TotalCustomerNumber);
         }
 
     }
@@ -98,8 +94,8 @@ public class WinCondition : MonoBehaviour
         switch (CurrentLevelWinCondition)
         {
             case ConditionType.Profit:
-                print("Profit?");
-                print(GameManager.instance.netIncome + " >= " + GoalNetIncome + "?");
+                //print("Profit?");
+                //print(GameManager.instance.netIncome + " >= " + GoalNetIncome + "?");
                 if (GameManager.instance.netIncome >= GoalNetIncome)
                 {
                     StartCoroutine("Win");

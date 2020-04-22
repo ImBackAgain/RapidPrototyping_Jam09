@@ -190,17 +190,27 @@ public class GameManager : MonoBehaviour
         BoastPanel.SetActive(false);
         InitUIComponets();
 
-        GameObject.Find("ShipAmountTotal").GetComponent<Text>().text = "/" + shipPrefabs.Count.ToString();
+        print(drawWithReplacement);
+        if (!drawWithReplacement)
+        {
+            GameObject.Find("ShipAmountTotal").GetComponent<Text>().text = "/" + shipPrefabs.Count.ToString();
+        }
+        else
+        {
+            GameObject.Find("ShipAmountTotal").GetComponent<Text>().text = "";
+            GameObject.Find("ShipAmountLeft").GetComponent<Text>().text = "∞";
+        }
     }
 
     private void Update()
     {
+        if (!drawWithReplacement)
         GameObject.Find("ShipAmountLeft").GetComponent<Text>().text = (shipPrefabs.Count - exclude.Count + WinCondition.activedocks).ToString();
     }
     static bool drawWithReplacement = false;
-    public static void Invinciblate()
+    public static void Invinciblate(bool reallly)
     {
-        drawWithReplacement = true;
+        drawWithReplacement = reallly;
     }
     static int customers = -1;
     public static void CountCustomers(int howMany)
@@ -708,7 +718,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void PermaPause()
     {
-        print("And we're [oppposite of live]!");
+        //print("And we're [oppposite of live]!");
         GameObject.Find("Interview").GetComponent<Button>().interactable = false;
         GameObject.Find("Boast").GetComponent<Button>().interactable = false;
         GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
