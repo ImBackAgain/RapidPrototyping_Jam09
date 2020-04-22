@@ -3344,7 +3344,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Restart
+  m_Text: Next Level
 --- !u!222 &896421580
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5359,7 +5359,7 @@ MonoBehaviour:
   shipPromptPanel: {fileID: 0}
   dealerActions: 0
   netIncome: 0
-  nextLevelIsSame: 1
+  nextLevelIsSame: 0
 --- !u!4 &1286412933
 Transform:
   m_ObjectHideFlags: 0
@@ -5386,11 +5386,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ec912e5baf4eb4c89bddf0b87463e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RandomiseCondition: 1
+  RandomiseCondition: 0
   CurrentLevelWinCondition: 1
   GoalNetIncome: 2000
-  goaltext: {fileID: 0}
   TotalCustomerNumber: 10
+  TotalShipCount: 0
+  goaltext: {fileID: 0}
   wincanvas: {fileID: 1781542122}
   losecanvas: {fileID: 1006504910}
   mainCanvas: {fileID: 1083032782}

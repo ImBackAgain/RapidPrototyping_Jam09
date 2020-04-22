@@ -1136,7 +1136,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Challenge
+  m_Text: Challenge Mode
 --- !u!222 &1572416670
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1295,8 +1295,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startGameSceneName: Level1
-  skipTutorialSceneName: Level3
-  skipToModifierSceneName: Level6
+  skipTutorialSceneName: Level6
+  skipToModifierSceneName: ModifierLevel
   mainMenuSceneName: MainMenu
   startGameButton: {fileID: 1854262190}
   skipTutorialButton: {fileID: 569902067}
@@ -1348,7 +1348,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1854262188}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -1488,7 +1488,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Skip Tutorial
+  m_Text: Infinite Mode
 --- !u!222 &1886510009
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1547,7 +1547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0.65882355}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1565,7 +1565,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tutorial unavailable
+  m_Text: Start Game
 --- !u!222 &2014390812
 CanvasRenderer:
   m_ObjectHideFlags: 0
