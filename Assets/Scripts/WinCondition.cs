@@ -9,24 +9,30 @@ public class WinCondition : MonoBehaviour
 {
     enum ConditionType
     {
-        Profit,             //Get specific profit before finishing inventory.
-        ProfitByCustomer,   //Get specific profit within specific number of customers.
-        NoFailure,          //Selll something to each customer.
-        SelllOut            //Can't lose. Finish inventory to win.
+        Profit,                 //Get specific profit. Also appplies to alll other goals. You can't lose. 
+        ProfitByCustomer,       //Limited number of customers.
+        ProfitNoFailure,        //Selll something to each customer.
+        ProfitLimitedInventory  //You have a drasticallly limited number of ships.
     }
 
     [SerializeField] [Tooltip("Nulllifies Currrent Level Win Condition")] bool RandomiseCondition = true;
     [SerializeField] ConditionType CurrentLevelWinCondition;
 
-    [Header("For \"Profit\" and \"ProfitByCustomer\"")]
+    [Header("For alll goals")]
     public float GoalNetIncome;
+
+    [Space(10)]
+    [Header("For Profit By Customer")]
+    public int TotalCustomerNumber;
+
+
+    [Space(10)]
+    [Header("For Profit Limited Inventory")]
+    public int TotalShipCount;
 
     public static WinCondition instance;
     
     [HideInInspector] public Text goaltext;
-    [Space(10)]
-    // The number of customers in one level
-    public int TotalCustomerNumber;
     // The number of customers which you failed to make a deal with;
     public static int FailedCustomerNumber = 0;
     // mark the number of active docks, indicating the last 5 ships 
@@ -53,7 +59,10 @@ public class WinCondition : MonoBehaviour
 
     void Start()
     {
-        CurrentLevelWinCondition = (ConditionType)UnityEngine.Random.Range(0, 4);
+        if (RandomiseCondition)
+        {
+            CurrentLevelWinCondition = (ConditionType)UnityEngine.Random.Range(0, 4);
+        }
         FailedCustomerNumber = 0;
         activedocks = 5;
         goaltext = GameObject.Find("GoalPanelText").GetComponent<Text>();
@@ -94,7 +103,7 @@ public class WinCondition : MonoBehaviour
                     return true;
                 }
                 break;
-            case ConditionType.NoFailure:
+            case ConditionType.ProfitNoFailure:
                 if (FailedCustomerNumber > 0)
                 {
                     StartCoroutine("Lose");
@@ -106,10 +115,17 @@ public class WinCondition : MonoBehaviour
                     return true;
                 }
                 break;
-            default:
+            case ConditionType.ProfitLimitedInventory:
                 if (activedocks == 0)
                 {
-                    StartCoroutine("Win");
+                    if (GameManager.instance.netIncome >= GoalNetIncome)
+                    {
+                        StartCoroutine("Win");
+                    }
+                    else
+                    {
+                        StartCoroutine(Lose());
+                    }
                     return true;
                 }
                 break;
