@@ -52,10 +52,17 @@ public class WinCondition : MonoBehaviour
         {
             CurrentLevelWinCondition = (ConditionType)UnityEngine.Random.Range(1, 4);
         }
-        if (CurrentLevelWinCondition == ConditionType.Profit)
+        switch (CurrentLevelWinCondition)
         {
-            GameManager.Invinciblate();
+            case ConditionType.Profit:
+                GameManager.Invinciblate();
+                break;
+
+            case ConditionType.ProfitByCustomer:
+                GameManager.CountCustomers(TotalCustomerNumber);
+                break;
         }
+
     }
 
     void OnDestroy()

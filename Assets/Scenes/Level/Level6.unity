@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 19288668}
   m_Layer: 0
   m_Name: SpawnPoint3
-  m_TagString: ShipSpawnPoint
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1084,7 +1084,7 @@ GameObject:
   - component: {fileID: 203641064}
   m_Layer: 0
   m_Name: Ship4
-  m_TagString: Untagged
+  m_TagString: ShipSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1816,7 +1816,7 @@ GameObject:
   - component: {fileID: 424417205}
   m_Layer: 0
   m_Name: SpawnPoint2
-  m_TagString: ShipSpawnPoint
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2888,7 +2888,7 @@ GameObject:
   - component: {fileID: 778028922}
   m_Layer: 0
   m_Name: ShipSpawn5
-  m_TagString: ShipSpawnPoint
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3175,7 +3175,7 @@ GameObject:
   - component: {fileID: 850083135}
   m_Layer: 0
   m_Name: ShipSpawn4
-  m_TagString: ShipSpawnPoint
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4662,7 +4662,7 @@ GameObject:
   - component: {fileID: 1070359968}
   m_Layer: 0
   m_Name: Ship1
-  m_TagString: Untagged
+  m_TagString: ShipSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5389,8 +5389,9 @@ MonoBehaviour:
   RandomiseCondition: 1
   CurrentLevelWinCondition: 1
   GoalNetIncome: 2000
-  goaltext: {fileID: 0}
+  TotalShipCount: 0
   TotalCustomerNumber: 10
+  goaltext: {fileID: 0}
   wincanvas: {fileID: 1781542122}
   losecanvas: {fileID: 1006504910}
   mainCanvas: {fileID: 1083032782}
@@ -5730,7 +5731,7 @@ GameObject:
   - component: {fileID: 1490798016}
   m_Layer: 0
   m_Name: Ship3
-  m_TagString: Untagged
+  m_TagString: ShipSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6479,7 +6480,7 @@ GameObject:
   - component: {fileID: 1580530020}
   m_Layer: 0
   m_Name: Ship5
-  m_TagString: Untagged
+  m_TagString: ShipSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7655,7 +7656,7 @@ GameObject:
   - component: {fileID: 1778479289}
   m_Layer: 0
   m_Name: SpawnPoint1
-  m_TagString: ShipSpawnPoint
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9057,7 +9058,7 @@ GameObject:
   - component: {fileID: 1993768330}
   m_Layer: 0
   m_Name: Ship2
-  m_TagString: Untagged
+  m_TagString: ShipSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

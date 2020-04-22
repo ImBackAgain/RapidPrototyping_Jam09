@@ -202,6 +202,11 @@ public class GameManager : MonoBehaviour
     {
         drawWithReplacement = true;
     }
+    static int customers = -1;
+    public static void CountCustomers(int howMany)
+    {
+        customers = howMany;
+    }
 
     public void LimitInventory(int count)
     {
@@ -341,12 +346,12 @@ public class GameManager : MonoBehaviour
                 if (amount / maximumOffer < 0.85f)
                 {
                     speechBubble.text = purchaseResponseCheap[Random.Range(0, purchaseResponseCheap.Length)];
-                    currentCustomer.OutOfActions("Perfect Price: $" + maximumOffer);
+                    currentCustomer.OutOfActions("Max Price: $" + maximumOffer);
                 }
                 else
                 {
                     speechBubble.text = purchaseResponseAverage[Random.Range(0, purchaseResponseAverage.Length)];
-                    currentCustomer.OutOfActions("Perfect Price: $" + maximumOffer);
+                    currentCustomer.OutOfActions("Max Price: $" + maximumOffer);
                 }
 
                 // If it has been accepted, just decrement the dealer action count for the visual of the thing
@@ -475,7 +480,7 @@ public class GameManager : MonoBehaviour
         // When new customer is spawed, reset interviewRank back to maximum (5)
         currentInterviewRank = 5;
         VisitedCustomerNumber++;
-        customerText.text = "Customer #" + VisitedCustomerNumber;
+        customerText.text = "Customer #" + VisitedCustomerNumber + (customers > 0 ? customers.ToString() : "");
         // New customer is spawned at this position
         Vector3 spawnPoint = GameObject.FindGameObjectWithTag("CustomerSpawnPoint").transform.position;
         Transform container = GameObject.Find("CustomerContainer").transform;

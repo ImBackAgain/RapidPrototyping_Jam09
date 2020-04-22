@@ -4014,7 +4014,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 182, y: 196}
+  m_AnchoredPosition: {x: 109, y: 196}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1011287835
@@ -5348,8 +5348,8 @@ MonoBehaviour:
   RandomiseCondition: 0
   CurrentLevelWinCondition: 1
   GoalNetIncome: 2000
-  TotalCustomerNumber: 10
   TotalShipCount: 10
+  TotalCustomerNumber: 10
   goaltext: {fileID: 0}
   wincanvas: {fileID: 1781542122}
   losecanvas: {fileID: 1006504910}
