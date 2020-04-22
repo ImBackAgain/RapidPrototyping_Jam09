@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 19288668}
   m_Layer: 0
   m_Name: SpawnPoint3
-  m_TagString: ShipSpawnPoint
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1084,7 +1084,7 @@ GameObject:
   - component: {fileID: 203641064}
   m_Layer: 0
   m_Name: Ship4
-  m_TagString: Untagged
+  m_TagString: ShipSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1816,7 +1816,7 @@ GameObject:
   - component: {fileID: 424417205}
   m_Layer: 0
   m_Name: SpawnPoint2
-  m_TagString: ShipSpawnPoint
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2888,7 +2888,7 @@ GameObject:
   - component: {fileID: 778028922}
   m_Layer: 0
   m_Name: ShipSpawn5
-  m_TagString: ShipSpawnPoint
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3175,7 +3175,7 @@ GameObject:
   - component: {fileID: 850083135}
   m_Layer: 0
   m_Name: ShipSpawn4
-  m_TagString: ShipSpawnPoint
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4662,7 +4662,7 @@ GameObject:
   - component: {fileID: 1070359968}
   m_Layer: 0
   m_Name: Ship1
-  m_TagString: Untagged
+  m_TagString: ShipSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5302,51 +5302,10 @@ MonoBehaviour:
   - {fileID: 1161146204671809282, guid: b126afc773f1d42b2a59dfa33d98c514, type: 3}
   - {fileID: 4686007964383163455, guid: d91a209cab58b4a688420a942eafbe99, type: 3}
   - {fileID: 705805827844887578, guid: 698690f311c07496f9f1ae3714b75ec5, type: 3}
-  - {fileID: 1565991714462447382, guid: 64689a243aa394fa39616a27d4839cc1, type: 3}
-  - {fileID: 2225728840596436812, guid: e22b2c44cd94940ebbbc14e46efceb9d, type: 3}
-  - {fileID: 7279502282178529024, guid: 9b079dd4636cb4ad1a3939b15a8292f5, type: 3}
-  - {fileID: 2378815908641445582, guid: eb9e6bc34ce3e4030b1656e2051ad4bb, type: 3}
-  - {fileID: 648663681741799877, guid: 2ce14f03d48e845b2bb32852e62f307d, type: 3}
-  - {fileID: 6880813284483965958, guid: b90162ce037e74985898033b6042e669, type: 3}
-  - {fileID: 994390043793435936, guid: 3dc5b713b70754d62bcf7fa338797ebe, type: 3}
-  - {fileID: 2761864926563428650, guid: 49f311730466843c0ba58e07c9905c75, type: 3}
-  - {fileID: 7975209963868920183, guid: 8e82abc10eb9e409bbe15f398f67d604, type: 3}
-  - {fileID: 5821617403748195451, guid: 5982687d9a4f0442bb414c2c85bb89ee, type: 3}
-  - {fileID: 3124864294834060473, guid: c190172ab77cf4b67b4beb0dc61c265c, type: 3}
-  - {fileID: 5935571189134361630, guid: fd335c6c7888c4c7b9207c6946f55c64, type: 3}
-  - {fileID: 65317547885966073, guid: 370e56590ef5f465d904f55d65c0e37e, type: 3}
-  - {fileID: 8383252593327488233, guid: 17a6020698ca64f2280c8edf2cedebed, type: 3}
-  - {fileID: 3990354318082586921, guid: 536b21e5c36b04e9a82586fd597fd87a, type: 3}
-  - {fileID: 8605958501377708915, guid: 8020a8b025b9b4c86a09fe92d9463392, type: 3}
-  - {fileID: 2617096300976786832, guid: b53943126670747bf806d0c263837183, type: 3}
-  - {fileID: 4112475968330191179, guid: 710b621024a5144a891a7aea99b60a99, type: 3}
-  - {fileID: 4962576969941293612, guid: 105a9a0c3c67f41f3b2e06dc312ea459, type: 3}
-  - {fileID: 4681412898461757272, guid: 8637224e4b80b4c238ad83d237d51fbd, type: 3}
-  - {fileID: 2794982581527840791, guid: c1373e46a68a64e36b7907f2b17138d5, type: 3}
-  - {fileID: 2196205576395215511, guid: 8865c95084d8649468362db51a84ae43, type: 3}
-  - {fileID: 7992817843273593525, guid: c55deb2219d824c33b45ddd9a0e04340, type: 3}
-  - {fileID: 5118761296435555408, guid: fd5a144d5638042839da7846e728ea6d, type: 3}
-  - {fileID: 5644138748509829067, guid: df79ccbbb09cf4c3289fd1e4d9be6457, type: 3}
-  - {fileID: 1343000531977760162, guid: b7030c4c5aed448f5bad56c76dd1b670, type: 3}
+  - {fileID: 705805827844887578, guid: 698690f311c07496f9f1ae3714b75ec5, type: 3}
   customerPrefabs:
   - {fileID: 6087183343384311862, guid: a9df1cd1ad7dc4755857c78fd5ba14b3, type: 3}
   - {fileID: 593198724688891142, guid: 3a4c77fc2e30a4330abe9a12d67a2ae5, type: 3}
-  - {fileID: 2986648045802557880, guid: 36fb9bd9906d14f618e623b22d6e5b12, type: 3}
-  - {fileID: 4357431361596187130, guid: a4ad624a3368c43469c9a88026d31d6a, type: 3}
-  - {fileID: 7238976417252691463, guid: 7dbd76edf71df4fc6a4ca134f60cee88, type: 3}
-  - {fileID: 6964442837460130180, guid: a277a5592da964dd4bec3f659a2ab651, type: 3}
-  - {fileID: 229786388293294749, guid: 379be07b7b57d45d095283767d268a16, type: 3}
-  - {fileID: 7154824468111516320, guid: 0614ca84ff3f64cab8498e84c5aca69e, type: 3}
-  - {fileID: 3985085529688685680, guid: acbca006aa7b0447395509fa6ad083b7, type: 3}
-  - {fileID: 1430458533309072643, guid: 030a545eed71b4b3da34b23fcbdcf70f, type: 3}
-  - {fileID: 8210918725538125798, guid: 7bb914ac2f76f4c059f44a77ecb163e0, type: 3}
-  - {fileID: 1141486919780596100, guid: 342cc6c4b82f34fdd9610a4b5cbc0b04, type: 3}
-  - {fileID: 2305488763779571153, guid: 3db548d0c768f45ceb4e5828da378337, type: 3}
-  - {fileID: 7802948328323783211, guid: 8e422f0821fe24082b0c07918166d572, type: 3}
-  - {fileID: 4685277230264633737, guid: 1701de8f393ce4e5199530a406d033d8, type: 3}
-  - {fileID: 8904614707176069794, guid: c1c20c2caaf0a489abbdf0c2e035f2e8, type: 3}
-  - {fileID: 6208744681924399384, guid: 391cc346c8b2a4ac3ac2cdd342436cf0, type: 3}
-  - {fileID: 8613430567458801659, guid: 998f1b06057ba4072b736afa1a51e3da, type: 3}
   currentSoldShipParent: {fileID: 0}
   VisitedCustomerNumber: 0
   BoastPanel: {fileID: 2059518765}
@@ -5389,8 +5348,9 @@ MonoBehaviour:
   RandomiseCondition: 1
   CurrentLevelWinCondition: 1
   GoalNetIncome: 2000
-  goaltext: {fileID: 0}
   TotalCustomerNumber: 10
+  TotalShipCount: 10
+  goaltext: {fileID: 0}
   wincanvas: {fileID: 1781542122}
   losecanvas: {fileID: 1006504910}
   mainCanvas: {fileID: 1083032782}
@@ -5730,7 +5690,7 @@ GameObject:
   - component: {fileID: 1490798016}
   m_Layer: 0
   m_Name: Ship3
-  m_TagString: Untagged
+  m_TagString: ShipSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6479,7 +6439,7 @@ GameObject:
   - component: {fileID: 1580530020}
   m_Layer: 0
   m_Name: Ship5
-  m_TagString: Untagged
+  m_TagString: ShipSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7307,6 +7267,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8392268167236307177, guid: 5e3fc1d5dc3867249ba178547919ccb3,
+        type: 3}
+      propertyPath: audioSources.Array.data[0].volume
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8392268167236307182, guid: 5e3fc1d5dc3867249ba178547919ccb3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7655,7 +7620,7 @@ GameObject:
   - component: {fileID: 1778479289}
   m_Layer: 0
   m_Name: SpawnPoint1
-  m_TagString: ShipSpawnPoint
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9057,7 +9022,7 @@ GameObject:
   - component: {fileID: 1993768330}
   m_Layer: 0
   m_Name: Ship2
-  m_TagString: Untagged
+  m_TagString: ShipSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

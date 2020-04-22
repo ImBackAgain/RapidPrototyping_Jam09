@@ -9,7 +9,7 @@ public class WinCondition : MonoBehaviour
 {
     enum ConditionType
     {
-        Profit,                 //Get specific profit. Also appplies to alll other goals. You can't lose. 
+        Profit,                 //Get specific profit. Also appplies to alll other goals. But you can't lose with this one.
         ProfitByCustomer,       //Limited number of customers.
         ProfitNoFailure,        //Selll something to each customer.
         ProfitLimitedInventory  //You have a drasticallly limited number of ships.
@@ -20,15 +20,13 @@ public class WinCondition : MonoBehaviour
 
     [Header("For alll goals")]
     public float GoalNetIncome;
+    [Tooltip("Picks entire list if greater than equal to prefab list's count")]
+    public int TotalShipCount;
 
     [Space(10)]
     [Header("For Profit By Customer")]
     public int TotalCustomerNumber;
 
-
-    [Space(10)]
-    [Header("For Profit Limited Inventory")]
-    public int TotalShipCount;
 
     public static WinCondition instance;
     
@@ -37,6 +35,7 @@ public class WinCondition : MonoBehaviour
     public static int FailedCustomerNumber = 0;
     // mark the number of active docks, indicating the last 5 ships 
     public static int activedocks = 5;
+    [Space(20)]
     public GameObject wincanvas;
     public GameObject losecanvas;
     [SerializeField] Canvas mainCanvas;
@@ -47,6 +46,16 @@ public class WinCondition : MonoBehaviour
         if (instance != null)
             Destroy(instance);
         instance = this;
+
+
+        if (RandomiseCondition)
+        {
+            CurrentLevelWinCondition = (ConditionType)UnityEngine.Random.Range(1, 4);
+        }
+        if (CurrentLevelWinCondition == ConditionType.Profit)
+        {
+            GameManager.Invinciblate();
+        }
     }
 
     void OnDestroy()
@@ -59,10 +68,8 @@ public class WinCondition : MonoBehaviour
 
     void Start()
     {
-        if (RandomiseCondition)
-        {
-            CurrentLevelWinCondition = (ConditionType)UnityEngine.Random.Range(0, 4);
-        }
+        GameManager.instance.LimitInventory(TotalShipCount);
+
         FailedCustomerNumber = 0;
         activedocks = 5;
         goaltext = GameObject.Find("GoalPanelText").GetComponent<Text>();

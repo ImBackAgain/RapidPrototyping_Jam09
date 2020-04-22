@@ -9,10 +9,11 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     // List of prefabs used, manuallly added
-    private GameObject[] shipPrefabs, customerPrefabs;
+    //private GameObject[] shipPrefabs, customerPrefabs;
+    private List<GameObject> shipPrefabs, customerPrefabs;
     public int TotalShipCount
     {
-        get { return shipPrefabs.Length; }
+        get { return shipPrefabs.Count; }
     }
     // List of data for ships
     private List<ShipStats> ships;
@@ -81,6 +82,7 @@ public class GameManager : MonoBehaviour
     private bool snackBtnState;
     private bool boastBtnState;
     private bool offerBtnState;
+    private bool boastPanelState;
 
     //Ship pool; Exclude one ship per spwan
     private HashSet<int> exclude = new HashSet<int>();
@@ -188,12 +190,37 @@ public class GameManager : MonoBehaviour
         BoastPanel.SetActive(false);
         InitUIComponets();
 
-        GameObject.Find("ShipAmountTotal").GetComponent<Text>().text = "/" + shipPrefabs.Length.ToString();
+        GameObject.Find("ShipAmountTotal").GetComponent<Text>().text = "/" + shipPrefabs.Count.ToString();
     }
 
     private void Update()
     {
-        GameObject.Find("ShipAmountLeft").GetComponent<Text>().text = (shipPrefabs.Length - exclude.Count + WinCondition.activedocks).ToString();
+        GameObject.Find("ShipAmountLeft").GetComponent<Text>().text = (shipPrefabs.Count - exclude.Count + WinCondition.activedocks).ToString();
+    }
+    static bool drawWithReplacement = false;
+    public static void Invinciblate()
+    {
+        drawWithReplacement = true;
+    }
+
+    public void LimitInventory(int count)
+    {
+        if (count >= shipPrefabs.Count)
+        {
+            print("Keeeping " + shipPrefabs.Count + " ships instead of " + count + ".");
+            return;
+        }
+        else
+        {
+            int discard = shipPrefabs.Count - count;
+            for (int i = 0; i < discard; i++)
+            {
+                int index = Random.Range(0, shipPrefabs.Count);
+                {
+                    shipPrefabs.RemoveAt(index);
+                }
+            }
+        }
     }
 
     // Behavior for interview button
@@ -358,18 +385,27 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject spawn in spawnPoints)
         {
-            IEnumerable<int> range = Enumerable.Range(0, shipPrefabs.Length).Where(i => !exclude.Contains(i));
+            /*
+            int shipIndex;
 
-            int randomIndex = Random.Range(0, shipPrefabs.Length - exclude.Count);
-            int shipIndex = range.ElementAt(randomIndex);
+            if (!drawWithReplacement)
+            {
+                //Unique ships
 
+                IEnumerable<int> range = Enumerable.Range(0, shipPrefabs.Count).Where(i => !exclude.Contains(i));
+
+                int randomIndex = Random.Range(0, shipPrefabs.Count - exclude.Count);
+                shipIndex = range.ElementAt(randomIndex);
+
+
+                exclude.Add(shipIndex);
+            }
             GameObject spawnedShip = Instantiate(shipPrefabs[shipIndex], spawn.transform.position, Quaternion.identity);
-            exclude.Add(shipIndex);
-
             spawnedShip.transform.localScale = new Vector3(spawnedShip.transform.localScale.x * 45f, spawnedShip.transform.localScale.y * 45f, 1f);
             spawnedShip.transform.SetParent(spawn.transform.parent);
-
             //totalShipValue += spawnedShip.GetComponent<ShipStats>().value;
+            */
+            SpawnOneShip(spawn.transform);
         }
 
         AddIncome(0.0f, 0.0f);
@@ -384,23 +420,41 @@ public class GameManager : MonoBehaviour
     // Yuanchao's code of spawn only one ship
     public void SpawnOneShip(Transform SpawnPointParent)
     {
-        Destroy(SpawnPointParent.GetChild(2).gameObject);
-        if (exclude.Count == shipPrefabs.Length)
+        try
         {
+            GameObject alreadyThere = SpawnPointParent.GetChild(2)?.gameObject;
+            if (alreadyThere) Destroy(alreadyThere);
+        }
+        catch(UnityException ex)
+        {
+            //No child to destroy
+        }
+
+        if (exclude.Count == shipPrefabs.Count)
+        {   
             SpawnPointParent.gameObject.SetActive(false);
             WinCondition.activedocks = WinCondition.activedocks - 1;
         }
         else
         {
             Transform spawn = SpawnPointParent.GetChild(0);
-            IEnumerable<int> range = Enumerable.Range(0, shipPrefabs.Length).Where(i => !exclude.Contains(i));
+            int shipIndex;
 
-            int randomIndex = Random.Range(0, shipPrefabs.Length - exclude.Count);
-            int shipIndex = range.ElementAt(randomIndex);
+            if (drawWithReplacement)
+            {
+                shipIndex = Random.Range(0, shipPrefabs.Count);
+            }
+            else
+            {
+                IEnumerable<int> range = Enumerable.Range(0, shipPrefabs.Count).Where(i => !exclude.Contains(i));
+
+                int randomIndex = Random.Range(0, shipPrefabs.Count - exclude.Count);
+                shipIndex = range.ElementAt(randomIndex);
+
+                exclude.Add(shipIndex);
+            }
 
             GameObject spawnedShip = Instantiate(shipPrefabs[shipIndex], spawn.position, Quaternion.identity);
-            exclude.Add(shipIndex);
-
             spawnedShip.transform.localScale = new Vector3(spawnedShip.transform.localScale.x * 45f, spawnedShip.transform.localScale.y * 45f, 1f);
             spawnedShip.transform.SetParent(spawn.parent);
         }
@@ -429,28 +483,36 @@ public class GameManager : MonoBehaviour
         // If this is the first customer being created, create a customer
         if (previousCustomerIndex == -1)
         {
-            int randomIndex = Random.Range(0, customerPrefabs.Length);
+            int randomIndex = Random.Range(0, customerPrefabs.Count);
             GameObject spawnedCustomer = Instantiate(customerPrefabs[randomIndex], spawnPoint, Quaternion.identity);
             spawnedCustomer.transform.localScale = new Vector3(spawnedCustomer.transform.localScale.x * 35f, spawnedCustomer.transform.localScale.y * 35f, 1f);
             spawnedCustomer.transform.SetParent(container);
             previousCustomerIndex = randomIndex;
         }
-        // If this is not the first customer, save the index of previous customer to a list of used customer,
-        // and only spawn from customer prefabs that haven't been used
+        // If this is not the first customer, save the index of previous customer to a list of used customer, and...
         else
         {
-            excludecustomer.Add(previousCustomerIndex);
-            IEnumerable<int> range = Enumerable.Range(0, shipPrefabs.Length).Where(i => !excludecustomer.Contains(i));
+            /*
+            //DON'T only spawn from customer prefabs that haven't been used, but don't spawn the last customer
+            int customerIndex = Random.Range(0, customerPrefabs.Count - 1);
+            if (customerIndex >= previousCustomerIndex) customerIndex++;
 
-            int randomIndex = Random.Range(0, customerPrefabs.Length - excludecustomer.Count);
+            /*/ 
+            //only spawn from customer prefabs that haven't been used
+            excludecustomer.Add(previousCustomerIndex);
+            IEnumerable<int> range = Enumerable.Range(0, shipPrefabs.Count).Where(i => !excludecustomer.Contains(i));
+
+            int randomIndex = Random.Range(0, customerPrefabs.Count - excludecustomer.Count);
             int customerIndex = range.ElementAt(randomIndex);
+            
+            //*/
 
             GameObject spawnedCustomer = Instantiate(customerPrefabs[customerIndex], spawnPoint, Quaternion.identity);
             spawnedCustomer.transform.localScale = new Vector3(spawnedCustomer.transform.localScale.x * 35f, spawnedCustomer.transform.localScale.y * 35f, 1f);
             spawnedCustomer.transform.SetParent(container);
             previousCustomerIndex = customerIndex;
-        }
 
+        }
         //Refresh buttons
         GameObject.Find("Interview").GetComponent<Button>().interactable = true;        
         GameObject.Find("Boast").GetComponent<Button>().interactable = true;
@@ -611,11 +673,13 @@ public class GameManager : MonoBehaviour
         boastBtnState = GameObject.Find("Boast").GetComponent<Button>().interactable;
         snackBtnState = GameObject.Find("Snacks").GetComponent<Button>().interactable;
         offerBtnState = GameObject.Find("Offer").GetComponent<Button>().interactable;
+        boastPanelState = BoastPanel.activeSelf;
 
         GameObject.Find("Interview").GetComponent<Button>().interactable = false;
         GameObject.Find("Boast").GetComponent<Button>().interactable = false;
         GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
         GameObject.Find("Offer").GetComponent<Button>().interactable = false;
+        BoastPanel.SetActive(false);
 
         isPopUp = true;
     }
@@ -623,11 +687,12 @@ public class GameManager : MonoBehaviour
 
     public void HidePopUpWindow()
     {
-        print("HidePopUpWindow?");
+        //print("HidePopUpWindow?");
         GameObject.Find("Interview").GetComponent<Button>().interactable = interviewBtnState;
         GameObject.Find("Boast").GetComponent<Button>().interactable = boastBtnState;
         GameObject.Find("Snacks").GetComponent<Button>().interactable = snackBtnState;
         GameObject.Find("Offer").GetComponent<Button>().interactable = offerBtnState;
+        BoastPanel.SetActive(boastPanelState);
 
         isPopUp = false;
     }
@@ -659,7 +724,7 @@ public class GameManager : MonoBehaviour
             ship.enabled = false;
         }
     }
-    [SerializeField][Tooltip("Use with WinCondition's Current Level Win Scene")] bool nextLevelIsSame;
+    [SerializeField][Header("Use with WinCondition's Randomise Condition")] bool nextLevelIsSame;
     public void NextLevel()
     {
         string levelname = SceneManager.GetActiveScene().name;
@@ -681,3 +746,4 @@ public class GameManager : MonoBehaviour
         }
     }
 }
+ 
