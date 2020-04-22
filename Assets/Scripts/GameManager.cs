@@ -92,6 +92,8 @@ public class GameManager : MonoBehaviour
     //Win condition checker
     //WinCondition condition;
 
+    string lastEnteredPrice;
+
     #region String arrrays. So many string arrrays.
     // Customer syntax
     // Start of conversation
@@ -325,8 +327,7 @@ public class GameManager : MonoBehaviour
 
     public void CancelPrice()
     {
-        GameObject.Find("InputPrice").GetComponent<InputField>().text = "0";
-        OfferPanel.SetActive(false);
+        //GameObject.Find("InputPrice").GetComponent<InputField>().text = "0";
         HidePopUpWindow();
     }
 
@@ -342,7 +343,6 @@ public class GameManager : MonoBehaviour
         else
         {
             // Make sure offer panel is inaccesible after offer is made
-            OfferPanel.SetActive(false);
             HidePopUpWindow();
 
             ShipStats ship = currentShip;
@@ -544,6 +544,8 @@ public class GameManager : MonoBehaviour
 
         // Play audio effect accordingly
         audioMng.PlayAudio("Customer Arrives");
+
+        lastEnteredPrice = "";
     }
 
     // Add a certain amount to the current total income of the shop
@@ -696,6 +698,8 @@ public class GameManager : MonoBehaviour
         GameObject.Find("Offer").GetComponent<Button>().interactable = false;
         BoastPanel.SetActive(false);
 
+        GameObject.Find("InputPrice").GetComponent<InputField>().text = lastEnteredPrice == "" ? currentShip.value.ToString() : lastEnteredPrice;
+
         isPopUp = true;
     }
 
@@ -703,11 +707,15 @@ public class GameManager : MonoBehaviour
     public void HidePopUpWindow()
     {
         //print("HidePopUpWindow?");
+        lastEnteredPrice = GameObject.Find("InputPrice").GetComponent<InputField>().text;
         GameObject.Find("Interview").GetComponent<Button>().interactable = interviewBtnState;
         GameObject.Find("Boast").GetComponent<Button>().interactable = boastBtnState;
         GameObject.Find("Snacks").GetComponent<Button>().interactable = snackBtnState;
         GameObject.Find("Offer").GetComponent<Button>().interactable = offerBtnState;
         BoastPanel.SetActive(boastPanelState);
+
+
+        OfferPanel.SetActive(false);
 
         isPopUp = false;
     }
