@@ -373,7 +373,7 @@ public class CustomerStats : MonoBehaviour
     /// <param name="maxPrice">The price to display</param>
     public void OutOfActions(RoundEnd how, float maxPrice)
     {
-        if (!done) return;
+        if (done) return;
         if (WinCondition.instance.CheckWinCondition()) return;
 
         done = true;
@@ -387,30 +387,30 @@ public class CustomerStats : MonoBehaviour
         switch (how)
         {
             case RoundEnd.Win:
-
+                print("Win");
                 GameManager.instance.UpdateFeedback("Max price: $" + maxPrice);
                 yield return new WaitForSeconds(2);
 
                 break;
 
             case RoundEnd.Actions:
-
-                GameManager.instance.UpdateFeedback("Out of actions");
+                print("OOOA");
+                GameManager.instance.UpdateFeedback("$" + maxPrice + " Would've Done It...");
                 yield return new WaitForSeconds(2);
 
+                GameManager.instance.UpdateFeedback("Out of actions");
                 GameManager.instance.NoSaleResponse();
-                GameManager.instance.UpdateFeedback("$" + maxPrice + " Would've Done It...");
                 yield return new WaitForSeconds(2);
 
                 break;
 
             case RoundEnd.Patience:
-
-                GameManager.instance.UpdateFeedback("Out of patience");
+                print("OOOP");
+                GameManager.instance.UpdateFeedback("$" + maxPrice + " Would've Done It...");
                 yield return new WaitForSeconds(2);
 
+                GameManager.instance.UpdateFeedback("Out of patience");
                 GameManager.instance.NoSaleResponse();
-                GameManager.instance.UpdateFeedback("$" + maxPrice + " Would've Done It...");
                 yield return new WaitForSeconds(2);
 
                 break;
