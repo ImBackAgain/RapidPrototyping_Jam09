@@ -200,7 +200,9 @@ public class GameManager : MonoBehaviour
         else
         {
             GameObject.Find("ShipAmountTotal").GetComponent<Text>().text = "";
-            GameObject.Find("ShipAmountLeft").GetComponent<Text>().text = "∞";
+            Text t = GameObject.Find("ShipAmountLeft").GetComponent<Text>();
+            t.text = "∞";
+            t.fontSize = 103;
         }
     }
 
