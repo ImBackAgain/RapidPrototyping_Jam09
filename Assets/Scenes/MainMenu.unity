@@ -225,8 +225,8 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "  The customer is on the left.\n\n\n  Interview to\nfigure out their \ntop
-    3 priorities.\n\n\n  Snacks keep up\ntheir patience\n\n\n        . . . Mmm, space
-    snacks"
+    3 priorities.\n\n\n  Snacks keep up\ntheir patience.\n\n\n        . . . Mmm, space
+    snacks."
 --- !u!222 &32744630
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1646,7 +1646,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "  Once you know your customers, it becomes easier to emphasize the features
-    they like best.\n\n\n  Sell ships\nthey like for\nmore than\nthey're worth\n\n\n
+    they like best.\n\n\n  Sell ships\nthey like for\nmore than\nthey're worth.\n\n\n
     \ Much much much more!"
 --- !u!222 &402239998
 CanvasRenderer:
@@ -4926,7 +4926,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "  Select a ship to see its stats. Then crank up the price!\n\n  How much
     they'll\npay depends on:\n\n- Original value\n- Stats\n        vs. priorities\n
-    \       vs. emphasis\n- Patience\n\n  And modifiers ( when unlocked)"
+    \       vs. emphasis\n- Patience\n\n  And modifiers ( when unlocked)."
 --- !u!222 &1918448938
 CanvasRenderer:
   m_ObjectHideFlags: 0

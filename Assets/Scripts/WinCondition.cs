@@ -9,16 +9,16 @@ public class WinCondition : MonoBehaviour
 {
     enum ConditionType
     {
-        Profit,                 //Get specific profit. Also appplies to alll other goals. But you can't lose with this one.
-        ProfitByCustomer,       //Limited number of customers.
-        ProfitNoFailure,        //Selll something to each customer.
-        ProfitLimitedInventory  //You have a drasticallly limited number of ships.
+        Profit,                 // Get specific profit. Also applies to alll other goals. But you can't lose with this one.
+        ProfitByCustomer,       // Limited number of customers.
+        ProfitNoFailure,        // Sell something to each customer.
+        ProfitLimitedInventory  // You have a drastically limited number of ships.
     }
 
-    [SerializeField] [Tooltip("Nulllifies Currrent Level Win Condition")] bool RandomiseCondition = true;
+    [SerializeField] [Tooltip("Nullifies current level win condition")] bool RandomiseCondition = true;
     [SerializeField] ConditionType CurrentLevelWinCondition;
 
-    [Header("For alll goals")]
+    [Header("For All Goals")]
     public float GoalNetIncome;
     [Tooltip("Picks entire list if greater than equal to prefab list's count")]
     public int TotalShipCount;
@@ -52,6 +52,8 @@ public class WinCondition : MonoBehaviour
         if (RandomiseCondition)
         {
             CurrentLevelWinCondition = (ConditionType)UnityEngine.Random.Range(1, 4);
+
+            if (CurrentLevelWinCondition != ConditionType.ProfitLimitedInventory) TotalShipCount = 30;
         }
 
         GameManager.Invinciblate(CurrentLevelWinCondition == ConditionType.Profit);
@@ -127,16 +129,14 @@ public class WinCondition : MonoBehaviour
                 }
                 break;
             case ConditionType.ProfitLimitedInventory:
-                if (activedocks == 0)
+                if (GameManager.instance.netIncome >= GoalNetIncome)
                 {
-                    if (GameManager.instance.netIncome >= GoalNetIncome)
-                    {
-                        StartCoroutine("Win");
-                    }
-                    else
-                    {
-                        StartCoroutine(Lose());
-                    }
+                    StartCoroutine("Win");
+                    return true;
+                }
+                else if (activedocks == 0)
+                {
+                    StartCoroutine("Lose");
                     return true;
                 }
                 break;
@@ -148,16 +148,16 @@ public class WinCondition : MonoBehaviour
         switch (Condition)
         {
             case ConditionType.Profit:
-                goaltext.text = "Goal: Earn a net income of $" + GoalNetIncome + ". (You can't lose!)";
+                goaltext.text = "Goal: Earn $" + GoalNetIncome + " profit to continue.";
                 break;
             case ConditionType.ProfitByCustomer:
-                goaltext.text = "Goal: Earn $" + GoalNetIncome + " within " + TotalCustomerNumber + " customers.";
+                goaltext.text = "Goal: Earn $" + GoalNetIncome + " profit within " + TotalCustomerNumber + " customers.";
                 break;
             case ConditionType.ProfitLimitedInventory:
-                goaltext.text = "Goal: Earn $" + GoalNetIncome + ". Watch your ship count.";
+                goaltext.text = "Goal: Earn $" + GoalNetIncome + " profit with a stock of " + TotalShipCount + " ships.";
                 break;
             case ConditionType.ProfitNoFailure:
-                goaltext.text = "Goal: Earn $" + GoalNetIncome + " without failing any deals.";
+                goaltext.text = "Goal: Earn $" + GoalNetIncome + " profit without failing any deals.";
                 break;
         }
     }

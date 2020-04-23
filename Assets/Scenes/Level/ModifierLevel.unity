@@ -5676,9 +5676,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RandomiseCondition: 1
   CurrentLevelWinCondition: 1
-  GoalNetIncome: 4500
-  TotalShipCount: 30
-  TotalCustomerNumber: 15
+  GoalNetIncome: 3000
+  TotalShipCount: 8
+  TotalCustomerNumber: 10
   goaltext: {fileID: 0}
   wincanvas: {fileID: 2083449311}
   losecanvas: {fileID: 413470943}
@@ -5881,7 +5881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43722a8f954dc49eb9f4514ee07c2c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destinationSceneName: Level6
+  destinationSceneName: ModifierLevel
 --- !u!114 &1310871591
 MonoBehaviour:
   m_ObjectHideFlags: 0

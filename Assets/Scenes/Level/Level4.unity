@@ -5873,13 +5873,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RandomiseCondition: 0
   CurrentLevelWinCondition: 1
-  GoalNetIncome: 3000
+  GoalNetIncome: 1500
   TotalShipCount: 30
-  TotalCustomerNumber: 12
+  TotalCustomerNumber: 7
   goaltext: {fileID: 0}
   wincanvas: {fileID: 1759013671}
   losecanvas: {fileID: 1927539117}
-  mainCanvas: {fileID: 0}
 --- !u!1 &1290246406
 GameObject:
   m_ObjectHideFlags: 0

@@ -4863,7 +4863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43722a8f954dc49eb9f4514ee07c2c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destinationSceneName: Level3
+  destinationSceneName: Level6
 --- !u!114 &1101759009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5388,13 +5388,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RandomiseCondition: 1
   CurrentLevelWinCondition: 1
-  GoalNetIncome: 2000
-  TotalShipCount: 30
+  GoalNetIncome: 3000
+  TotalShipCount: 10
   TotalCustomerNumber: 10
   goaltext: {fileID: 0}
   wincanvas: {fileID: 1781542122}
   losecanvas: {fileID: 1006504910}
-  mainCanvas: {fileID: 1083032782}
 --- !u!1 &1290246406
 GameObject:
   m_ObjectHideFlags: 0
