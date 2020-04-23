@@ -1136,7 +1136,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Challenge Mode
+  m_Text: Expert
 --- !u!222 &1572416670
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1488,7 +1488,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Infinite Mode
+  m_Text: Normal
 --- !u!222 &1886510009
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1565,7 +1565,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tutorial
+  m_Text: Novice
 --- !u!222 &2014390812
 CanvasRenderer:
   m_ObjectHideFlags: 0
