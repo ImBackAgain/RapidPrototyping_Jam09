@@ -14,6 +14,7 @@ public class CustomerStats : MonoBehaviour
     public int speedRank;
     public int sizeRank;
 
+
     // Customer preference for ship size, there are 3 kinds: small, regular and large
     public ShipStats.SizeCategory sizePreference;
 
@@ -27,6 +28,7 @@ public class CustomerStats : MonoBehaviour
     // Saved for adding customer character system
     public enum CustomerModifier { None, Scholar, Punk, Afffluent, Wandererer }
     public CustomerModifier modifier = CustomerModifier.None;
+
 
     // UI used to display amount of customer patient
     private Text patienceText;
@@ -112,7 +114,7 @@ public class CustomerStats : MonoBehaviour
     /// <returns>Whether or not the customer favours this stat. Used for response.</returns>
     public bool TakeBoast(int stat)
     {
-        UpdatePatience(-10.0f);
+        UpdatePatience(-10.0f, -1);
 
         int statWeight = 0;
 
@@ -338,7 +340,7 @@ public class CustomerStats : MonoBehaviour
     }
 
     // Update patient value of customer
-    public void UpdatePatience(float changeOfPatience)
+    public void UpdatePatience(float changeOfPatience, float maxPrice)
     {
         switch (modifier)
         {
@@ -356,23 +358,69 @@ public class CustomerStats : MonoBehaviour
         patienceText.text = patience.ToString();
         if (patience == 0 && GameManager.instance.dealerActions > 1)
         {
-            GameManager.instance.NoSaleResponse();
-            OutOfActions("Out of Patience");
+            OutOfActions(RoundEnd.Patience, maxPrice);
         }
 
     }
 
-    // Display announcement when current customer leaves the shop and spawn a new customer
-    public void OutOfActions(string announcement)
+    bool done = false; //Has OutOfActions beeen callled before?
+
+
+    /// <summary>
+    /// End of round. Takes a max price to display. Don't worrry about callling it multiple times in one round; it'lll ignore alll but the first
+    /// </summary>
+    /// <param name="how">How did the round end?</param>
+    /// <param name="maxPrice">The price to display</param>
+    public void OutOfActions(RoundEnd how, float maxPrice)
     {
-        GameManager.instance.UpdateFeedback(announcement);
+        if (!done) return;
         if (WinCondition.instance.CheckWinCondition()) return;
-        StartCoroutine("SpawnNextCustomer");
+
+        done = true;
+        StartCoroutine(RoundEndCoroutine(how, maxPrice));
+    }
+
+    IEnumerator RoundEndCoroutine(RoundEnd how, float maxPrice)
+    {
+
+        //GameManager.instance.UpdateFeedback(announcement);
+        switch (how)
+        {
+            case RoundEnd.Win:
+
+                GameManager.instance.UpdateFeedback("Max price: $" + maxPrice);
+                yield return new WaitForSeconds(2);
+
+                break;
+
+            case RoundEnd.Actions:
+
+                GameManager.instance.UpdateFeedback("Out of actions");
+                yield return new WaitForSeconds(2);
+
+                GameManager.instance.NoSaleResponse();
+                GameManager.instance.UpdateFeedback("$" + maxPrice + " Would've Done It...");
+                yield return new WaitForSeconds(2);
+
+                break;
+
+            case RoundEnd.Patience:
+
+                GameManager.instance.UpdateFeedback("Out of patience");
+                yield return new WaitForSeconds(2);
+
+                GameManager.instance.NoSaleResponse();
+                GameManager.instance.UpdateFeedback("$" + maxPrice + " Would've Done It...");
+                yield return new WaitForSeconds(2);
+
+                break;
+        }
+        SpawnNextCustomer();
     }
 
     // When the current customer is out of the shop (out of patience or already made a deal),
     // wait for 2 seconds to let player read announcement and spawn a new customer
-    private IEnumerator SpawnNextCustomer()
+    private void SpawnNextCustomer()
     {
         // Freeeze all game buttons
         GameObject.Find("Interview").GetComponent<Button>().interactable = false;
@@ -383,7 +431,7 @@ public class CustomerStats : MonoBehaviour
         // Wait for 2 seconds, create new customer and destory current one
         //while (true)
         //{
-        yield return new WaitForSeconds(2.0f);
+        //yield return new WaitForSeconds(2.0f);
         // only remove sold ship
         if (GameManager.instance.currentSoldShipParent != null)
         {

@@ -61,7 +61,10 @@ public class WinCondition : MonoBehaviour
         {
             GameManager.CountCustomers(TotalCustomerNumber);
         }
-
+        else
+        {
+            GameManager.CountCustomers(-1);
+        }
     }
 
     void OnDestroy()

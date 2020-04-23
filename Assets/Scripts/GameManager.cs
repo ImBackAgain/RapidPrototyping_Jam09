@@ -5,6 +5,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+public enum RoundEnd {
+    Win,
+    Patience,
+    Actions
+}
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
@@ -147,6 +152,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        
         // Locate AudioManager
         //condition = GetComponent<WinCondition>();
         audioMng = FindObjectOfType<AudioManager>();
@@ -216,7 +222,7 @@ public class GameManager : MonoBehaviour
     {
         drawWithReplacement = reallly;
     }
-    static int customers = -1;
+    static int customers;
     public static void CountCustomers(int howMany)
     {
         customers = howMany;
@@ -271,7 +277,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Customer lost patience everytime they were interviewed
-        currentCustomer.UpdatePatience(-10.0f);
+        currentCustomer.UpdatePatience(-10.0f, -1);
 
         // Set current interview to the next
         currentInterviewRank--;
@@ -280,7 +286,7 @@ public class GameManager : MonoBehaviour
         if (currentInterviewRank == 2)
             GameObject.Find("Interview").GetComponent<Button>().interactable = false;
 
-        DealerActionCountdown();
+        DealerActionCountdown(-1);
     }
 
     // Currently linked to boast button in UI, activate the boast panel
@@ -305,18 +311,18 @@ public class GameManager : MonoBehaviour
         BoastPanel.SetActive(false);
         //GameObject.Find("Boast").GetComponent<Button>().interactable = false;
 
-        DealerActionCountdown();
+        DealerActionCountdown(-1);
     }
 
     // Behavior for offer snack for customer, currently works as debug method for spawn new customer, need to change to add patience when offer snack
     public void Snacks()
     {
         speechBubble.text = snackResponse[Random.Range(0, snackResponse.Length)];
-        currentCustomer.UpdatePatience(100.0f);
+        currentCustomer.UpdatePatience(100.0f, -1);
         // Each customer can only be offered once
         GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
 
-        DealerActionCountdown();
+        DealerActionCountdown(-1);
     }
 
     // Activate offer input panel
@@ -358,14 +364,13 @@ public class GameManager : MonoBehaviour
                 if (amount / maximumOffer < 0.85f)
                 {
                     speechBubble.text = purchaseResponseCheap[Random.Range(0, purchaseResponseCheap.Length)];
-                    currentCustomer.OutOfActions("Max Price: $" + maximumOffer);
                 }
                 else
                 {
                     speechBubble.text = purchaseResponseAverage[Random.Range(0, purchaseResponseAverage.Length)];
-                    currentCustomer.OutOfActions("Max Price: $" + maximumOffer);
                 }
 
+                currentCustomer.OutOfActions(RoundEnd.Win, maximumOffer);
                 // If it has been accepted, just decrement the dealer action count for the visual of the thing
                 dealerActions--;
                 actionsText.text = dealerActions.ToString();
@@ -373,40 +378,28 @@ public class GameManager : MonoBehaviour
             //When customer can't accept the offer made, customer becomes inpatient
             else
             {
+                float patienceChange;
                 speechBubble.text = purchaseResponseExpensive[Random.Range(0, purchaseResponseExpensive.Length)];
-                if (amount >= maximumOffer && amount < maximumOffer * 1.2f)
-                    currentCustomer.UpdatePatience(-10.0f);
-                else if (amount >= maximumOffer * 1.2f && amount < maximumOffer * 1.5f)
-                    currentCustomer.UpdatePatience(-20.0f);
-                else if (amount >= maximumOffer * 1.5f && amount < maximumOffer * 2f)
-                    currentCustomer.UpdatePatience(-40.0f);
-                else if (amount >= maximumOffer * 2f && amount < maximumOffer * 3f)
-                    currentCustomer.UpdatePatience(-70.0f);
-                else if (amount >= maximumOffer * 3f)
-                    currentCustomer.UpdatePatience(-100.0f);
+                if (amount < maximumOffer * 1.2f)
+                    patienceChange = -10;
+                else if (amount < maximumOffer * 1.5f)
+                    patienceChange = -20;
+                else if (amount < maximumOffer * 2f)
+                    patienceChange = -40;
+                else if (amount < maximumOffer * 3f)
+                    patienceChange = -70;
+                else
+                    patienceChange = -100;
 
-                if (currentCustomer.patience == 0 || GameManager.instance.dealerActions == 1)
-                {
-                    if (GameManager.instance.dealerActions > 1)
-                    {                        
-                        StartCoroutine("wait", maximumOffer); 
-                    }
-                    else
-                    UpdateFeedback("$" + maximumOffer + " Would've Done It...");
-                }
+                currentCustomer.UpdatePatience(patienceChange, maximumOffer);
 
                 // If it has not been accepted, check as usual to see if the dealer is out of actions
-                DealerActionCountdown();
+                DealerActionCountdown(maximumOffer);
             }
 
         }
     }
 
-    IEnumerator wait(float maximumOffer)
-    {
-        yield return new WaitForSeconds(1.0f);
-        UpdateFeedback("$" + maximumOffer + " Would've Done It...");
-    }
     // Spawn new ship that wasn't currently in stock
     private void SpawnShips()
     {
@@ -603,13 +596,13 @@ public class GameManager : MonoBehaviour
     }
 
     // If dealer action is 0, put customer out of action
-    private void DealerActionCountdown()
+    private void DealerActionCountdown(float maxPrice)
     {
         dealerActions--;
         actionsText.text = dealerActions.ToString();
         if (dealerActions == 0)
         {
-            StartCoroutine("WaitForTextBeforeEndOfCustomer");
+            currentCustomer.OutOfActions(RoundEnd.Actions, maxPrice);
         }
         else if(dealerActions == 1)
         {
@@ -620,30 +613,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitForTextBeforeEndOfCustomer()
-    {
-        // The player has 2 seconds to read whatever text was recently displayed, then another customer will be spawned after another 2 seconds
-        GameObject.Find("Interview").GetComponent<Button>().interactable = false;          //block buttons
-        GameObject.Find("Boast").GetComponent<Button>().interactable = false;
-        GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
-        GameObject.Find("Offer").GetComponent<Button>().interactable = false;
+    //private IEnumerator WaitForTextBeforeEndOfCustomer()
+    //{
+    //    // The player has 2 seconds to read whatever text was recently displayed, then another customer will be spawned after another 2 seconds
+    //    GameObject.Find("Interview").GetComponent<Button>().interactable = false;          //block buttons
+    //    GameObject.Find("Boast").GetComponent<Button>().interactable = false;
+    //    GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
+    //    GameObject.Find("Offer").GetComponent<Button>().interactable = false;
 
-        bool stillWaiting = true;
-
-        while (stillWaiting)
-        {
-            yield return new WaitForSeconds(2.0f);
-            NoSaleResponse();
-            if (currentCustomer.patience == 0)
-            {
+    //    yield return new WaitForSeconds(2.0f);
+    //    NoSaleResponse();
+    //    if (currentCustomer.patience == 0)
+    //    {
                 
-                UpdateFeedback("Out of Patience");
-                yield return new WaitForSeconds(2.0f);
-            }
-            currentCustomer.OutOfActions("Out of Actions");            
-            stillWaiting = false;
-        }
-    }
+    //        UpdateFeedback("Out of Patience");
+    //        yield return new WaitForSeconds(2.0f);
+    //    }
+    //    currentCustomer.OutOfActions("Out of Actions");
+    //}
 
     // Set current customer to a certain custumoer
     public void SetCustomer(CustomerStats customer)
