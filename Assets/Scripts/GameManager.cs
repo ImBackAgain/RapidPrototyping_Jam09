@@ -385,7 +385,15 @@ public class GameManager : MonoBehaviour
                 else if (amount >= maximumOffer * 3f)
                     currentCustomer.UpdatePatience(-100.0f);
 
-                if (currentCustomer.patience == 0) UpdateFeedback("$" + maximumOffer + " Would've Done It...");
+                if (currentCustomer.patience == 0 || GameManager.instance.dealerActions == 1)
+                {
+                    if (GameManager.instance.dealerActions > 1)
+                    {                        
+                        StartCoroutine("wait", maximumOffer); 
+                    }
+                    else
+                    UpdateFeedback("$" + maximumOffer + " Would've Done It...");
+                }
 
                 // If it has not been accepted, check as usual to see if the dealer is out of actions
                 DealerActionCountdown();
@@ -394,6 +402,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    IEnumerator wait(float maximumOffer)
+    {
+        yield return new WaitForSeconds(1.0f);
+        UpdateFeedback("$" + maximumOffer + " Would've Done It...");
+    }
     // Spawn new ship that wasn't currently in stock
     private void SpawnShips()
     {
@@ -621,7 +634,13 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(2.0f);
             NoSaleResponse();
-            currentCustomer.OutOfActions("Out of Actions");
+            if (currentCustomer.patience == 0)
+            {
+                
+                UpdateFeedback("Out of Patience");
+                yield return new WaitForSeconds(2.0f);
+            }
+            currentCustomer.OutOfActions("Out of Actions");            
             stillWaiting = false;
         }
     }
