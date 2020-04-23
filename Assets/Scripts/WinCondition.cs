@@ -132,6 +132,7 @@ public class WinCondition : MonoBehaviour
                 }
                 break;
             case ConditionType.ProfitLimitedInventory:
+                print("checking for win");
                 if (GameManager.instance.netIncome >= GoalNetIncome)
                 {
                     StartCoroutine("Win");

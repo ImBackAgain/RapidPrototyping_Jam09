@@ -374,8 +374,6 @@ public class CustomerStats : MonoBehaviour
     public void OutOfActions(RoundEnd how, float maxPrice)
     {
         if (done) return;
-        if (WinCondition.instance.CheckWinCondition()) return;
-
         done = true;
         StartCoroutine(RoundEndCoroutine(how, maxPrice));
     }
@@ -383,18 +381,23 @@ public class CustomerStats : MonoBehaviour
     IEnumerator RoundEndCoroutine(RoundEnd how, float maxPrice)
     {
 
+        GameObject.Find("Interview").GetComponent<Button>().interactable = false;
+        GameObject.Find("Boast").GetComponent<Button>().interactable = false;
+        GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
+        GameObject.Find("Offer").GetComponent<Button>().interactable = false;
+
         //GameManager.instance.UpdateFeedback(announcement);
         switch (how)
         {
             case RoundEnd.Win:
-                print("Win");
+                //print("Win");
                 GameManager.instance.UpdateFeedback("Max price: $" + maxPrice);
                 yield return new WaitForSeconds(2);
 
                 break;
 
             case RoundEnd.Actions:
-                print("OOOA");
+                //print("OOOA");
                 GameManager.instance.UpdateFeedback("$" + maxPrice + " Would've Done It...");
                 yield return new WaitForSeconds(2);
 
@@ -405,7 +408,7 @@ public class CustomerStats : MonoBehaviour
                 break;
 
             case RoundEnd.Patience:
-                print("OOOP");
+                //print("OOOP");
                 GameManager.instance.UpdateFeedback("$" + maxPrice + " Would've Done It...");
                 yield return new WaitForSeconds(2);
 
@@ -423,11 +426,6 @@ public class CustomerStats : MonoBehaviour
     private void SpawnNextCustomer()
     {
         // Freeeze all game buttons
-        GameObject.Find("Interview").GetComponent<Button>().interactable = false;
-        GameObject.Find("Boast").GetComponent<Button>().interactable = false;
-        GameObject.Find("Snacks").GetComponent<Button>().interactable = false;
-        GameObject.Find("Offer").GetComponent<Button>().interactable = false;
-
         // Wait for 2 seconds, create new customer and destory current one
         //while (true)
         //{
@@ -438,6 +436,7 @@ public class CustomerStats : MonoBehaviour
             GameManager.instance.SpawnOneShip(GameManager.instance.currentSoldShipParent);
             GameManager.instance.currentSoldShipParent = null;
         }
+        if (WinCondition.instance.CheckWinCondition()) return;
         // remove the current ship selection
         GameManager.instance.SpawnCustomer();
         Destroy(gameObject);
