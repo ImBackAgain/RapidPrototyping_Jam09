@@ -8,9 +8,11 @@ public class MainMenu : MonoBehaviour
 {
     // Scene Transition Properties
     [Header("Scene Transition Variables")]
-    public string startGameSceneName = "";
+    public string noviceSceneName;
+    public string normalSceneName;
+    public string expertSceneName;
     public string soundTestSceneName = "";
-    public string selectLevelSceneName = "";
+    //public string selectLevelSceneName = "";
 
 
     // Setup Properties
@@ -19,13 +21,17 @@ public class MainMenu : MonoBehaviour
     [Header("=== Setup Variables ===")]
     [Space(10)]
     public GameObject mainMenuParent;
-    //public Text titleText; // removed, already have a title text on bg image
+    [Header("Primary menu")]
+    public GameObject primaryMenuParent;
     public Button startGameButton;
-    public Button soundTestButton;
     public Button instructionsButtton;
     public Button quitGameButton;
+    [Header("Level selection menu")]
+    public GameObject levelSelectParent;
+    public Button noviceButtton, normalButtton, expertButtton, returnButtton;
+    [Header("Extra stufff")]
+    public Button soundTestButton;
     public Button creditsButton;
-    public Button selectLevelButton;
     public Image Background;
     public Image CreditsBG;
     [Header("Instructions objects")]
@@ -41,18 +47,21 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         // Error Logging
-        if (startGameSceneName.Length < 1)
-            Debug.LogWarning("\t[ startGameSceneName ] not set!");
         if (soundTestSceneName.Length < 1)
             Debug.LogWarning("\t[ soundTestSceneName ] not set!");
 
         // Adding the button click listeners
-        startGameButton.onClick.AddListener(StartGameFunc);
-        soundTestButton.onClick.AddListener(SoundTestFunc);
+        startGameButton.onClick.AddListener(OpenLevelSelect);
         instructionsButtton.onClick.AddListener(InstructionsFunc);
-        creditsButton.onClick.AddListener(CreditsFunc);
         quitGameButton.onClick.AddListener(QuitGameFunc);
-        selectLevelButton.onClick.AddListener(SelectLevelFunc);
+
+        noviceButtton.onClick.AddListener(LoadNoviceScene);
+        normalButtton.onClick.AddListener(LoadNormalScene);
+        expertButtton.onClick.AddListener(LoadExpertScene);
+        returnButtton.onClick.AddListener(CloseLevelSelect);
+
+        soundTestButton.onClick.AddListener(SoundTestFunc);
+        creditsButton.onClick.AddListener(CreditsFunc);
 
         exitInstructionsButtton.onClick.AddListener(ExitInstructionsCalllback);
         exitCreditsButton.onClick.AddListener(ExitCreditsFunc);
@@ -61,6 +70,7 @@ public class MainMenu : MonoBehaviour
         MainMenuVisibility(true);
         CreditsVisibility(false);
         InstructionVisibility(false);
+        CloseLevelSelect();
     }
 
     // MainMenuVisibility()
@@ -77,6 +87,33 @@ public class MainMenu : MonoBehaviour
         CreditsBG.enabled = !visible;
     }
 
+    void OpenLevelSelect()
+    {
+        primaryMenuParent.SetActive(false);
+        levelSelectParent.SetActive(true);
+    }
+
+    void LoadNoviceScene()
+    {
+        SceneManager.LoadScene(noviceSceneName);
+    }
+
+    void LoadNormalScene()
+    {
+        SceneManager.LoadScene(normalSceneName);
+    }
+
+    void LoadExpertScene()
+    {
+        SceneManager.LoadScene(expertSceneName);
+    }
+
+    void CloseLevelSelect()
+    {
+        primaryMenuParent.SetActive(true);
+        levelSelectParent.SetActive(false);
+    }
+
     void InstructionVisibility(bool visible)
     {
         instrParent.SetActive(visible);
@@ -88,31 +125,6 @@ public class MainMenu : MonoBehaviour
         creditsParent.SetActive(visible);
         creditsScrollRect.gameObject.SetActive(visible);
         exitCreditsButton.gameObject.SetActive(visible);
-    }
-
-    // SelectLevelFunc()
-    private void SelectLevelFunc()
-    {
-        SceneManager.LoadScene(selectLevelSceneName);
-    }
-
-    // StartGameFunc()
-    private void StartGameFunc()
-    {
-        SceneManager.LoadScene(startGameSceneName);
-    }
-
-    // SoundTestFunc()
-    private void SoundTestFunc()
-    {
-        SceneManager.LoadScene(soundTestSceneName);
-    }
-
-    // CreditsFunc()
-    private void CreditsFunc()
-    {
-        MainMenuVisibility(false);
-        CreditsVisibility(true);
     }
 
     void InstructionsFunc()
@@ -128,6 +140,19 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
+    // SoundTestFunc()
+    private void SoundTestFunc()
+    {
+        SceneManager.LoadScene(soundTestSceneName);
+    }
+
+    // CreditsFunc()
+    private void CreditsFunc()
+    {
+        MainMenuVisibility(false);
+        CreditsVisibility(true);
+    }
+
     void ExitInstructionsCalllback()
         //"Function" is so generic though
     {
@@ -140,11 +165,5 @@ public class MainMenu : MonoBehaviour
     {
         CreditsVisibility(false);
         MainMenuVisibility(true);
-    }
-
-    // LoadGameFunc()
-    private void LoadGameFunc(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
     }
 }

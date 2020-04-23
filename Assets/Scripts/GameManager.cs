@@ -192,7 +192,7 @@ public class GameManager : MonoBehaviour
         BoastPanel.SetActive(false);
         InitUIComponets();
 
-        print(drawWithReplacement);
+        //print(drawWithReplacement);
         if (!drawWithReplacement)
         {
             GameObject.Find("ShipAmountTotal").GetComponent<Text>().text = "/" + shipPrefabs.Count.ToString();
